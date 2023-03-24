@@ -1,36 +1,25 @@
+#include <float.h>
+#include <limits.h> // tells properties about types and variables
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, const char **argv) {
+const double piApprox = 3.14159;
+#define PI_APPROX 3.14159L
+#define MAX_ARR_SIZE 1000U
+// stands for long double macro definition, U stands for unsigned integer
+// There's a particular part dedicated to constant allocation, with the macro
+// approach we save a bit of memory because we save space on the variable
+// allocation
 
-  double factors[2];
-  double result = 0;
+int main() {
+  /* Integers */
+  int my_int = INT_MAX;
+  printf("My int size is: %lu, the range is [%d..%d]\n", sizeof(int), INT_MIN,
+         INT_MAX);
 
-  // Print command
-  printf("Command: %s\n", argv[0]);
+  /* Overflow */
+  printf("My int is: %d\n", my_int + 1);
 
-  // Check of num of arguments
-
-  if (argc != 3) {
-    fprintf(stderr, "I need at least 2 arguments but you gave me %d\n",
-            argc - 1); // same output on terminal but also on stderr stream
-    // Different ways to manage the error
-
-    // goto end;
-    // return 0;
-    result = -1;
-  }
-
-  // Get factors
-
-  for (unsigned int i = 0; i < 2; i++) {
-    factors[i] = atof(argv[i + 1]); // atof -> char to double
-  }
-
-  result = factors[0] * factors[1];
-
-  printf("%.2f * %.2f = %.2f\n", factors[0], factors[1], result);
-
-  // end:
   return 0;
 }
