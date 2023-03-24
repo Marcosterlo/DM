@@ -181,6 +181,19 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/build
 .PHONY : 6_inout_p/fast
 
+#=============================================================================
+# Target rules for targets named 3_file
+
+# Build rule for target.
+3_file: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3_file
+.PHONY : 3_file
+
+# fast build rule for target.
+3_file/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/3_file.dir/build.make CMakeFiles/3_file.dir/build
+.PHONY : 3_file/fast
+
 src/0_hello.o: src/0_hello.c.o
 .PHONY : src/0_hello.o
 
@@ -253,6 +266,30 @@ src/2_basics.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/src/2_basics.c.s
 .PHONY : src/2_basics.c.s
 
+src/3_file.o: src/3_file.c.o
+.PHONY : src/3_file.o
+
+# target to build an object file
+src/3_file.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/3_file.dir/build.make CMakeFiles/3_file.dir/src/3_file.c.o
+.PHONY : src/3_file.c.o
+
+src/3_file.i: src/3_file.c.i
+.PHONY : src/3_file.i
+
+# target to preprocess a source file
+src/3_file.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/3_file.dir/build.make CMakeFiles/3_file.dir/src/3_file.c.i
+.PHONY : src/3_file.c.i
+
+src/3_file.s: src/3_file.c.s
+.PHONY : src/3_file.s
+
+# target to generate assembly for a file
+src/3_file.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/3_file.dir/build.make CMakeFiles/3_file.dir/src/3_file.c.s
+.PHONY : src/3_file.c.s
+
 src/4_include_guards.o: src/4_include_guards.c.o
 .PHONY : src/4_include_guards.o
 
@@ -312,6 +349,7 @@ help:
 	@echo "... 0_hello"
 	@echo "... 1_basics"
 	@echo "... 2_basics"
+	@echo "... 3_file"
 	@echo "... 4_include_guards"
 	@echo "... 6_inout_p"
 	@echo "... src/0_hello.o"
@@ -323,6 +361,9 @@ help:
 	@echo "... src/2_basics.o"
 	@echo "... src/2_basics.i"
 	@echo "... src/2_basics.s"
+	@echo "... src/3_file.o"
+	@echo "... src/3_file.i"
+	@echo "... src/3_file.s"
 	@echo "... src/4_include_guards.o"
 	@echo "... src/4_include_guards.i"
 	@echo "... src/4_include_guards.s"
