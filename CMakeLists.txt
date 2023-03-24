@@ -22,7 +22,13 @@ if(APPLE)
   endif()
 endif()
 
-# Set my targets
+#   _____                    _       
+#  |_   _|_ _ _ __ __ _  ___| |_ ___ 
+#    | |/ _` | '__/ _` |/ _ \ __/ __|
+#    | | (_| | | | (_| |  __/ |_\__ \
+#    |_|\__,_|_|  \__, |\___|\__|___/
+#                 |___/              
 add_executable(0_hello ${SOURCES}/0_hello.c)
+add_executable(2_basics ${SOURCES}/2_basics.c)
+add_executable(4_include_guards ${SOURCES}/4_include_guards.c)
 add_executable(1_basics ${SOURCES}/1_basics.c)
-add_executable(2_include_guards ${SOURCES}/2_include_guards.c)

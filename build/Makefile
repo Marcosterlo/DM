@@ -130,6 +130,32 @@ depend:
 .PHONY : 0_hello/fast
 
 #=============================================================================
+# Target rules for targets named 2_basics
+
+# Build rule for target.
+2_basics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2_basics
+.PHONY : 2_basics
+
+# fast build rule for target.
+2_basics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/build
+.PHONY : 2_basics/fast
+
+#=============================================================================
+# Target rules for targets named 4_include_guards
+
+# Build rule for target.
+4_include_guards: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 4_include_guards
+.PHONY : 4_include_guards
+
+# fast build rule for target.
+4_include_guards/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/build
+.PHONY : 4_include_guards/fast
+
+#=============================================================================
 # Target rules for targets named 1_basics
 
 # Build rule for target.
@@ -141,19 +167,6 @@ depend:
 1_basics/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/1_basics.dir/build.make CMakeFiles/1_basics.dir/build
 .PHONY : 1_basics/fast
-
-#=============================================================================
-# Target rules for targets named 2_include_guards
-
-# Build rule for target.
-2_include_guards: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 2_include_guards
-.PHONY : 2_include_guards
-
-# fast build rule for target.
-2_include_guards/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_include_guards.dir/build.make CMakeFiles/2_include_guards.dir/build
-.PHONY : 2_include_guards/fast
 
 src/0_hello.o: src/0_hello.c.o
 .PHONY : src/0_hello.o
@@ -203,29 +216,53 @@ src/1_basics.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/1_basics.dir/build.make CMakeFiles/1_basics.dir/src/1_basics.c.s
 .PHONY : src/1_basics.c.s
 
-src/2_include_guards.o: src/2_include_guards.c.o
-.PHONY : src/2_include_guards.o
+src/2_basics.o: src/2_basics.c.o
+.PHONY : src/2_basics.o
 
 # target to build an object file
-src/2_include_guards.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_include_guards.dir/build.make CMakeFiles/2_include_guards.dir/src/2_include_guards.c.o
-.PHONY : src/2_include_guards.c.o
+src/2_basics.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/src/2_basics.c.o
+.PHONY : src/2_basics.c.o
 
-src/2_include_guards.i: src/2_include_guards.c.i
-.PHONY : src/2_include_guards.i
+src/2_basics.i: src/2_basics.c.i
+.PHONY : src/2_basics.i
 
 # target to preprocess a source file
-src/2_include_guards.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_include_guards.dir/build.make CMakeFiles/2_include_guards.dir/src/2_include_guards.c.i
-.PHONY : src/2_include_guards.c.i
+src/2_basics.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/src/2_basics.c.i
+.PHONY : src/2_basics.c.i
 
-src/2_include_guards.s: src/2_include_guards.c.s
-.PHONY : src/2_include_guards.s
+src/2_basics.s: src/2_basics.c.s
+.PHONY : src/2_basics.s
 
 # target to generate assembly for a file
-src/2_include_guards.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_include_guards.dir/build.make CMakeFiles/2_include_guards.dir/src/2_include_guards.c.s
-.PHONY : src/2_include_guards.c.s
+src/2_basics.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/src/2_basics.c.s
+.PHONY : src/2_basics.c.s
+
+src/4_include_guards.o: src/4_include_guards.c.o
+.PHONY : src/4_include_guards.o
+
+# target to build an object file
+src/4_include_guards.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/src/4_include_guards.c.o
+.PHONY : src/4_include_guards.c.o
+
+src/4_include_guards.i: src/4_include_guards.c.i
+.PHONY : src/4_include_guards.i
+
+# target to preprocess a source file
+src/4_include_guards.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/src/4_include_guards.c.i
+.PHONY : src/4_include_guards.c.i
+
+src/4_include_guards.s: src/4_include_guards.c.s
+.PHONY : src/4_include_guards.s
+
+# target to generate assembly for a file
+src/4_include_guards.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/src/4_include_guards.c.s
+.PHONY : src/4_include_guards.c.s
 
 # Help Target
 help:
@@ -237,16 +274,20 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... 0_hello"
 	@echo "... 1_basics"
-	@echo "... 2_include_guards"
+	@echo "... 2_basics"
+	@echo "... 4_include_guards"
 	@echo "... src/0_hello.o"
 	@echo "... src/0_hello.i"
 	@echo "... src/0_hello.s"
 	@echo "... src/1_basics.o"
 	@echo "... src/1_basics.i"
 	@echo "... src/1_basics.s"
-	@echo "... src/2_include_guards.o"
-	@echo "... src/2_include_guards.i"
-	@echo "... src/2_include_guards.s"
+	@echo "... src/2_basics.o"
+	@echo "... src/2_basics.i"
+	@echo "... src/2_basics.s"
+	@echo "... src/4_include_guards.o"
+	@echo "... src/4_include_guards.i"
+	@echo "... src/4_include_guards.s"
 .PHONY : help
 
 

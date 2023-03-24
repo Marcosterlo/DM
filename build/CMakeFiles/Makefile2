@@ -64,8 +64,9 @@ CMAKE_BINARY_DIR = /home/marco/Desktop/DM/build
 
 # The main recursive "all" target.
 all: CMakeFiles/0_hello.dir/all
+all: CMakeFiles/2_basics.dir/all
+all: CMakeFiles/4_include_guards.dir/all
 all: CMakeFiles/1_basics.dir/all
-all: CMakeFiles/2_include_guards.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,8 +75,9 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/0_hello.dir/clean
+clean: CMakeFiles/2_basics.dir/clean
+clean: CMakeFiles/4_include_guards.dir/clean
 clean: CMakeFiles/1_basics.dir/clean
-clean: CMakeFiles/2_include_guards.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -105,6 +107,58 @@ CMakeFiles/0_hello.dir/clean:
 .PHONY : CMakeFiles/0_hello.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/2_basics.dir
+
+# All Build rule for target.
+CMakeFiles/2_basics.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marco/Desktop/DM/build/CMakeFiles --progress-num=5,6 "Built target 2_basics"
+.PHONY : CMakeFiles/2_basics.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/2_basics.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/2_basics.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles 0
+.PHONY : CMakeFiles/2_basics.dir/rule
+
+# Convenience name for target.
+2_basics: CMakeFiles/2_basics.dir/rule
+.PHONY : 2_basics
+
+# clean rule for target.
+CMakeFiles/2_basics.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/clean
+.PHONY : CMakeFiles/2_basics.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/4_include_guards.dir
+
+# All Build rule for target.
+CMakeFiles/4_include_guards.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marco/Desktop/DM/build/CMakeFiles --progress-num=7,8 "Built target 4_include_guards"
+.PHONY : CMakeFiles/4_include_guards.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/4_include_guards.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/4_include_guards.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles 0
+.PHONY : CMakeFiles/4_include_guards.dir/rule
+
+# Convenience name for target.
+4_include_guards: CMakeFiles/4_include_guards.dir/rule
+.PHONY : 4_include_guards
+
+# clean rule for target.
+CMakeFiles/4_include_guards.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/clean
+.PHONY : CMakeFiles/4_include_guards.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/1_basics.dir
 
 # All Build rule for target.
@@ -129,32 +183,6 @@ CMakeFiles/1_basics.dir/rule: cmake_check_build_system
 CMakeFiles/1_basics.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/1_basics.dir/build.make CMakeFiles/1_basics.dir/clean
 .PHONY : CMakeFiles/1_basics.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/2_include_guards.dir
-
-# All Build rule for target.
-CMakeFiles/2_include_guards.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_include_guards.dir/build.make CMakeFiles/2_include_guards.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_include_guards.dir/build.make CMakeFiles/2_include_guards.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marco/Desktop/DM/build/CMakeFiles --progress-num=5,6 "Built target 2_include_guards"
-.PHONY : CMakeFiles/2_include_guards.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/2_include_guards.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/2_include_guards.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles 0
-.PHONY : CMakeFiles/2_include_guards.dir/rule
-
-# Convenience name for target.
-2_include_guards: CMakeFiles/2_include_guards.dir/rule
-.PHONY : 2_include_guards
-
-# clean rule for target.
-CMakeFiles/2_include_guards.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_include_guards.dir/build.make CMakeFiles/2_include_guards.dir/clean
-.PHONY : CMakeFiles/2_include_guards.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
