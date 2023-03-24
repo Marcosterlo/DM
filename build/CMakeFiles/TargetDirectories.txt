@@ -1,0 +1,5 @@
+/home/marco/Desktop/DM/build/CMakeFiles/0_hello.dir
+/home/marco/Desktop/DM/build/CMakeFiles/1_basics.dir
+/home/marco/Desktop/DM/build/CMakeFiles/2_include_guards.dir
+/home/marco/Desktop/DM/build/CMakeFiles/edit_cache.dir
+/home/marco/Desktop/DM/build/CMakeFiles/rebuild_cache.dir

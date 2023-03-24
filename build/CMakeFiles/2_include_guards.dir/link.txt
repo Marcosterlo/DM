@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/2_include_guards.dir/src/2_include_guards.c.o -o 2_include_guards 
