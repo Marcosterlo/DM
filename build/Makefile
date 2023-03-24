@@ -168,6 +168,19 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/1_basics.dir/build.make CMakeFiles/1_basics.dir/build
 .PHONY : 1_basics/fast
 
+#=============================================================================
+# Target rules for targets named 6_inout_p
+
+# Build rule for target.
+6_inout_p: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 6_inout_p
+.PHONY : 6_inout_p
+
+# fast build rule for target.
+6_inout_p/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/build
+.PHONY : 6_inout_p/fast
+
 src/0_hello.o: src/0_hello.c.o
 .PHONY : src/0_hello.o
 
@@ -264,6 +277,30 @@ src/4_include_guards.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/src/4_include_guards.c.s
 .PHONY : src/4_include_guards.c.s
 
+src/6_inout_p.o: src/6_inout_p.c.o
+.PHONY : src/6_inout_p.o
+
+# target to build an object file
+src/6_inout_p.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o
+.PHONY : src/6_inout_p.c.o
+
+src/6_inout_p.i: src/6_inout_p.c.i
+.PHONY : src/6_inout_p.i
+
+# target to preprocess a source file
+src/6_inout_p.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/6_inout_p.c.i
+.PHONY : src/6_inout_p.c.i
+
+src/6_inout_p.s: src/6_inout_p.c.s
+.PHONY : src/6_inout_p.s
+
+# target to generate assembly for a file
+src/6_inout_p.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/6_inout_p.c.s
+.PHONY : src/6_inout_p.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -276,6 +313,7 @@ help:
 	@echo "... 1_basics"
 	@echo "... 2_basics"
 	@echo "... 4_include_guards"
+	@echo "... 6_inout_p"
 	@echo "... src/0_hello.o"
 	@echo "... src/0_hello.i"
 	@echo "... src/0_hello.s"
@@ -288,6 +326,9 @@ help:
 	@echo "... src/4_include_guards.o"
 	@echo "... src/4_include_guards.i"
 	@echo "... src/4_include_guards.s"
+	@echo "... src/6_inout_p.o"
+	@echo "... src/6_inout_p.i"
+	@echo "... src/6_inout_p.s"
 .PHONY : help
 
 
