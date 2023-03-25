@@ -40,13 +40,15 @@ int main() {
   printf("\nFunction that takes pointer as input *****************\n");
   float *b = NULL;
   printf("The address contained in the pointer b is: %p\n", b);
+  printf("The address of pointer to float variable &b is: %p\n", &b);
   f2(b, n);
   // array_print(b, n); this cause segmentation fault because the function just
-  // operates in its scope at the location indicated by pointer b without
-  // effectively changing the b pointer, so at the exit of the function f2 b
-  // remains NULL and the launch of print_array function with a null pointer
-  // gives the error
+  // operates in its scope at the location indicated by pointer b (NULL) without
+  // effectively changing the b pointer, so at the exit of the function f2 the
+  // value contained in b gets deleted because out of scope and b remains NULL.
+  // The launch of print_array function with a null pointer gives the error
   printf("The address contained in the pointer b is: %p\n", b);
+  printf("The address of pointer to float variable &b is: %p\n", &b);
   free(b);
 
   // Third example, by using double pointers
@@ -86,8 +88,7 @@ float *f1(int n) {
   float *a = malloc(n * sizeof(float));
   printf("f1(%i) the value of the pointer is %p\n", n, a);
   // Value assignment
-  int i = 0;
-  for (i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {
     a[i] = i;
   }
   return a;
@@ -95,11 +96,13 @@ float *f1(int n) {
 
 void f2(float *a, int n) {
   // Definition
-  a = malloc(n * sizeof(float));
   printf("f2(%i) the address of the passed pointer is %p\n", n, a);
+  a = malloc(n * sizeof(float));
+  printf("f2(%i) the address of the passed pointer after malloc allocation is "
+         "%p\n",
+         n, a);
   // Value assignment
-  int i = 0;
-  for (i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {
     a[i] = i;
   }
   array_print(a, n);
@@ -112,8 +115,7 @@ void f3(float **a, int n) {
   printf("f3(%i) the address created via malloc and stored in *c is %p\n", n,
          *a);
   // Value assignment
-  int i = 0;
-  for (i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++) {
     (*a)[i] = i;
   }
 }
