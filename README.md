@@ -7,7 +7,7 @@ The folder is the github page of refrence of the professor where all the updated
 ## Shortcut and setups useful for programming
 ```bashr 
 CTRL-SHIFT-I -> clang formatter in vscode
-ALT-SHIFT-K -> figlet roba evidenziata
-ALT-S -> switcha il focus tra terminale ed editor
-CTRL-SHIFT-7 (CTRL-/) -> commenta roba evidenziata
+ALT-SHIFT-K -> figlet highlighted stuff
+ALT-S -> switch focus between terminale and editor
+CTRL-SHIFT-7 (CTRL-/) -> comment highlighted stuff
 ```
