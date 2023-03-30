@@ -1,5 +1,6 @@
 CMakeFiles/2_basics.dir/src/2_basics.c.o: \
-  /home/marco/Desktop/DM/src/2_basics.c /usr/include/stdio.h \
+  /home/marco/Desktop/Working\ directory/DM/src/2_basics.c \
+  /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h /usr/include/features-time64.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \

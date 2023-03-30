@@ -1,6 +1,7 @@
 CMakeFiles/4_include_guards.dir/src/4_include_guards.c.o: \
-  /home/marco/Desktop/DM/src/4_include_guards.c \
-  /home/marco/Desktop/DM/include/include_guards.h /usr/include/stdio.h \
+  /home/marco/Desktop/Working\ directory/DM/src/4_include_guards.c \
+  /home/marco/Desktop/Working\ directory/DM/include/include_guards.h \
+  /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h /usr/include/features-time64.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \

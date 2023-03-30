@@ -1,5 +1,6 @@
 CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o: \
-  /home/marco/Desktop/DM/src/6_inout_p.c /usr/include/stdio.h \
+  /home/marco/Desktop/Working\ directory/DM/src/6_inout_p.c \
+  /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h /usr/include/features-time64.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -47,4 +48,5 @@ CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o: \
   /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/alloca.h \
-  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h
+  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+  /home/marco/Desktop/Working\ directory/DM/include/inout.h

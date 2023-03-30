@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/marco/Desktop/DM/src/2_basics.c" "CMakeFiles/2_basics.dir/src/2_basics.c.o" "gcc" "CMakeFiles/2_basics.dir/src/2_basics.c.o.d"
+  "/home/marco/Desktop/Working directory/DM/src/2_basics.c" "CMakeFiles/2_basics.dir/src/2_basics.c.o" "gcc" "CMakeFiles/2_basics.dir/src/2_basics.c.o.d"
   )
 
 # Targets to which this target links.

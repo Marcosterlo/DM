@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marco/Desktop/DM
+CMAKE_SOURCE_DIR = "/home/marco/Desktop/Working directory/DM"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marco/Desktop/DM/build
+CMAKE_BINARY_DIR = "/home/marco/Desktop/Working directory/DM/build"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles /home/marco/Desktop/DM/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/marco/Desktop/Working directory/DM/build/CMakeFiles" "/home/marco/Desktop/Working directory/DM/build//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marco/Desktop/DM/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/marco/Desktop/Working directory/DM/build/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -130,6 +130,19 @@ depend:
 .PHONY : 0_hello/fast
 
 #=============================================================================
+# Target rules for targets named 1_basics
+
+# Build rule for target.
+1_basics: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 1_basics
+.PHONY : 1_basics
+
+# fast build rule for target.
+1_basics/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/1_basics.dir/build.make CMakeFiles/1_basics.dir/build
+.PHONY : 1_basics/fast
+
+#=============================================================================
 # Target rules for targets named 2_basics
 
 # Build rule for target.
@@ -141,6 +154,19 @@ depend:
 2_basics/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/2_basics.dir/build.make CMakeFiles/2_basics.dir/build
 .PHONY : 2_basics/fast
+
+#=============================================================================
+# Target rules for targets named 3_file
+
+# Build rule for target.
+3_file: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3_file
+.PHONY : 3_file
+
+# fast build rule for target.
+3_file/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/3_file.dir/build.make CMakeFiles/3_file.dir/build
+.PHONY : 3_file/fast
 
 #=============================================================================
 # Target rules for targets named 4_include_guards
@@ -156,19 +182,6 @@ depend:
 .PHONY : 4_include_guards/fast
 
 #=============================================================================
-# Target rules for targets named 1_basics
-
-# Build rule for target.
-1_basics: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 1_basics
-.PHONY : 1_basics
-
-# fast build rule for target.
-1_basics/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/1_basics.dir/build.make CMakeFiles/1_basics.dir/build
-.PHONY : 1_basics/fast
-
-#=============================================================================
 # Target rules for targets named 6_inout_p
 
 # Build rule for target.
@@ -180,19 +193,6 @@ depend:
 6_inout_p/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/build
 .PHONY : 6_inout_p/fast
-
-#=============================================================================
-# Target rules for targets named 3_file
-
-# Build rule for target.
-3_file: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 3_file
-.PHONY : 3_file
-
-# fast build rule for target.
-3_file/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/3_file.dir/build.make CMakeFiles/3_file.dir/build
-.PHONY : 3_file/fast
 
 src/0_hello.o: src/0_hello.c.o
 .PHONY : src/0_hello.o
@@ -338,6 +338,30 @@ src/6_inout_p.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/6_inout_p.c.s
 .PHONY : src/6_inout_p.c.s
 
+src/inout.o: src/inout.c.o
+.PHONY : src/inout.o
+
+# target to build an object file
+src/inout.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/inout.c.o
+.PHONY : src/inout.c.o
+
+src/inout.i: src/inout.c.i
+.PHONY : src/inout.i
+
+# target to preprocess a source file
+src/inout.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/inout.c.i
+.PHONY : src/inout.c.i
+
+src/inout.s: src/inout.c.s
+.PHONY : src/inout.s
+
+# target to generate assembly for a file
+src/inout.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/inout.c.s
+.PHONY : src/inout.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -370,6 +394,9 @@ help:
 	@echo "... src/6_inout_p.o"
 	@echo "... src/6_inout_p.i"
 	@echo "... src/6_inout_p.s"
+	@echo "... src/inout.o"
+	@echo "... src/inout.i"
+	@echo "... src/inout.s"
 .PHONY : help
 
 

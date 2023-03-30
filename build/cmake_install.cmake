@@ -1,4 +1,4 @@
-# Install script for directory: /home/marco/Desktop/DM
+# Install script for directory: /home/marco/Desktop/Working directory/DM
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/marco/Desktop/DM/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/marco/Desktop/Working directory/DM/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

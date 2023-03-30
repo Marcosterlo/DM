@@ -1,5 +1,5 @@
 CMakeFiles/1_basics.dir/src/1_basics.c.o: \
-  /home/marco/Desktop/DM/src/1_basics.c \
+  /home/marco/Desktop/Working\ directory/DM/src/1_basics.c \
   /usr/lib/llvm-14/lib/clang/14.0.0/include/float.h \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \

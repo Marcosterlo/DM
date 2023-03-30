@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/marco/Desktop/DM/src/6_inout_p.c" "CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o" "gcc" "CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o.d"
+  "/home/marco/Desktop/Working directory/DM/src/6_inout_p.c" "CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o" "gcc" "CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o.d"
+  "/home/marco/Desktop/Working directory/DM/src/inout.c" "CMakeFiles/6_inout_p.dir/src/inout.c.o" "gcc" "CMakeFiles/6_inout_p.dir/src/inout.c.o.d"
   )
 
 # Targets to which this target links.

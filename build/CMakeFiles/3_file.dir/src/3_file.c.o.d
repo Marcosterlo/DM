@@ -1,4 +1,5 @@
-CMakeFiles/3_file.dir/src/3_file.c.o: /home/marco/Desktop/DM/src/3_file.c \
+CMakeFiles/3_file.dir/src/3_file.c.o: \
+  /home/marco/Desktop/Working\ directory/DM/src/3_file.c \
   /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h /usr/include/features-time64.h \

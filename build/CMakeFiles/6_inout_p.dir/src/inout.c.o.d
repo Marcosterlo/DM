@@ -1,6 +1,7 @@
-CMakeFiles/2_include_guards.dir/src/2_include_guards.c.o: \
-  /home/marco/Desktop/DM/src/2_include_guards.c \
-  /home/marco/Desktop/DM/include/include_guards.h /usr/include/stdio.h \
+CMakeFiles/6_inout_p.dir/src/inout.c.o: \
+  /home/marco/Desktop/Working\ directory/DM/src/inout.c \
+  /home/marco/Desktop/Working\ directory/DM/include/inout.h \
+  /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h /usr/include/features-time64.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \

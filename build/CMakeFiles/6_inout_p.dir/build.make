@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marco/Desktop/DM
+CMAKE_SOURCE_DIR = "/home/marco/Desktop/Working directory/DM"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marco/Desktop/DM/build
+CMAKE_BINARY_DIR = "/home/marco/Desktop/Working directory/DM/build"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/6_inout_p.dir/depend.make
@@ -72,28 +72,44 @@ include CMakeFiles/6_inout_p.dir/flags.make
 CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o: CMakeFiles/6_inout_p.dir/flags.make
 CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o: ../src/6_inout_p.c
 CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o: CMakeFiles/6_inout_p.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/marco/Desktop/DM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o -MF CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o.d -o CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o -c /home/marco/Desktop/DM/src/6_inout_p.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o -MF CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o.d -o CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o -c "/home/marco/Desktop/Working directory/DM/src/6_inout_p.c"
 
 CMakeFiles/6_inout_p.dir/src/6_inout_p.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/6_inout_p.dir/src/6_inout_p.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/marco/Desktop/DM/src/6_inout_p.c > CMakeFiles/6_inout_p.dir/src/6_inout_p.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/marco/Desktop/Working directory/DM/src/6_inout_p.c" > CMakeFiles/6_inout_p.dir/src/6_inout_p.c.i
 
 CMakeFiles/6_inout_p.dir/src/6_inout_p.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/6_inout_p.dir/src/6_inout_p.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/marco/Desktop/DM/src/6_inout_p.c -o CMakeFiles/6_inout_p.dir/src/6_inout_p.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/marco/Desktop/Working directory/DM/src/6_inout_p.c" -o CMakeFiles/6_inout_p.dir/src/6_inout_p.c.s
+
+CMakeFiles/6_inout_p.dir/src/inout.c.o: CMakeFiles/6_inout_p.dir/flags.make
+CMakeFiles/6_inout_p.dir/src/inout.c.o: ../src/inout.c
+CMakeFiles/6_inout_p.dir/src/inout.c.o: CMakeFiles/6_inout_p.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/6_inout_p.dir/src/inout.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/6_inout_p.dir/src/inout.c.o -MF CMakeFiles/6_inout_p.dir/src/inout.c.o.d -o CMakeFiles/6_inout_p.dir/src/inout.c.o -c "/home/marco/Desktop/Working directory/DM/src/inout.c"
+
+CMakeFiles/6_inout_p.dir/src/inout.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/6_inout_p.dir/src/inout.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/marco/Desktop/Working directory/DM/src/inout.c" > CMakeFiles/6_inout_p.dir/src/inout.c.i
+
+CMakeFiles/6_inout_p.dir/src/inout.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/6_inout_p.dir/src/inout.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/marco/Desktop/Working directory/DM/src/inout.c" -o CMakeFiles/6_inout_p.dir/src/inout.c.s
 
 # Object files for target 6_inout_p
 6_inout_p_OBJECTS = \
-"CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o"
+"CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o" \
+"CMakeFiles/6_inout_p.dir/src/inout.c.o"
 
 # External object files for target 6_inout_p
 6_inout_p_EXTERNAL_OBJECTS =
 
 6_inout_p: CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o
+6_inout_p: CMakeFiles/6_inout_p.dir/src/inout.c.o
 6_inout_p: CMakeFiles/6_inout_p.dir/build.make
 6_inout_p: CMakeFiles/6_inout_p.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/marco/Desktop/DM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable 6_inout_p"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable 6_inout_p"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/6_inout_p.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -105,6 +121,6 @@ CMakeFiles/6_inout_p.dir/clean:
 .PHONY : CMakeFiles/6_inout_p.dir/clean
 
 CMakeFiles/6_inout_p.dir/depend:
-	cd /home/marco/Desktop/DM/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/marco/Desktop/DM /home/marco/Desktop/DM /home/marco/Desktop/DM/build /home/marco/Desktop/DM/build /home/marco/Desktop/DM/build/CMakeFiles/6_inout_p.dir/DependInfo.cmake --color=$(COLOR)
+	cd "/home/marco/Desktop/Working directory/DM/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/marco/Desktop/Working directory/DM" "/home/marco/Desktop/Working directory/DM" "/home/marco/Desktop/Working directory/DM/build" "/home/marco/Desktop/Working directory/DM/build" "/home/marco/Desktop/Working directory/DM/build/CMakeFiles/6_inout_p.dir/DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/6_inout_p.dir/depend
 
