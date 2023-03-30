@@ -41,11 +41,27 @@ int main() {
   }
 
   // Read actual time -> For futher information check docs
-  clock_gettime(CLOCK_MONOTONIC, &ts);
+  clock_gettime(CLOCK_MONOTONIC, &ts); // Vscode da errore ma il compilatore no
   t0 = ts.tv_sec + ts.tv_nsec / 1.0E9; // divide the number of nano seconds by
                                        // one million to obtain seconds.
   printf("tv_sec: %ld, tv_nsec: %ld\n", ts.tv_sec, ts.tv_nsec);
   printf("t0: %.9f\n", t0);
+
+  // CSV like header
+  printf("n, dt\n");
+  for (i = 0; i < 100; i++) {
+    sleep(1); // sleeps for 1 seconds unless a SIGALRM signal arrives first
+
+    // Getting the time
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    t = ts.tv_sec + ts.tv_nsec / 1.0E9;
+    dt = t - t0;
+    t0 = t;
+    printf("%d, %f\n", i, dt);
+    // This prints every event with the corresponding elapsed time between every
+    // sleep function call and interruption by the SIGALRM signal our timer
+    // generates
+  }
 
   return 0;
 }
