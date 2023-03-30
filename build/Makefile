@@ -207,6 +207,19 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/build
 .PHONY : 6_inout_p/fast
 
+#=============================================================================
+# Target rules for targets named 9_timed
+
+# Build rule for target.
+9_timed: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 9_timed
+.PHONY : 9_timed
+
+# fast build rule for target.
+9_timed/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/9_timed.dir/build.make CMakeFiles/9_timed.dir/build
+.PHONY : 9_timed/fast
+
 src/0_hello.o: src/0_hello.c.o
 .PHONY : src/0_hello.o
 
@@ -375,6 +388,30 @@ src/6_inout_p.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/6_inout_p.c.s
 .PHONY : src/6_inout_p.c.s
 
+src/9_timed.o: src/9_timed.c.o
+.PHONY : src/9_timed.o
+
+# target to build an object file
+src/9_timed.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/9_timed.dir/build.make CMakeFiles/9_timed.dir/src/9_timed.c.o
+.PHONY : src/9_timed.c.o
+
+src/9_timed.i: src/9_timed.c.i
+.PHONY : src/9_timed.i
+
+# target to preprocess a source file
+src/9_timed.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/9_timed.dir/build.make CMakeFiles/9_timed.dir/src/9_timed.c.i
+.PHONY : src/9_timed.c.i
+
+src/9_timed.s: src/9_timed.c.s
+.PHONY : src/9_timed.s
+
+# target to generate assembly for a file
+src/9_timed.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/9_timed.dir/build.make CMakeFiles/9_timed.dir/src/9_timed.c.s
+.PHONY : src/9_timed.c.s
+
 src/inout.o: src/inout.c.o
 .PHONY : src/inout.o
 
@@ -414,6 +451,7 @@ help:
 	@echo "... 4_include_guards"
 	@echo "... 5_struct_union"
 	@echo "... 6_inout_p"
+	@echo "... 9_timed"
 	@echo "... src/0_hello.o"
 	@echo "... src/0_hello.i"
 	@echo "... src/0_hello.s"
@@ -435,6 +473,9 @@ help:
 	@echo "... src/6_inout_p.o"
 	@echo "... src/6_inout_p.i"
 	@echo "... src/6_inout_p.s"
+	@echo "... src/9_timed.o"
+	@echo "... src/9_timed.i"
+	@echo "... src/9_timed.s"
 	@echo "... src/inout.o"
 	@echo "... src/inout.i"
 	@echo "... src/inout.s"

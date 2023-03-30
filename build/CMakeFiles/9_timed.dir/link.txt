@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/9_timed.dir/src/9_timed.c.o -o 9_timed 
