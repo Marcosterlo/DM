@@ -182,6 +182,19 @@ depend:
 .PHONY : 4_include_guards/fast
 
 #=============================================================================
+# Target rules for targets named 5_struct_union
+
+# Build rule for target.
+5_struct_union: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 5_struct_union
+.PHONY : 5_struct_union
+
+# fast build rule for target.
+5_struct_union/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/5_struct_union.dir/build.make CMakeFiles/5_struct_union.dir/build
+.PHONY : 5_struct_union/fast
+
+#=============================================================================
 # Target rules for targets named 6_inout_p
 
 # Build rule for target.
@@ -314,6 +327,30 @@ src/4_include_guards.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/4_include_guards.dir/build.make CMakeFiles/4_include_guards.dir/src/4_include_guards.c.s
 .PHONY : src/4_include_guards.c.s
 
+src/5_struct_union.o: src/5_struct_union.c.o
+.PHONY : src/5_struct_union.o
+
+# target to build an object file
+src/5_struct_union.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/5_struct_union.dir/build.make CMakeFiles/5_struct_union.dir/src/5_struct_union.c.o
+.PHONY : src/5_struct_union.c.o
+
+src/5_struct_union.i: src/5_struct_union.c.i
+.PHONY : src/5_struct_union.i
+
+# target to preprocess a source file
+src/5_struct_union.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/5_struct_union.dir/build.make CMakeFiles/5_struct_union.dir/src/5_struct_union.c.i
+.PHONY : src/5_struct_union.c.i
+
+src/5_struct_union.s: src/5_struct_union.c.s
+.PHONY : src/5_struct_union.s
+
+# target to generate assembly for a file
+src/5_struct_union.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/5_struct_union.dir/build.make CMakeFiles/5_struct_union.dir/src/5_struct_union.c.s
+.PHONY : src/5_struct_union.c.s
+
 src/6_inout_p.o: src/6_inout_p.c.o
 .PHONY : src/6_inout_p.o
 
@@ -375,6 +412,7 @@ help:
 	@echo "... 2_basics"
 	@echo "... 3_file"
 	@echo "... 4_include_guards"
+	@echo "... 5_struct_union"
 	@echo "... 6_inout_p"
 	@echo "... src/0_hello.o"
 	@echo "... src/0_hello.i"
@@ -391,6 +429,9 @@ help:
 	@echo "... src/4_include_guards.o"
 	@echo "... src/4_include_guards.i"
 	@echo "... src/4_include_guards.s"
+	@echo "... src/5_struct_union.o"
+	@echo "... src/5_struct_union.i"
+	@echo "... src/5_struct_union.s"
 	@echo "... src/6_inout_p.o"
 	@echo "... src/6_inout_p.i"
 	@echo "... src/6_inout_p.s"
