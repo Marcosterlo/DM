@@ -23,3 +23,22 @@ Changing name file to for example defines.h.in we can use cmake defined variable
 After we finished the debugging, we want to optimize for speed: "cmake -B build -DCMAKE_BUILD_TYPE=Release" this is telling cmake to build the code in release form without debug code.
 
 Substitution with (%something, arguments) happens at runtime, string literals are directly handled by the pre-processor resulting in a lighter execution.
+
+A program can be allocated as a series of linked list blocks (in gcode sense), each block will have a pointer to the previous and next one, there's another object representing the machine, we can initialize methods to send and receive messages with it via MQTT protocol. To sum up:
+
+TOP DOWN APPROACH -> First structure and function and then we write the implementation of each and every function
+Objects: point, block, program, machine
+Executable files that linkes everythig together.
+
+==============!!!!!!!!!!!!===================
+WHEN PASSING POINTER ASK ALWAYS: IS THIS POINTER GOING TO CHANGE? IF NOT IT'S GOOD USE TO DECLARE IT AS CONST IN FUNCTION DECLARATION. Doing so if in the function we change the pointer by accident the compiler will launch an error letting us know at compile time.
+==============!!!!!!!!!!!!===================
+
+Point modal: suppose we have a GCODE like this:
+
+N100 G01 X0 Y0 Z0
+N110 G01 X100
+
+We didn't update Y and Z values, we have to copy in the next block the previous values that have not been updated
+
+assert() is useful in the debug fase, it gives information of where the code is breaking
