@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/6_inout_p.dir/src/6_inout_p.c.o CMakeFiles/6_inout_p.dir/src/inout.c.o -o 6_inout_p 

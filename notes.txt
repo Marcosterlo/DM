@@ -1,0 +1,25 @@
+  __  __    _    ____ ____   ___    _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
+ |  \/  |  / \  / ___|  _ \ / _ \  |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
+ | |\/| | / _ \| |   | |_) | | | | | |_  | | | |  \| | |     | |  | | | | |  \| \___ \ 
+ | |  | |/ ___ \ |___|  _ <| |_| | |  _| | |_| | |\  | |___  | |  | | |_| | |\  |___) |
+ |_|  |_/_/   \_\____|_| \_\\___/  |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/ 
+                                                                                       
+#define eprintf(m, ...) fprintf(stderr, BRED "*** ERROR: " m CRESET, ##__VA_ARGS__) 
+
+The ... is used for a variable number of arguments, then we have to put ##__VA_ARGS__ that get replaced with the number of variables
+
+   ____ ___  _     ___  ____  ____    ___ _   _   _____ _   _ _____   _____ _____ ____  __  __ ___ _   _    _    _      
+  / ___/ _ \| |   / _ \|  _ \/ ___|  |_ _| \ | | |_   _| | | | ____| |_   _| ____|  _ \|  \/  |_ _| \ | |  / \  | |     
+ | |  | | | | |  | | | | |_) \___ \   | ||  \| |   | | | |_| |  _|     | | |  _| | |_) | |\/| || ||  \| | / _ \ | |     
+ | |__| |_| | |__| |_| |  _ < ___) |  | || |\  |   | | |  _  | |___    | | | |___|  _ <| |  | || || |\  |/ ___ \| |___  
+  \____\___/|_____\___/|_| \_\____/  |___|_| \_|   |_| |_| |_|_____|   |_| |_____|_| \_\_|  |_|___|_| \_/_/   \_\_____| 
+                                                                                                                        
+
+The colors are defined as strings, \e is an escape character, the following in a terminal act like a switch on to a particular color, the color and mode remain active until reset with the special character linked in defines.h to CRESET: "\e[0m"
+Any string written in " dfa " in a function call like printf are literal strings, the compiler whenever find 2 or morex literal strings next to each other merges them
+This is the standard color code ANSI.
+
+Changing name file to for example defines.h.in we can use cmake defined variables (see from rec at around 12.18). In Cmake we can do some tricks to make it compile the .h.in file and then create another .h file with the cmake variables already substitued.
+After we finished the debugging, we want to optimize for speed: "cmake -B build -DCMAKE_BUILD_TYPE=Release" this is telling cmake to build the code in release form without debug code.
+
+Substitution with (%something, arguments) happens at runtime, string literals are directly handled by the pre-processor resulting in a lighter execution.

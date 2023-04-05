@@ -1,1 +1,0 @@
-/usr/bin/cc -g CMakeFiles/3_file.dir/src/3_file.c.o -o 3_file 

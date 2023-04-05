@@ -1,0 +1,27 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "C_Cpp.default.defines": [
+      "STATS_MAIN=1",
+      "POINT_MAIN=1"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "lldb",
+        "request": "launch",
+        "name": "hello",
+        "program": "${workspaceFolder}/build/hello",
+        "args": [],
+        "cwd": "${workspaceFolder}/build"
+      }
+    ],
+    "compounds": []
+  }
+}
