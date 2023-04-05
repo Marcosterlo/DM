@@ -13,8 +13,8 @@ if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
   message(FATAL_ERROR "In-source builds not allowed! Create a build directory and run CMake from there.")
 endif()
 # This is dynamically updated in defines.h.in:
-set(VERSION "1.0")
-project(C-CNC VERSION ${VERSION} LANGUAGES C)
+set(VERSION "1.1")
+project(C-CNC VERSION ${VERSION} LANGUAGES C CXX)
 
 
 #   ____        _ _     _            _   _   _                 
@@ -56,10 +56,10 @@ endif()
 set(SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 file(GLOB LIB_SOURCES "${SOURCE_DIR}/[^_]*.c")
 # generate defines.h
-# configure_file(
-#   ${SOURCE_DIR}/defines.h.in
-#   ${SOURCE_DIR}/defines.h
-# )
+configure_file(
+  ${SOURCE_DIR}/defines.h.in
+  ${SOURCE_DIR}/defines.h
+)
 
 
 #   _____                    _       
@@ -107,4 +107,3 @@ install(TARGETS ${TARGETS_LIST}
 #    |_|\___||___/\__|
 include(CTest)
 add_test(NAME hello COMMAND hello)
-set_property(TEST hello PROPERTY PASS_REGULAR_EXPRESSION "^Hello")

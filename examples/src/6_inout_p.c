@@ -1,69 +1,32 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "inout.h"
 
 int main() {
-  int n = 10; // Size of my array
+  int n = 10;
 
   // First example
   float *a;
-  printf("The address contained in the pointer a is: %p\n", a);
-  // This prints 0x1000, an low address, probably in the stack because
-  // intialized in the stack
-  printf("The address of pointer to float variable &a is: %p\n", &a);
-  // the variable *a is located somewhere in the heap, the value it stores is
-  // 0x1000
+  printf("A address is: %p\n\n", a);
 
-  // Return pointer array
-  printf("\nFunction that returns a pointer *****************\n");
-  printf("The address contained in the pointer a is: %p\n", a);
   a = f1(n);
   array_print(a, n);
-  printf("The address contained in the pointer a is: %p\n", a);
-  printf("The address of pointer to float variable &a is: %p\n", &a);
-  // In this case, before the f1 function call, a is generically initialized
-  // containing the address 0x1000 and stored in some random location in the
-  // heap. f1 returns a float*, assigning a to the return of the function make
-  // it store the address created via malloc function inside the function,
-  // without changing the place where the float pointer variable a is stored
+  printf("A address is: %p\n\n", a);
+
+  // Second example
+  float *b = NULL;
+  f2(b, n);
+  printf("B address is: %p\n\n", b);
+  // array_print(b, n); // this would segfault! (why?)
+
+  // Third example 
+  float *c = NULL;
+  f3(&c, n);
+  array_print(c, n);
+  printf("C address is: %p\n\n", c);
 
   free(a);
-
-  // Second example, pass pointer to the function
-  printf("\nFunction that takes pointer as input *****************\n");
-  float *b = NULL;
-  printf("The address contained in the pointer b is: %p\n", b);
-  printf("The address of pointer to float variable &b is: %p\n", &b);
-  f2(b, n);
-  // array_print(b, n); this cause segmentation fault because the function just
-  // operates in its scope at the location indicated by pointer b (NULL) without
-  // effectively changing the b pointer, so at the exit of the function f2 the
-  // value contained in b gets deleted because out of scope and b remains NULL.
-  // The launch of print_array function with a null pointer gives the error
-  printf("The address contained in the pointer b is: %p\n", b);
-  printf("The address of pointer to float variable &b is: %p\n", &b);
   free(b);
-
-  // Third example, by using double pointers
-  printf("\nFunction that takes double pointer as input *****************\n");
-
-  float *c = NULL;
-  printf("The address contained in the pointer c is: %p\n", c);
-  printf("The address of pointer to float variable &c is: %p\n", &c);
-  f3(&c, n);
-  printf("The address contained in the pointer c is: %p\n", c);
-  printf("The address of pointer to float variable &c is: %p\n", &c);
-  array_print(c, n);
   free(c);
-  // In this case we pass to f3 a double pointer to float, c refers to the
-  // pointer stored in c, &c is the address of the pointer variable storage
-  // location. We pass to f3 &c: a float **variable, in the function we create
-  // in (*c), or in other words just c in the main scope, the address created
-  // via malloc where we operate creating an array. At the exit of the function,
-  // since we passed a double pointer, c will maintain the value created via
-  // malloc in the function, differently from the second case where out of f2
-  // scope the value eliminated itself. The original storage location &c in the
-  // main scope remains unchanged
 
   return 0;
-}
+
+} // end of main

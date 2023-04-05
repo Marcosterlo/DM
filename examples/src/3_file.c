@@ -1,76 +1,91 @@
+//   _____ _ _           
+//  |  ___(_) | ___  ___ 
+//  | |_  | | |/ _ \/ __|
+//  |  _| | | |  __/\__ \
+//  |_|   |_|_|\___||___/
+                      
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// preprocessor constant
 #define MAX_LINE_LENGTH 1024
 
+// enum: lists the possible return values
+// note: enum values are internally stored as ints. Typically, the first value
+// is 0, the second 1 and so on, BUT THIS IT NOT GRANTED (different compilers
+// can behave differently). If the numeric value is important (e.g. because you
+// plan to transmit it via network), then it is safer to force its values. This
+// can be done by explicitly give the value of 0 to the first element.
 enum errors {
-  ERRORS_SUCCESS = 100,
-  ERRORS_OPEN,
-  ERRORS_READ,
-  ERRORS_WRITE,
-  ERRORS_ARGS
+  ERROR_SUCCESS=0,
+  ERROR_ARGS,
+  ERROR_READ,
+  ERROR_WRITE,
+  ERROR_OPEN
 };
+// for brevity, we can define a custom type for the "enum errors":
+typedef enum errors error_t;
 
-typedef enum errors errors_t;
+// same result in a single step using an anonymous enum:
+// typedef enum {
+//   ERROR_SUCCESS=0,
+//   ERROR_ARGS,
+//   ERROR_READ,
+//   ERROR_WRITE,
+//   ERROR_OPEN
+// } error_t;
+
 
 int main(int argc, const char **argv) {
-  errors_t result = ERRORS_SUCCESS;
+  error_t result = ERROR_SUCCESS;
   const char *filename;
 
   if (argc != 2) {
-    fprintf(stderr, "I have to give me only 2 arguments!\n");
-    result = ERRORS_ARGS;
+    fprintf(stderr, "I need 1 argument!\n");
+    result = ERROR_ARGS;
     goto end;
   }
 
-  // Writing a file
-  printf("Test file writing! *****************\n");
-  { // this defines a scope, all the variables inside here are only accessible
-    // inside of it
-    filename = argv[1];
-    fprintf(stdout, "My filename is %s\n", filename);
+  filename = argv[1];
+  fprintf(stdout, "My filename is: %s\n", filename);
 
+  // a group of expressions can be surrounded by {} this creates a local scope:
+  // variables declared herein are not visible outside the block
+  {
     FILE *f = fopen(filename, "w");
     if (!f) {
-      fprintf(stderr, "I was not able to open the file!\n");
-      result = ERRORS_OPEN;
+      fprintf(stderr, "I cannot open the file: %s\n", filename);
+      result = ERROR_OPEN;
       goto end;
     }
 
     fprintf(f, "I'm a line\n");
     fprintf(f, "I'm another line\n");
-    fprintf(
-        f, "I'm a number %f\n",
-        20.0f); // this tells to get 20 as a float and not a double as default
+    fprintf(f, "I'm a number: %8.3f\n", 20.0f);
 
     fclose(f);
   }
 
-  printf("Test file reading! *****************\n");
+  // another block with its local scope
   {
     char buffer[MAX_LINE_LENGTH];
-    FILE *f = fopen(filename, "r");
-
+    FILE *f = fopen(filename, "r"); // Not the same f as above!
     if (!f) {
-      fprintf(stderr, "I was not able to read the file!\n");
-      result = ERRORS_READ;
+      fprintf(stderr, "I cannot open the file: %s\n", filename);
+      result = ERROR_OPEN;
       goto end;
     }
 
-    while (fgets(buffer, MAX_LINE_LENGTH, f)) { // loop untile file EOF
+    while(fgets(buffer, MAX_LINE_LENGTH, f)) {
       fprintf(stdout, "%s", buffer);
     }
 
     fclose(f);
   }
 
+  fprintf(stderr, "I'm an error!\n");
+
 end:
-  return result;
+  return ERROR_SUCCESS;
 }
-
-// We can redirect the stdout to a file with the terminal operator >. To
-// separate different streams like stdout and stderr we can do something like
-// this:
-
-// exectutablefile [arguments] > stdout.log 2> error.log

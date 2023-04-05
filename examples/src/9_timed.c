@@ -1,70 +1,85 @@
-#include <signal.h> // we are able to catch signals, something managed by the operating system used  or communicating between processes
+//   _____ _                    _   _                     ____  
+//  |_   _(_)_ __ ___   ___  __| | | | ___   ___  _ __   |___ \
+//    | | | | '_ ` _ \ / _ \/ _` | | |/ _ \ / _ \| '_ \    __) |
+//    | | | | | | | | |  __/ (_| | | | (_) | (_) | |_) |  / __/ 
+//    |_| |_|_| |_| |_|\___|\__,_| |_|\___/ \___/| .__/  |_____|
+//                                               |_|            
+// This version uses a SIGALRM signal, raised by the kernel at regular 
+// intervals. A call to sleep() returns after the given time has elapsed
+// or after receiving an ALRM signal, whichever first.
+// This version does not need any tuning of the step time and it is typically
+// the best way to accomplish the task. On Realtime kernels the time jitter 
+// can be about +-1 us, on normal kernels about +-1 ms
+#include <pthread.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <time.h> // these includes utility and definition for time, date time etc...
-#include <unistd.h> // some utilities like sleep() function
-// to get a list of signals searching for signal.h on browser we get some
-// documentation, some of the most used are: SIGKILL to kill a process or
-// SIGTERM, today we use SIGALARM. By using htop we can see the list of
-// processes, we can send to signals to the process like SIGKILL via F9, can
-// choose the signal to send the process
+#include <time.h>
+#include <unistd.h>
+#include <sched.h>
 
-// Function declaration
-void handler(int signal);
+// an empty signal handler
+void handler(int signal) {}
 
-int main() {
+extern int runstats(double x, size_t n, double *mean, double *sd);
 
-  // Variable definition
-  int i = 0;
+
+int main(int argc, char const **argv) {
+  int i = 0, rc;
   double t0 = 0, t = 0, dt = 0;
-
-  // Timer struct
-  struct itimerval itv; // used to configure the timer, used to trigger
-                        // something inside the application
-  struct timespec ts;   // the struct stores the actual timer
-
-  // Timer configuration
-  itv.it_interval.tv_sec = 0;
-  itv.it_interval.tv_usec = 5000; // 5ms
-  // These are the delta times between two events occuring
-  itv.it_value.tv_sec = 0;     // timer initial value
-  itv.it_value.tv_usec = 5000; // 5ms -> the first occurence happen after 5ms
-
-  // Let's now catch out ALARM signal
-  signal(SIGALRM, handler);
-
-  // Timer set
-  if (setitimer(ITIMER_REAL, &itv, NULL)) {
-    printf("Timer setup failed!\n");
-    return 0;
+  struct itimerval itv;
+  struct timespec ts;
+  double mean = 0, sd = 0;
+  #ifdef __linux__
+  struct sched_param param = {.sched_priority = 80};
+  rc = sched_setscheduler(getpid(), SCHED_FIFO, &param);
+  if (rc) {
+    perror("Error (need sudo?): ");
+    exit(EXIT_FAILURE);
   }
+  #endif
 
-  // Read actual time -> For futher information check docs
-  clock_gettime(CLOCK_MONOTONIC, &ts); // Vscode da errore ma il compilatore no
-  t0 = ts.tv_sec + ts.tv_nsec / 1.0E9; // divide the number of nano seconds by
-                                       // one million to obtain seconds.
-  printf("tv_sec: %ld, tv_nsec: %ld\n", ts.tv_sec, ts.tv_nsec);
-  printf("t0: %.9f\n", t0);
 
-  // CSV like header
-  printf("n, dt\n");
-  for (i = 0; i < 100; i++) {
-    sleep(1); // sleeps for 1 seconds unless a SIGALRM signal arrives first
+  // the itimer interval needs two time periods: it_value is the time before
+  // the first occurrence, it_interval is the interval between further
+  // occurences
+  itv.it_interval.tv_sec = 0;
+  itv.it_interval.tv_usec = 5000;
+  itv.it_value.tv_sec = 0;
+  itv.it_value.tv_usec = 5000;
 
-    // Getting the time
+  // install the signal handler for SIGALRM
+  signal(SIGALRM, handler);
+  // set the timer
+  if (setitimer(ITIMER_REAL, &itv, NULL)) {
+    perror("Error setting timer");
+  }
+  
+  // initialize the clock
+  clock_gettime(CLOCK_MONOTONIC, &ts);
+  t0 = ts.tv_sec + ts.tv_nsec / 1.0E9;
+
+  // header
+  fprintf(stderr, "n, dt\n");
+  
+  // main loop
+  for (i = 0; i < 1000; i++) {
+    // the sleep waits for the next SIGALRM, but no more than 0.1 s
+    if (usleep(100000) == 0) { // see man usleep
+      fprintf(stderr, "Warning: did not get an alarm within 0.1 seconds\n");
+    }
+
+    // calculate and print the delta time
     clock_gettime(CLOCK_MONOTONIC, &ts);
     t = ts.tv_sec + ts.tv_nsec / 1.0E9;
     dt = t - t0;
     t0 = t;
-    printf("%d, %f\n", i, dt);
-    // This prints every event with the corresponding elapsed time between every
-    // sleep function call and interruption by the SIGALRM signal our timer
-    // generates
+    runstats(dt, i + 1, &mean, &sd);
+    fprintf(stderr, "%03d, %.9f\n", i, dt);
+    // here we do our business, which is supposed to take less than 100 ms
   }
+  printf("Timestep: mean %.9f, sd %.9f\n", mean, sd);
 
   return 0;
 }
-
-// Function definition
-void handler(int signal) {}
