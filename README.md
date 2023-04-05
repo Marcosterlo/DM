@@ -14,5 +14,9 @@ CTRL-SHIFT-7 (CTRL-/) -> comment highlighted stuff
 
 ## Problem c++ compiling
 To avoid problems in cmake building when adding CXX in the project install the package:
+```bashr
+sudo apt install libstdc++-12-dev
+```
+Substituting 12 with the newest version
 
 
