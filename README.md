@@ -11,3 +11,8 @@ ALT-SHIFT-K -> figlet highlighted stuff
 ALT-S -> switch focus between terminale and editor
 CTRL-SHIFT-7 (CTRL-/) -> comment highlighted stuff
 ```
+
+## Problem c++ compiling
+To avoid problems in cmake building when adding CXX in the project install the package:
+
+
