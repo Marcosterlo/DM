@@ -41,7 +41,18 @@ void block_free(block_t *b);
 void block_print(block_t *b, FILE *out);
 // print description into a stream, file of stderr for exampleDM/src/block.h
 
-// ACCESSORS
+// ACCESSORS (only the public ones we want the user to have access to)
+// All getters -> all consant
+data_t block_length(block_t const *b);
+data_t block_dtheta(block_t const *b);
+data_t block_dt(block_t const *b);
+data_t block_r(block_t const *b);
+block_type_t block_type(block_t const *b);
+char *block_line(block_t const *b);
+size_t block_n(block_t const *b);
+point_t *block_center(block_t const *b);
+point_t *block_next(block_t const *b);
+block_t *block_target(block_t const *b);
 
 
 // METHODS

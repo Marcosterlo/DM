@@ -95,7 +95,7 @@ point_t *point_new() {
   // Always check if allocation succeded
   if (!p) {
     eprintf("Error allocating memory for a point\n");
-    exit(EXIT_FAILURE); //?
+    return NULL;
   }
   // Usually a good idea is to initialize newly allocated memory, Linux
   // shouldn't set memory to 0 by defualt
@@ -120,24 +120,24 @@ void point_inspect(point_t const *p, char **desc) {
   char str_x[FIELD_SIZE + 1], str_y[FIELD_SIZE + 1], str_z[FIELD_SIZE + 1];
   // +1 to take into account the string terminator \0
   if (p->s & X_SET) {
-    snprintf(str_x, "%*.3f", FIELD_SIZE, p->x);
+    sprintf(str_x, "%*.3f", FIELD_SIZE, p->x);
     // First we pass the string we want to write into, the * is substituted with
     // the first parameter passed after the format, in this case it's like
     // passing %8.3f
   } else {
-    snprintf(str_x, "%*s", FIELD_SIZE, "-"); // It's like writing 8 characters -
+    sprintf(str_x, "%*s", FIELD_SIZE, "-"); // It's like writing 8 characters -
   }
 
   if (p->s & Y_SET) {
-    snprintf(str_y, "%*.3f", FIELD_SIZE, p->y);
+    sprintf(str_y, "%*.3f", FIELD_SIZE, p->y);
   } else {
-    snprintf(str_y, "%*s", FIELD_SIZE, "-"); // It's like writing 8 characters -
+    sprintf(str_y, "%*s", FIELD_SIZE, "-"); // It's like writing 8 characters -
   }
 
   if (p->s & Z_SET) {
-    snprintf(str_z, "%*.3f", FIELD_SIZE, p->z);
+    sprintf(str_z, "%*.3f", FIELD_SIZE, p->z);
   } else {
-    snprintf(str_z, "%*s", FIELD_SIZE, "-"); // It's like writing 8 characters -
+    sprintf(str_z, "%*s", FIELD_SIZE, "-"); // It's like writing 8 characters -
   }
 
   // Now we combine the 3 string in a single one that will be allocated in the

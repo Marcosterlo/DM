@@ -587,6 +587,33 @@ ContinuousSubmit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ContinuousSubmit.dir/build.make CMakeFiles/ContinuousSubmit.dir/build
 .PHONY : ContinuousSubmit/fast
 
+src/block.o: src/block.c.o
+.PHONY : src/block.o
+
+# target to build an object file
+src/block.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/block.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/block.c.o
+.PHONY : src/block.c.o
+
+src/block.i: src/block.c.i
+.PHONY : src/block.i
+
+# target to preprocess a source file
+src/block.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/block.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/block.c.i
+.PHONY : src/block.c.i
+
+src/block.s: src/block.c.s
+.PHONY : src/block.s
+
+# target to generate assembly for a file
+src/block.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/block.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/block.c.s
+.PHONY : src/block.c.s
+
 src/main/hello.o: src/main/hello.c.o
 .PHONY : src/main/hello.o
 
@@ -713,6 +740,9 @@ help:
 	@echo "... c-cnc_static"
 	@echo "... hello"
 	@echo "... point"
+	@echo "... src/block.o"
+	@echo "... src/block.i"
+	@echo "... src/block.s"
 	@echo "... src/main/hello.o"
 	@echo "... src/main/hello.i"
 	@echo "... src/main/hello.s"
