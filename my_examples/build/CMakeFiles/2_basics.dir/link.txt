@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/2_basics.dir/src/2_basics.c.o -o 2_basics 
