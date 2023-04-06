@@ -18,8 +18,8 @@
 //         └──────┴───┘     └──────┴───┘     └──────┴───┘
 
 typedef struct element {
-  char *id // Name/Index of my element
-      struct element *prev;
+  char *id; // Name/Index of my element
+  struct element *prev;
   struct element *next;
   // USER DATA
   // point_t point; and so on
@@ -44,17 +44,18 @@ element_t *element_new(char *id) {
 
 // Free the element
 void element_free(element_t *e) {
-  // We have to free every heap allocated element stored inside the struct element
+  // We have to free every heap allocated element stored inside the struct
+  // element
   free(e->id);
   free(e);
 }
 
-//   _     _     _   
-//  | |   (_)___| |_ 
+//   _     _     _
+//  | |   (_)___| |_
 //  | |   | / __| __|
-//  | |___| \__ \ |_ 
+//  | |___| \__ \ |_
 //  |_____|_|___/\__|
-                  
+
 typedef struct {
   element_t *first, *last;
   size_t length;

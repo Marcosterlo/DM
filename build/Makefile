@@ -211,6 +211,19 @@ hello/fast:
 .PHONY : hello/fast
 
 #=============================================================================
+# Target rules for targets named point
+
+# Build rule for target.
+point: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 point
+.PHONY : point
+
+# fast build rule for target.
+point/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/build
+.PHONY : point/fast
+
+#=============================================================================
 # Target rules for targets named Experimental
 
 # Build rule for target.
@@ -605,6 +618,7 @@ src/point.o: src/point.c.o
 src/point.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/point.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/point.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/src/point.c.o
 .PHONY : src/point.c.o
 
 src/point.i: src/point.c.i
@@ -614,6 +628,7 @@ src/point.i: src/point.c.i
 src/point.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/point.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/point.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/src/point.c.i
 .PHONY : src/point.c.i
 
 src/point.s: src/point.c.s
@@ -623,6 +638,7 @@ src/point.s: src/point.c.s
 src/point.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/point.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/point.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/src/point.c.s
 .PHONY : src/point.c.s
 
 src/toml.o: src/toml.c.o
@@ -696,6 +712,7 @@ help:
 	@echo "... c-cnc"
 	@echo "... c-cnc_static"
 	@echo "... hello"
+	@echo "... point"
 	@echo "... src/main/hello.o"
 	@echo "... src/main/hello.i"
 	@echo "... src/main/hello.s"

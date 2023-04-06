@@ -66,6 +66,7 @@ CMAKE_BINARY_DIR = "/home/marco/Desktop/Working directory/DM/build"
 all: CMakeFiles/c-cnc.dir/all
 all: CMakeFiles/c-cnc_static.dir/all
 all: CMakeFiles/hello.dir/all
+all: CMakeFiles/point.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -76,6 +77,7 @@ preinstall:
 clean: CMakeFiles/c-cnc.dir/clean
 clean: CMakeFiles/c-cnc_static.dir/clean
 clean: CMakeFiles/hello.dir/clean
+clean: CMakeFiles/point.dir/clean
 clean: CMakeFiles/Experimental.dir/clean
 clean: CMakeFiles/Nightly.dir/clean
 clean: CMakeFiles/Continuous.dir/clean
@@ -183,6 +185,32 @@ hello: CMakeFiles/hello.dir/rule
 CMakeFiles/hello.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/clean
 .PHONY : CMakeFiles/hello.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/point.dir
+
+# All Build rule for target.
+CMakeFiles/point.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=9,10 "Built target point"
+.PHONY : CMakeFiles/point.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/point.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/marco/Desktop/Working directory/DM/build/CMakeFiles" 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/point.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/marco/Desktop/Working directory/DM/build/CMakeFiles" 0
+.PHONY : CMakeFiles/point.dir/rule
+
+# Convenience name for target.
+point: CMakeFiles/point.dir/rule
+.PHONY : point
+
+# clean rule for target.
+CMakeFiles/point.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/clean
+.PHONY : CMakeFiles/point.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/Experimental.dir

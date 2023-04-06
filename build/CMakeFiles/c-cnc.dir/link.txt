@@ -1,1 +1,1 @@
-/usr/bin/cc -fPIC -g -shared -Wl,-soname,libc-cnc.so -o libc-cnc.so CMakeFiles/c-cnc.dir/src/point.c.o CMakeFiles/c-cnc.dir/src/toml.c.o  -Wl,-rpath,::::::::::::::::::::::::::::: 
+/usr/bin/cc -fPIC -g -shared -Wl,-soname,libc-cnc.so -o libc-cnc.so CMakeFiles/c-cnc.dir/src/point.c.o CMakeFiles/c-cnc.dir/src/toml.c.o  -Wl,-rpath,::::::::::::::::::::::::::::: -lm 

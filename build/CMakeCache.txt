@@ -262,6 +262,9 @@ MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 //Name of the computer/site where compile is being run
 SITE:STRING=marco-mint
 
+//Dependencies for the target
+c-cnc_LIB_DEPENDS:STATIC=general;m;
+
 
 ########################
 # INTERNAL cache entries
