@@ -1,0 +1,6 @@
+The final part on the comparison between the different timers:
+One method is accurate and not precise (sleep function)
+One method is precise and not accurate (usleep function)
+One method is both precise and accurate (custom function) but:
+  It is not threaded so it occupies the whole CPU the whole time and boils it.
+  It is influenced by higher priority system interrupt so it shows some random peaks where the delay is very high, for this reason if we want a real time implementation in a small time window this could not be a good idea to implement since a delay spike could happne in the short time windows and mess everything up

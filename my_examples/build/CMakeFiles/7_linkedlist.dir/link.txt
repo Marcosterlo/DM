@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/7_linkedlist.dir/src/7_linkedlist.c.o -o 7_linkedlist 
