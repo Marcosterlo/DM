@@ -107,7 +107,10 @@ point_t *point_new() {
 
 // Free memory
 void point_free(point_t *p) {
-
+  // Assert is a function that checks a condition, in this case if p is not
+  // NULL, If false assert stop and tells us in compiling time where the error
+  // is, it's a faster way to debug instead of checking manually and adding a
+  // print function to determine what broke
   assert(p); // gives info in debugging fase in case it breaks
 
   free(p);
