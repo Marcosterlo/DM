@@ -27,8 +27,10 @@ Substitution with (%something, arguments) happens at runtime, string literals ar
 A program can be allocated as a series of linked list blocks (in gcode sense), each block will have a pointer to the previous and next one, there's another object representing the machine, we can initialize methods to send and receive messages with it via MQTT protocol. To sum up:
 
 TOP DOWN APPROACH -> First structure and function and then we write the implementation of each and every function
-Objects: point, block, program, machine
-Executable files that linkes everythig together.
+The program need to read a file, parse it, translate into a set of position in the space and make the interpolation.
+Objects: point, block, program (a sequence of blocks), machine (to send and receive commands and data). For every program we will make a c file and a header.
+All of those function will be in a single library, we'll make a single executable that will be linked to our library. 
+We will have all the object in the src directory and the executables in the main directory.
 
 ==============!!!!!!!!!!!!===================
 WHEN PASSING POINTER ASK ALWAYS: IS THIS POINTER GOING TO CHANGE? IF NOT IT'S GOOD USE TO DECLARE IT AS CONST IN FUNCTION DECLARATION. Doing so if in the function we change the pointer by accident the compiler will launch an error letting us know at compile time.
