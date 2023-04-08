@@ -117,6 +117,7 @@ void point_free(point_t *p) {
 }
 
 #define FIELD_SIZE 8 // Desired number of decimal digits
+#define FORMAT "[" RED "%s " GRN "%s " BLU "%s" CRESET "]"
 void point_inspect(point_t const *p, char **desc) {
   assert(p);
   // The size depends on how many decimal we want in the number
@@ -145,10 +146,13 @@ void point_inspect(point_t const *p, char **desc) {
 
   // Now we combine the 3 string in a single one that will be allocated in the
   // stack and returned as output
-
-  if (asprintf(desc, "[%s %s %s]", str_x, str_y, str_z) == -1) {
-    eprintf("Could not allocate memory for point description.\n");
-    exit(EXIT_FAILURE);
+  if (*desc) {
+    snprintf(*desc, strlen(*desc) + 1, FORMAT, str_x, str_y, str_z);
+  } else {
+    if (asprintf(desc, FORMAT, str_x, str_y, str_z) == -1) {
+      eprintf("Could not allocate memory for point description.\n");
+      exit(EXIT_FAILURE);
+    }
   }
   // Everytime we allocate a memory we have to check it's success or not,
   // asprintf returns a integer wether the operation was successfull or not, in
@@ -156,6 +160,7 @@ void point_inspect(point_t const *p, char **desc) {
 }
 #undef FIELD_SIZE // The macro is only existing in this set of lines, it's risky
                   // to have a macro with similar name and different value
+#undef FORMAT
 
 // Distance between 2 points
 data_t point_dist(point_t const *from, point_t const *to) {
@@ -197,7 +202,7 @@ void point_modal(point_t const *from, point_t *to) {
 #ifdef POINT_MAIN
 int main(int argc, char const *argv[]) {
   point_t *p1, *p2, *p3;
-  char *desc;
+  char *desc = NULL;
   // Create 3 points
   p1 = point_new();
   p2 = point_new();
@@ -210,15 +215,15 @@ int main(int argc, char const *argv[]) {
   point_set_x(p2, 100);
   point_set_y(p2, 110);
   point_inspect(p2, &desc);
-  printf("Initial p2: %s\n", desc);
+  printf("Initial p2:         %s\n", desc);
 
   // Modal
   point_modal(p1, p2);
   point_inspect(p2, &desc);
-  printf("After modal p2: %s\n", desc);
+  printf("After modal p2:     %s\n", desc);
 
   // Distance
-  printf("Distance p1->p2: %f\n", point_dist(p1, p2));
+  printf("Distance p1->p2:    %f\n", point_dist(p1, p2));
 
   // Delta
   point_delta(p1, p2, p3);

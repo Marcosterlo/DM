@@ -70,7 +70,7 @@ configure_file(
 #                 |___/              
 # Libraries
 # All files in /src (except src/main) are compiled into a library
-add_library(c-cnc SHARED ${LIB_SOURCES})
+add_library(c-cnc SHARED ${LIB_SOURCES}) #c-cnc is the library we're creating
 add_library(c-cnc_static STATIC ${LIB_SOURCES})
 
 # Executables

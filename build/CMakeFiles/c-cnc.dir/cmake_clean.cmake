@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/c-cnc.dir/src/block.c.o"
+  "CMakeFiles/c-cnc.dir/src/block.c.o.d"
   "CMakeFiles/c-cnc.dir/src/point.c.o"
   "CMakeFiles/c-cnc.dir/src/point.c.o.d"
   "CMakeFiles/c-cnc.dir/src/toml.c.o"

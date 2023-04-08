@@ -1,2 +1,2 @@
-/usr/bin/ar qc libc-cnc_static.a CMakeFiles/c-cnc_static.dir/src/point.c.o CMakeFiles/c-cnc_static.dir/src/toml.c.o
+/usr/bin/ar qc libc-cnc_static.a CMakeFiles/c-cnc_static.dir/src/block.c.o CMakeFiles/c-cnc_static.dir/src/point.c.o CMakeFiles/c-cnc_static.dir/src/toml.c.o
 /usr/bin/ranlib libc-cnc_static.a
