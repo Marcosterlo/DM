@@ -1,5 +1,6 @@
 CMakeFiles/c-cnc.dir/src/block.c.o: \
   /home/marco/Desktop/Working\ directory/DM/src/block.c \
+  /home/marco/Desktop/Working\ directory/DM/src/block.h \
   /home/marco/Desktop/Working\ directory/DM/src/defines.h \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -57,6 +58,5 @@ CMakeFiles/c-cnc.dir/src/block.c.o: \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
-  /home/marco/Desktop/Working\ directory/DM/src/block.h \
   /home/marco/Desktop/Working\ directory/DM/src/point.h \
   /usr/include/string.h /usr/include/strings.h

@@ -118,6 +118,7 @@ void point_free(point_t *p) {
 
 #define FIELD_SIZE 8 // Desired number of decimal digits
 #define FORMAT "[" RED "%s " GRN "%s " BLU "%s" CRESET "]"
+
 void point_inspect(point_t const *p, char **desc) {
   assert(p);
   // The size depends on how many decimal we want in the number
@@ -147,17 +148,26 @@ void point_inspect(point_t const *p, char **desc) {
   // Now we combine the 3 string in a single one that will be allocated in the
   // stack and returned as output
   if (*desc) {
+    // snprintf doesn't allocate a new memory location if desc is different than
+    // NULL
     snprintf(*desc, strlen(*desc) + 1, FORMAT, str_x, str_y, str_z);
   } else {
+    // If desc is NULL with asprintf we allocate a new memory location in the
+    // heap
     if (asprintf(desc, FORMAT, str_x, str_y, str_z) == -1) {
       eprintf("Could not allocate memory for point description.\n");
       exit(EXIT_FAILURE);
     }
+    // Otherwise if we just called asprintf everytime this function is called
+    // this would have created each time a new allocated memory space resulting
+    // in a memory leak, with this additional control we allocate memory only
+    // the first time
   }
   // Everytime we allocate a memory we have to check it's success or not,
   // asprintf returns a integer wether the operation was successfull or not, in
   // particular it return -1 if the operation failed
 }
+
 #undef FIELD_SIZE // The macro is only existing in this set of lines, it's risky
                   // to have a macro with similar name and different value
 #undef FORMAT
@@ -203,6 +213,10 @@ void point_modal(point_t const *from, point_t *to) {
 int main(int argc, char const *argv[]) {
   point_t *p1, *p2, *p3;
   char *desc = NULL;
+  // Everytime we allocate a pointer it's good to initialize
+  // it manually to NULL, otherwise in the inspect function
+  // we allocate memory to a random location
+
   // Create 3 points
   p1 = point_new();
   p2 = point_new();

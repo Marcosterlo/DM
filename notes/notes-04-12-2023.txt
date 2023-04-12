@@ -1,0 +1,18 @@
+Vedi il memory leak nella descrizione di point_inspect in point.c
+
+To write the algorithms it's best not to write directly into block.c so that different machines don't have to recompile everything. We create a new class: machine.
+We'll define everything related to the machine itself here including communication via MQTT protocol
+
+For the configuration file we'll use a standard format, json... In C the easier format to read is toml format. It's divided in section identified by headers around square brackets followed by a series of assignment. For more information search for toml website. It's provided with a large number of libraries to allow this standard translation into the most popular programming languages. The library is toml.c (and toml.h) that bosetti already downloaded and included in the src folder. We just have to include toml.h and the library can be used:
+
+1) Parse the TOML file
+2) Traverse and locate a table in TOML (a section with a header)
+3)                -on website-
+4)                -on website-
+
+host is a struct, u is a union as a field of host, u is the union that holds the data and depending on it's type can be called as for example host.u.s for a string and so on.
+Comments are with the #
+
+PREPROCESSOR SYNTAX NOTES, we pass naked words, to use a passed value as a string we have to use a #: like #key, to use the name as part of another name like in the function name definition in block.c a double # is needed: get_##name(...)
+
+In the compilation command passing -j8 it tells to use 8 cores of the CPU at the same time to obtain a faster compilation. -j16 uses 16 cores

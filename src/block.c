@@ -3,10 +3,10 @@
 //  |  _ \| |/ _ \ / __| |/ /
 //  | |_) | | (_) | (__|   <
 //  |____/|_|\___/ \___|_|\_\ 
-//                         
+//
 
-#include "defines.h"
 #include "block.h"
+#include "defines.h"
 
 //   ____            _                 _   _
 //  |  _ \  ___  ___| | __ _ _ __ __ _| |_(_) ___  _ __  ___
@@ -99,8 +99,13 @@ block_t *block_new(char const *line, block_t *prev) {
               // moment we leave 0
 
   return b;
+
+// Only good way to use jumps and label, usually it's best to avoid using them.
+// Use goto only when strictly necessary. The only good use is to control the
+// exit point of a function, never use it instead of conditions and loops
 fail:
-  if (b) block_free(b);
+  if (b)
+    block_free(b);
   return NULL;
 }
 void block_free(block_t *b) {
@@ -154,11 +159,22 @@ block_getter(block_t *, next, next);
 
 // METHODS
 // G-Code line string parsing
-int block_parse(block_t *b) { return 0; }
+int block_parse(block_t *b) { 
+
+  return 0; 
+}
+
 // int so it returns a flag on the success of the operation
-data_t block_lambda(block_t *b, data_t time, data_t *v) { return 0; }
+data_t block_lambda(block_t *b, data_t time, data_t *v) { 
+
+  return 0;
+}
+
 // We return the value passed as output parameter, a pointer
-point_t *block_interpolate(block_t *b, data_t lambda) { return NULL; }
+point_t *block_interpolate(block_t *b, data_t lambda) { 
+
+  return NULL; 
+}
 
 //   ____  _        _   _         __                  _   _
 //  / ___|| |_ __ _| |_(_) ___   / _|_   _ _ __   ___| |_(_) ___  _ __  ___

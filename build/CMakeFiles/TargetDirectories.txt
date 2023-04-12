@@ -2,6 +2,7 @@
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/c-cnc_static.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/hello.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/point.dir
+/home/marco/Desktop/Working directory/DM/build/CMakeFiles/machine.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Experimental.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Nightly.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Continuous.dir
