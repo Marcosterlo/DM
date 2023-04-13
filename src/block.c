@@ -7,6 +7,7 @@
 
 #include "block.h"
 #include "defines.h"
+#include "point.h"
 #include "machine.h"
 #include <ctype.h>
 #include <math.h>
