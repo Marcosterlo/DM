@@ -11,3 +11,6 @@ With a segmentation fault we have to debug. In .code-workspace file there are th
 Rivedi parte sul debug di vscode. Step into and out of functions. There's a mirror used to inspect the content of variables at any time, 
 
 The problem was that in block_print the string pointers were declared but not initalized to NULL. ALWAYS INITIALIZE POINTERS TO NULL IF NOT DIRECTLY WITH A SPECIFIC FUNCTION
+
+We redirect stdout to a file with >
+We redirect stderr to a file with 2>
