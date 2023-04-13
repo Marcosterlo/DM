@@ -14,3 +14,5 @@ The problem was that in block_print the string pointers were declared but not in
 
 We redirect stdout to a file with >
 We redirect stderr to a file with 2>
+
+csv file -> comma separated values. Works with every excel that's not italian where comma is the decimal separator
