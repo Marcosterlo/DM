@@ -111,8 +111,11 @@ machine_t *machine_new(char const *cfg_path) {
   d = toml_string_in(tab, #key);                                               \
   if (!d.ok)                                                                   \
     wprintf("Missing %s:%s\n", toml_table_key(tab), #key);                     \
-  else                                                                         \
-    strncpy(machine->key, d.u.s, strlen(machine->key));
+  else {                                                                       \
+    strncpy(machine->key, d.u.s, strlen(machine->key));                        \
+    free(d.u.s);                                                               \
+  }
+  // We freed the string as indicated in the header file of toml library
 
   // We create a local block to initialize and use the variables necessary for
   // methods creation, variables in the block are only visible in the block

@@ -20,7 +20,15 @@
         "program": "${workspaceFolder}/build/hello",
         "args": [],
         "cwd": "${workspaceFolder}/build"
-      }
+      },
+      {
+        "type": "lldb",
+        "request": "launch",
+        "name": "block",
+        "program": "${workspaceFolder}/build/block",
+        "args": ["machine.ini"],
+        "cwd": "${workspaceFolder}"
+      },
     ],
     "compounds": []
   }

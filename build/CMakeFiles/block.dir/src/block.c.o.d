@@ -1,4 +1,4 @@
-CMakeFiles/c-cnc.dir/src/block.c.o: \
+CMakeFiles/block.dir/src/block.c.o: \
   /home/marco/Desktop/Working\ directory/DM/src/block.c \
   /home/marco/Desktop/Working\ directory/DM/src/block.h \
   /home/marco/Desktop/Working\ directory/DM/src/defines.h \

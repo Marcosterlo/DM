@@ -11,6 +11,7 @@
 
 #include "defines.h"
 #include "point.h"
+#include "machine.h"
 #include <string.h>
 
 //   _____
@@ -36,7 +37,7 @@ typedef enum { RAPID = 0, LINE, ARC_CW, ARC_CCW, NO_MOTION } block_type_t;
 //  |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
 
 // LIFECYCLE
-block_t *block_new(char const *line, block_t *prev);
+block_t *block_new(char const *line, block_t *prev, machine_t const *machine);
 // new block starting from single line G-Code, and the pointer to the previous
 // element in the list
 void block_free(block_t *b);

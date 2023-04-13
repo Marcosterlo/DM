@@ -1,0 +1,13 @@
+Con alt-o si switcha tra file .c e header .h
+
+Rivedi rec per la parte delle accelerazioni angolari. We should find the optimal value, to simplify things we assume we start with a tangential acceleration equal to half maximum acceleration. We compute everything to keep tangential acceleration constant, we can compute the time we get to general maximum acceleration (considering centripetal acceleration) and maximum feedrate (minimum between nominal feedrate and computed maximum feedrate)
+
+Quando ho tempo devo commentare con la teoria accanto tutta la parte dell'interpolazione
+
+Per block_arc ci da direttamente il codice delle equazioni perché è noioso
+
+With a segmentation fault we have to debug. In .code-workspace file there are the configuration files with each executable, to add a new one we can copy and paste one of the existing one and fix everything
+
+Rivedi parte sul debug di vscode. Step into and out of functions. There's a mirror used to inspect the content of variables at any time, 
+
+The problem was that in block_print the string pointers were declared but not initalized to NULL. ALWAYS INITIALIZE POINTERS TO NULL IF NOT DIRECTLY WITH A SPECIFIC FUNCTION

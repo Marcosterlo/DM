@@ -77,6 +77,8 @@ add_library(c-cnc_static STATIC ${LIB_SOURCES})
 add_executable(hello ${SOURCE_DIR}/main/hello.c)
 add_executable(point ${SOURCE_DIR}/point.c)
 target_compile_definitions(point PUBLIC POINT_MAIN)
+add_executable(block ${LIB_SOURCES})
+target_compile_definitions(block PUBLIC BLOCK_MAIN)
 add_executable(machine ${LIB_SOURCES})
 target_compile_definitions(machine PUBLIC MACHINE_MAIN)
 
@@ -84,6 +86,7 @@ target_compile_definitions(machine PUBLIC MACHINE_MAIN)
 target_link_libraries(hello c-cnc)
 target_link_libraries(c-cnc m) # Our library to math library
 target_link_libraries(point m) # Point executable to math library
+target_link_libraries(block m) # Block executable to math library
 target_link_libraries(machine m) # Machine executable to math library
 
 
