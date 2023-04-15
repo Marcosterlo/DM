@@ -577,7 +577,7 @@ int main(int argc, char const *argv[]) {
 
     b = b1;
 
-    printf("t lambda v x y z\n");
+    printf("t,lambda,v,x,y,z\n");
     // csv format
     for (t = 0; t < t_tot; t += tq) {
       // Exercise:
@@ -602,21 +602,21 @@ int main(int argc, char const *argv[]) {
 
       // printf("Iterazione numero %lf\n", t/tq);
       //  Time print
-      printf("%lf ", t);
+      printf("%lf,", t);
 
       // printf("%lf ", t_stacked);
 
       // Lambda print
-      printf("%lf ", lambda);
+      printf("%lf,", lambda);
 
       // Velocity print
-      printf("%lf ", v);
+      printf("%lf,", v);
 
       // X coordinate print
-      printf("%lf ", point_x(pos));
+      printf("%lf,", point_x(pos));
 
       // Y coordinate print
-      printf("%lf ", point_y(pos));
+      printf("%lf,", point_y(pos));
 
       // Z coordinate print
       printf("%lf\n", point_z(pos));
