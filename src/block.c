@@ -7,12 +7,10 @@
 
 #include "block.h"
 #include "defines.h"
-#include "point.h"
 #include "machine.h"
-#include <ctype.h>
+#include <ctype.h> // toupper()
 #include <math.h>
-#include <string.h>
-#include <sys/param.h>
+#include <sys/param.h> // MIN()
 
 //   ____            _                 _   _
 //  |  _ \  ___  ___| | __ _ _ __ __ _| |_(_) ___  _ __  ___
@@ -474,7 +472,59 @@ static void block_compute(block_t *b) {
   b->prof->l = l;
 }
 
-static int block_arc(block_t *b) { return 0; }
+static int block_arc(block_t *b) {
+  data_t x0, y0, z0, xc, yc, xf, yf, zf, r;
+  point_t *p0 = start_point(b);
+  x0 = point_get_x(p0);
+  y0 = point_get_y(p0);
+  z0 = point_get_z(p0);
+  xf = point_get_x(b->target);
+  yf = point_get_y(b->target);
+  zf = point_get_z(b->target);
+
+  if (b->r) { // if the radius is given
+    data_t dx = point_get_x(b->delta);
+    data_t dy = point_get_y(b->delta);
+    r = b->r;
+    data_t dxy2 = pow(dx, 2) + pow(dy, 2);
+    data_t sq = sqrt(-pow(dy, 2) * dxy2 * (dxy2 - 4 * r * r));
+    // signs table
+    // sign(r) | CW(-1) | CCW(+1)
+    // --------------------------
+    //      -1 |     +  |    -
+    //      +1 |     -  |    +
+    int s = (r > 0) - (r < 0);
+    s *= (b->type == ARC_CCW ? 1 : -1);
+    xc = x0 + (dx - s * sq / dxy2) / 2.0;
+    yc = y0 + dy / 2.0 + s * (dx * sq) / (2 * dy * dxy2);
+  } else { // if I,J are given
+    data_t r2;
+    r = hypot(b->i, b->j);
+    xc = x0 + b->i;
+    yc = y0 + b->j;
+    r2 = hypot(xf - xc, yf - yc);
+    if (fabs(r - r2) > machine_error(b->machine)) {
+      fprintf(stderr, "Arc endpoints mismatch error (%f)\n", r - r2);
+      return 1;
+    }
+    b->r = r;
+  }
+  point_set_x(b->center, xc);
+  point_set_y(b->center, yc);
+  b->theta0 = atan2(y0 - yc, x0 - xc);
+  b->dtheta = atan2(yf - yc, xf - xc) - b->theta0;
+  // we need the net angle so we take the 2PI complement if negative
+  if (b->dtheta < 0)
+    b->dtheta = 2 * M_PI + b->dtheta;
+  // if CW, take the negative complement
+  if (b->type == ARC_CW)
+    b->dtheta = -(2 * M_PI - b->dtheta);
+  //
+  b->length = hypot(zf - z0, b->dtheta * b->r);
+  // from now on , it's safer to drop radius angle
+  b->r = fabs(b->r);
+  return 0;
+}
 
 //   _____         _                     _
 //  |_   _|__  ___| |_   _ __ ___   __ _(_)_ __
@@ -513,10 +563,15 @@ int main(int argc, char const *argv[]) {
     data_t lambda, v = 0;
     point_t *pos = NULL;
     printf("t lambda v x y z\n");
-    // svg format
+    // csv format
     for (t = 0; /* Exercise: time should start at 0 and exactly stop at dt */;
          t += tq) {
-      // Exercise
+      // Exercise:
+      // Calculate the lamda, calculate the interpolation point
+      // (interpolate_point with lambda value). For this point we print values
+      // for t, lambda, velocity and 3 coordinates x y z. I want to obtain a
+      // table of values separated by spaces or commas, so that we can open it
+      // with another software and plot them
     }
   }
 
