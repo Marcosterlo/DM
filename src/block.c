@@ -319,12 +319,12 @@ point_t *block_interpolate(block_t *b, data_t lambda) {
   // Equations of the type:
   // x(t) = x(0) + d_x * lambda
   if (b->type == LINE) {
-    point_set_x(result, point_get_x(p0) + point_get_x(b->delta) * lambda);
-    point_set_y(result, point_get_y(p0) + point_get_y(b->delta) * lambda);
+    point_set_x(result, point_x(p0) + point_x(b->delta) * lambda);
+    point_set_y(result, point_y(p0) + point_y(b->delta) * lambda);
   } else if (b->type == ARC_CW || b->type == ARC_CCW) {
-    point_set_x(result, point_get_x(b->center) +
+    point_set_x(result, point_x(b->center) +
                             b->r * cos(b->theta0 + b->dtheta * lambda));
-    point_set_y(result, point_get_y(b->center) +
+    point_set_y(result, point_y(b->center) +
                             b->r * sin(b->theta0 + b->dtheta * lambda));
   } else {
     // We're calling block interpolate in a block that shouldn't require to be
@@ -333,9 +333,9 @@ point_t *block_interpolate(block_t *b, data_t lambda) {
     return NULL;
   }
   // z is common to both line and arcs, in arcs z is like the spiral component
-  point_set_z(result, point_get_z(p0) + point_get_z(b->delta) * lambda);
+  point_set_z(result, point_z(p0) + point_z(b->delta) * lambda);
 
-  return NULL;
+  return result;
 }
 
 //   ____  _        _   _         __                  _   _
@@ -475,16 +475,16 @@ static void block_compute(block_t *b) {
 static int block_arc(block_t *b) {
   data_t x0, y0, z0, xc, yc, xf, yf, zf, r;
   point_t *p0 = start_point(b);
-  x0 = point_get_x(p0);
-  y0 = point_get_y(p0);
-  z0 = point_get_z(p0);
-  xf = point_get_x(b->target);
-  yf = point_get_y(b->target);
-  zf = point_get_z(b->target);
+  x0 = point_x(p0);
+  y0 = point_y(p0);
+  z0 = point_z(p0);
+  xf = point_x(b->target);
+  yf = point_y(b->target);
+  zf = point_z(b->target);
 
   if (b->r) { // if the radius is given
-    data_t dx = point_get_x(b->delta);
-    data_t dy = point_get_y(b->delta);
+    data_t dx = point_x(b->delta);
+    data_t dy = point_y(b->delta);
     r = b->r;
     data_t dxy2 = pow(dx, 2) + pow(dy, 2);
     data_t sq = sqrt(-pow(dy, 2) * dxy2 * (dxy2 - 4 * r * r));
@@ -552,26 +552,74 @@ int main(int argc, char const *argv[]) {
   b4 = block_new("N40 G01 x0 y0 z0", b3, m);
   block_parse(b4);
 
-  block_print(b1, stderr);
-  block_print(b2, stderr);
-  block_print(b3, stderr);
-  block_print(b4, stderr);
+  // block_print(b1, stderr);
+  // block_print(b2, stderr);
+  // block_print(b3, stderr);
+  // block_print(b4, stderr);
 
-  wprintf("Interpolation of block 20 (duration: %f)\n", block_dt(b2));
+  // wprintf("Interpolation of block 20 (duration: %f)\n", block_dt(b2));
   {
-    data_t t = 0, tq = machine_tq(m), dt = block_dt(b2);
+    data_t t = 0, t_tot = 0, tq = machine_tq(m), dt = block_dt(b2);
+    data_t t_stacked = 0;
     data_t lambda, v = 0;
     point_t *pos = NULL;
+    block_t *b = b1;
+
+    // I compute the fixed total time considerinq quantization
+    do {
+      t_tot += block_dt(b);
+      // printf("time: %lf\n", block_dt(b));
+      b = b->next;
+    } while (b);
+
+    // printf("Total time: %lf, total number of interpolated points: %d\n",
+    // t_tot, (int)(t_tot/tq));
+
+    b = b1;
+
     printf("t lambda v x y z\n");
     // csv format
-    for (t = 0; /* Exercise: time should start at 0 and exactly stop at dt */;
-         t += tq) {
+    for (t = 0; t < t_tot; t += tq) {
       // Exercise:
       // Calculate the lamda, calculate the interpolation point
       // (interpolate_point with lambda value). For this point we print values
       // for t, lambda, velocity and 3 coordinates x y z. I want to obtain a
       // table of values separated by spaces or commas, so that we can open it
       // with another software and plot them
+
+      // block advance
+
+      if (t - t_stacked - block_dt(b) >= tq / 2.0) {
+        t_stacked += block_dt(b);
+        b = b->next;
+      }
+
+      // data_t block_lambda(block_t *b, data_t t, data_t *v) {
+      lambda = block_lambda(b, t - t_stacked, &v);
+
+      // point_t *block_interpolate(block_t *b, data_t lambda) {
+      pos = block_interpolate(b, lambda);
+
+      // printf("Iterazione numero %lf\n", t/tq);
+      //  Time print
+      printf("%lf ", t);
+
+      // printf("%lf ", t_stacked);
+
+      // Lambda print
+      printf("%lf ", lambda);
+
+      // Velocity print
+      printf("%lf ", v);
+
+      // X coordinate print
+      printf("%lf ", point_x(pos));
+
+      // Y coordinate print
+      printf("%lf ", point_y(pos));
+
+      // Z coordinate print
+      printf("%lf\n", point_z(pos));
     }
   }
 

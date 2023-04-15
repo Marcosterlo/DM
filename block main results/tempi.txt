@@ -1,0 +1,10 @@
+time: 9.865000
+time: 0.755000
+time: 6.155000
+time: 14.615000
+Total time: 31.390000, total number of interpolated points: 6278
+
+N10 G01 X90 Y90 Z100 T3 F1000
+N20 G01 y100 s2000
+N30 G01 Y200
+N40 G01 x0 y0 z0

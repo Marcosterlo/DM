@@ -69,7 +69,7 @@ data_t point_z(point_t const *p) {
     p->axis = value;                                                           \
     p->s |= bitmask;                                                           \
   }                                                                            \
-  data_t point_get_##axis(point_t const *p) {                                  \
+  data_t point_##axis(point_t const *p) {                                  \
     assert(p);                                                                 \
     return p->axis;                                                            \
   }

@@ -64,9 +64,9 @@ void point_set_y(point_t *p, data_t y);
 void point_set_z(point_t *p, data_t z);
 void point_set_xyz(point_t *p, data_t x, data_t y, data_t z);
 // getters
-data_t point_get_x(point_t const *p);
-data_t point_get_y(point_t const *p);
-data_t point_get_z(point_t const *p);
+data_t point_x(point_t const *p);
+data_t point_y(point_t const *p);
+data_t point_z(point_t const *p);
 
 // METHODS (Functuions that operate on an object)
 data_t point_dist(point_t const *from, point_t const *to);
