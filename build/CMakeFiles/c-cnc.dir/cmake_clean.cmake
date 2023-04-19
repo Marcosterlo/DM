@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/c-cnc.dir/src/machine.c.o.d"
   "CMakeFiles/c-cnc.dir/src/point.c.o"
   "CMakeFiles/c-cnc.dir/src/point.c.o.d"
+  "CMakeFiles/c-cnc.dir/src/program.c.o"
+  "CMakeFiles/c-cnc.dir/src/program.c.o.d"
   "CMakeFiles/c-cnc.dir/src/toml.c.o"
   "CMakeFiles/c-cnc.dir/src/toml.c.o.d"
   "libc-cnc.pdb"

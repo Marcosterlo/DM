@@ -81,6 +81,8 @@ add_executable(block ${LIB_SOURCES})
 target_compile_definitions(block PUBLIC BLOCK_MAIN)
 add_executable(machine ${LIB_SOURCES})
 target_compile_definitions(machine PUBLIC MACHINE_MAIN)
+add_executable(program ${LIB_SOURCES})
+target_compile_definitions(program PUBLIC PROGRAM_MAIN)
 
 # Linking
 target_link_libraries(hello c-cnc)
@@ -88,6 +90,7 @@ target_link_libraries(c-cnc m) # Our library to math library
 target_link_libraries(point m) # Point executable to math library
 target_link_libraries(block m) # Block executable to math library
 target_link_libraries(machine m) # Machine executable to math library
+target_link_libraries(program m) # Program executable to math library
 
 
 #   _____           _        _ _ 

@@ -559,7 +559,7 @@ int main(int argc, char const *argv[]) {
 
   // wprintf("Interpolation of block 20 (duration: %f)\n", block_dt(b2));
   {
-    data_t t = 0, t_tot = 0, tq = machine_tq(m), dt = block_dt(b2);
+    data_t t = 0, t_tot = 0, tq = machine_tq(m);
     data_t t_stacked = 0;
     data_t lambda, v = 0;
     point_t *pos = NULL;
@@ -590,6 +590,9 @@ int main(int argc, char const *argv[]) {
       // block advance
 
       if (t - t_stacked - block_dt(b) >= tq / 2.0) {
+        // I checked for the time to be greater than a threshold since we're
+        // working with floating point characterized by limited precision, hence
+        // the exact equivalence between numbers doesn't hold
         t_stacked += block_dt(b);
         b = b->next;
       }
@@ -599,6 +602,15 @@ int main(int argc, char const *argv[]) {
 
       // point_t *block_interpolate(block_t *b, data_t lambda) {
       pos = block_interpolate(b, lambda);
+
+      /*
+      // Un altro modo per farlo era usare direttamente il machine_setpoint dato
+      // che block_interpolate lo aggiorna direttamente dentro la funzione
+      block_interpolate(b, lambda);
+      point_x(machine_setpoint(m));
+      point_y(machine_setpoint(m));
+      point_z(machine_setpoint(m));
+      */
 
       // printf("Iterazione numero %lf\n", t/tq);
       //  Time print

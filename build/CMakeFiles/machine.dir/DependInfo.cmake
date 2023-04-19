@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/marco/Desktop/Working directory/DM/src/block.c" "CMakeFiles/machine.dir/src/block.c.o" "gcc" "CMakeFiles/machine.dir/src/block.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/machine.c" "CMakeFiles/machine.dir/src/machine.c.o" "gcc" "CMakeFiles/machine.dir/src/machine.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/point.c" "CMakeFiles/machine.dir/src/point.c.o" "gcc" "CMakeFiles/machine.dir/src/point.c.o.d"
+  "/home/marco/Desktop/Working directory/DM/src/program.c" "CMakeFiles/machine.dir/src/program.c.o" "gcc" "CMakeFiles/machine.dir/src/program.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/toml.c" "CMakeFiles/machine.dir/src/toml.c.o" "gcc" "CMakeFiles/machine.dir/src/toml.c.o.d"
   )
 

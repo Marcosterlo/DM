@@ -250,6 +250,19 @@ machine/fast:
 .PHONY : machine/fast
 
 #=============================================================================
+# Target rules for targets named program
+
+# Build rule for target.
+program: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 program
+.PHONY : program
+
+# fast build rule for target.
+program/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/build
+.PHONY : program/fast
+
+#=============================================================================
 # Target rules for targets named Experimental
 
 # Build rule for target.
@@ -622,6 +635,7 @@ src/block.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/block.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/block.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/block.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/block.c.o
 .PHONY : src/block.c.o
 
 src/block.i: src/block.c.i
@@ -633,6 +647,7 @@ src/block.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/block.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/block.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/block.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/block.c.i
 .PHONY : src/block.c.i
 
 src/block.s: src/block.c.s
@@ -644,6 +659,7 @@ src/block.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/block.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/block.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/block.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/block.c.s
 .PHONY : src/block.c.s
 
 src/machine.o: src/machine.c.o
@@ -655,6 +671,7 @@ src/machine.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/machine.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/machine.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/machine.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/machine.c.o
 .PHONY : src/machine.c.o
 
 src/machine.i: src/machine.c.i
@@ -666,6 +683,7 @@ src/machine.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/machine.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/machine.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/machine.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/machine.c.i
 .PHONY : src/machine.c.i
 
 src/machine.s: src/machine.c.s
@@ -677,6 +695,7 @@ src/machine.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/machine.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/machine.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/machine.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/machine.c.s
 .PHONY : src/machine.c.s
 
 src/main/hello.o: src/main/hello.c.o
@@ -713,6 +732,7 @@ src/point.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/src/point.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/point.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/point.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/point.c.o
 .PHONY : src/point.c.o
 
 src/point.i: src/point.c.i
@@ -725,6 +745,7 @@ src/point.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/src/point.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/point.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/point.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/point.c.i
 .PHONY : src/point.c.i
 
 src/point.s: src/point.c.s
@@ -737,7 +758,44 @@ src/point.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/point.dir/build.make CMakeFiles/point.dir/src/point.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/point.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/point.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/point.c.s
 .PHONY : src/point.c.s
+
+src/program.o: src/program.c.o
+.PHONY : src/program.o
+
+# target to build an object file
+src/program.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/program.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/program.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/program.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/program.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/program.c.o
+.PHONY : src/program.c.o
+
+src/program.i: src/program.c.i
+.PHONY : src/program.i
+
+# target to preprocess a source file
+src/program.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/program.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/program.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/program.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/program.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/program.c.i
+.PHONY : src/program.c.i
+
+src/program.s: src/program.c.s
+.PHONY : src/program.s
+
+# target to generate assembly for a file
+src/program.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/program.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/program.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/program.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/program.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/program.c.s
+.PHONY : src/program.c.s
 
 src/toml.o: src/toml.c.o
 .PHONY : src/toml.o
@@ -748,6 +806,7 @@ src/toml.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/toml.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/toml.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/toml.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/toml.c.o
 .PHONY : src/toml.c.o
 
 src/toml.i: src/toml.c.i
@@ -759,6 +818,7 @@ src/toml.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/toml.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/toml.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/toml.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/toml.c.i
 .PHONY : src/toml.c.i
 
 src/toml.s: src/toml.c.s
@@ -770,6 +830,7 @@ src/toml.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/toml.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/toml.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/toml.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/toml.c.s
 .PHONY : src/toml.c.s
 
 # Help Target
@@ -819,6 +880,7 @@ help:
 	@echo "... hello"
 	@echo "... machine"
 	@echo "... point"
+	@echo "... program"
 	@echo "... src/block.o"
 	@echo "... src/block.i"
 	@echo "... src/block.s"
@@ -831,6 +893,9 @@ help:
 	@echo "... src/point.o"
 	@echo "... src/point.i"
 	@echo "... src/point.s"
+	@echo "... src/program.o"
+	@echo "... src/program.i"
+	@echo "... src/program.s"
 	@echo "... src/toml.o"
 	@echo "... src/toml.i"
 	@echo "... src/toml.s"

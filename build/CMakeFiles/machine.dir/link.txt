@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/machine.dir/src/block.c.o CMakeFiles/machine.dir/src/machine.c.o CMakeFiles/machine.dir/src/point.c.o CMakeFiles/machine.dir/src/toml.c.o -o machine  -lm 
+/usr/bin/cc -g CMakeFiles/machine.dir/src/block.c.o CMakeFiles/machine.dir/src/machine.c.o CMakeFiles/machine.dir/src/point.c.o CMakeFiles/machine.dir/src/program.c.o CMakeFiles/machine.dir/src/toml.c.o -o machine  -lm 
