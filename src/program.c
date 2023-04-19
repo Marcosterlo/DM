@@ -6,20 +6,23 @@
 //                   |___/
 
 #include "program.h"
-#include "block.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
-// #include "defines.h"
-// #include "machine.h"
+
+//   _____
+//  |_   _|   _ _ __   ___  ___
+//    | || | | | '_ \ / _ \/ __|
+//    | || |_| | |_) |  __/\__ \
+//    |_| \__, | .__/ \___||___/
+//        |___/|_|
 
 // Object structure:
 typedef struct program {
-  char *filename;
-  FILE *file;
-  block_t *first, *current, *last;
-  size_t n;
+  char *filename;                  // path to the g-code program file
+  FILE *file;                      // file pointer
+  block_t *first, *current, *last; // relevant blocks in the linked list
+  size_t n;                        // total number of blocks in the program
 } program_t;
 
 //   _____                 _   _
@@ -28,10 +31,11 @@ typedef struct program {
 //  |  _|| |_| | | | | (__| |_| | (_) | | | \__ \
 //  |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
 
-// Lifecycle functions
+// Lifecycle functions =========================================================
 program_t *program_new(char const *filename) {
   program_t *p = malloc(sizeof(*p));
 
+  // checks
   if (!p) {
     eprintf("Could not create program\n");
     return NULL;
@@ -65,7 +69,6 @@ void program_free(program_t *p) {
     do {
       tmp = b;
       b = block_next(b);
-      // shouldn't we set to NULL b->prev?
       block_free(tmp);
     } while (b);
   }
@@ -74,15 +77,18 @@ void program_free(program_t *p) {
 }
 
 void program_print(program_t const *p, FILE *output) {
+
   assert(p && output);
   block_t *b = p->first;
+
+  // print each block from first to last
   do {
     block_print(b, output);
     b = block_next(b);
   } while (b);
 }
 
-// Accessors
+// Accessors ===================================================================
 #define program_getter(typ, par, name)                                         \
   typ program_##name(program_t const *p) {                                     \
     assert(p);                                                                 \
@@ -95,7 +101,9 @@ program_getter(block_t *, current, current);
 program_getter(block_t *, last, last);
 program_getter(size_t, n, length);
 
-// Processing
+// Processing ==================================================================
+
+// Loop over each block and parse it
 int program_parse(program_t *p, machine_t *m) {
   assert(p && m);
   char *line = NULL;
@@ -104,7 +112,11 @@ int program_parse(program_t *p, machine_t *m) {
   // in case of error)
   ssize_t line_len = 0;
   block_t *b;
+  // Initial counter reset, already to 0 if program just created. If we use
+  // another program we reset it to 0
+  p->n = 0;
 
+  // open the g-code file
   p->file = fopen(p->filename, "r");
 
   if (!p->file) {
@@ -112,40 +124,47 @@ int program_parse(program_t *p, machine_t *m) {
     return -1;
   }
 
-  // Initial counter reset, already to 0 if program just created. If we use
-  // another program we reset it to 0
-  p->n = 0;
   // Using getline or we pass a size_t argument with the maximum capacity, or we
   // can pass an allocated memory and we pass a size_t pointer cointaining the
   // size in bytes of the just allocated line
   // getline allocates the line by itself
+  // With this loop we create a block for every line in the gcode file
   while ((line_len = getline(&line, &n, p->file)) >= 0) {
     // Remove trailing newline \n replacing it with a string terminator \0
     if (line[line_len - 1] == '\n') {
-      line[line_len -1] = '\0';
+      line[line_len - 1] = '\0';
     }
-    // The last line of the file could not end with \n (?) REVIEW 
+    // The last line of the file could not end with \n (?) REVIEW
+
+    // Create a new block
+    // Remember block_new already add a block at the end of the block's linked
+    // list
     if (!(b = block_new(line, p->last, m))) {
       eprintf("Error creating a block from line %s\n", line);
       return -1;
     }
-    if (!block_parse(b)) {
+    // parse the block
+    if (block_parse(b)) {
       eprintf("Error parsing a block %s\n", line);
       return -1;
     }
-    
+
+    // if the program is initially null the first block added is both the first
+    // and the last
     if (p->first == NULL) {
       p->first = b;
-    } 
+    }
     p->last = b;
     p->n++;
   }
+  // cleanup
   fclose(p->file);
   free(line);
   program_reset(p);
-  return 0;
+  return p->n;
 }
 
+// load the next block
 block_t *program_next(program_t *p) {
   assert(p);
   if (p->current == NULL) {
@@ -156,6 +175,8 @@ block_t *program_next(program_t *p) {
   return p->current;
 }
 
+// Reset the program nulling the current block pointer, doing so calling after
+// the program_next() function sets the current pointer to the first block
 void program_reset(program_t *p) {
   assert(p);
   p->current = NULL;
@@ -170,7 +191,7 @@ int main(int argc, char const *argv[]) {
   if (argc != 3) {
     eprintf("I need exactly two arguments: g-code filename and INI filename\n");
     exit(EXIT_FAILURE);
-  }  
+  }
 
   m = machine_new(argv[2]);
   if (!m) {
@@ -185,9 +206,10 @@ int main(int argc, char const *argv[]) {
   }
 
   program_parse(p, m);
-
   program_print(p, stdout);
 
+  program_free(p);
+  machine_free(m);
 
   return 0;
 }
