@@ -187,6 +187,9 @@ void program_reset(program_t *p) {
 int main(int argc, char const *argv[]) {
   machine_t *m = NULL;
   program_t *p = NULL;
+  block_t *curr_b = NULL;
+  point_t *pos = NULL;
+  data_t t = 0, lambda = 0, v = 0, tq = 0, tt = 0, dt = 0;
 
   if (argc != 3) {
     eprintf("I need exactly two arguments: g-code filename and INI filename\n");
@@ -205,8 +208,32 @@ int main(int argc, char const *argv[]) {
     exit(EXIT_FAILURE);
   }
 
-  program_parse(p, m);
-  program_print(p, stdout);
+  // Check for parsing errors
+  if (program_parse(p, m) < 0) {
+    eprintf("Could not parse program\n");
+    exit(EXIT_FAILURE);
+  };
+
+  tq = machine_tq(m);
+  // ------ Run Program ---------- //
+  program_reset(p);
+  printf("# N t tt lambda s v X Y Z\n");
+  while ((curr_b = program_next(p))) {
+    if (block_type(curr_b) == RAPID) {
+      continue;
+    }
+    dt = block_dt(curr_b);
+    for (t = 0; t<=dt + tq/10.0; t+=tq, tt+=tq) {
+      lambda = block_lambda(curr_b, t, &v);
+      pos = block_interpolate(curr_b, lambda);
+      if (!pos) 
+        continue;
+      printf("%lu %.3f %.3f %.6f %.3f %.3f %.3f %.3f %.3f\n", block_n(curr_b), t, tt, lambda, lambda * block_length(curr_b), v, point_x(pos), point_y(pos), point_z(pos));
+    }
+  }
+
+
+  // program_print(p, stdout);
 
   program_free(p);
   machine_free(m);

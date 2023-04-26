@@ -1,10 +1,11 @@
-/home/marco/Desktop/Working directory/DM/build/CMakeFiles/c-cnc.dir
+/home/marco/Desktop/Working directory/DM/build/CMakeFiles/c-cnc_lib.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/c-cnc_static.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/hello.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/point.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/block.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/machine.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/program.dir
+/home/marco/Desktop/Working directory/DM/build/CMakeFiles/c-cnc.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Experimental.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Nightly.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Continuous.dir

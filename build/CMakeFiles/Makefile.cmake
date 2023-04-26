@@ -53,13 +53,14 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/c-cnc.dir/DependInfo.cmake"
+  "CMakeFiles/c-cnc_lib.dir/DependInfo.cmake"
   "CMakeFiles/c-cnc_static.dir/DependInfo.cmake"
   "CMakeFiles/hello.dir/DependInfo.cmake"
   "CMakeFiles/point.dir/DependInfo.cmake"
   "CMakeFiles/block.dir/DependInfo.cmake"
   "CMakeFiles/machine.dir/DependInfo.cmake"
   "CMakeFiles/program.dir/DependInfo.cmake"
+  "CMakeFiles/c-cnc.dir/DependInfo.cmake"
   "CMakeFiles/Experimental.dir/DependInfo.cmake"
   "CMakeFiles/Nightly.dir/DependInfo.cmake"
   "CMakeFiles/Continuous.dir/DependInfo.cmake"
