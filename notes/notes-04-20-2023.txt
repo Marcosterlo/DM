@@ -1,0 +1,121 @@
+Static library are better used when we don't intend it to be used by many programs, in this case a dynamic library it's better to be deployed.
+
+We have to add the MQTT protocol commnunication methods to the machine class, so we can communicate with the target machine (or simulator). 
+
+We'll see some way to emprove the executable file writing, there are a lot of conditions (nested) and loops. The code becomes difficult to read, a solution is the use of a finite state machine. This allows to reduce the number of conditional and make the program easier to read. We can design the executable even with a graphical counter part and automatically generate the code in C starting from the graph.
+
+  __  __  ___ _____ _____ 
+ |  \/  |/ _ \_   _|_   _|
+ | |\/| | | | || |   | |  
+ | |  | | |_| || |   | |  
+ |_|  |_|\__\_\|_|   |_|  
+
+MESSAGE QUEUE TELEMETRY TRANSPORT
+
+Originally designed for telemetry (reporting data form peripheral units to central unity). Before the message were put in a FIFO queue.
+Nowadays there's no more the queue but a PUBLISH-SUBSCRIBE architecture: we have different devices in a network that can act as publisher or subscribers, a pusblisher generates data, a subscribers reads data provided by publishers. It's very lightweight (reduced overhead). Around 100 times faster than REST HTTP in terms of messages per second. There are faster protocols but are harder to implement, MQTT it's easy and quick to build a robust network. 
+
+3 Roles: PUBLISHER, SUBSCRIBER, BROKER. 
+The broker is the center of the network, every client (publisher subscriber or both) are connected directly to the broker.
+We need to implement the clients (writing code), the broker is an application, server, already available. 
+Messages are published under topics, paths, arranged hierarchically. (ccnc/x/pos, ccnc/y/vel...) There is no root in MQTT topics, no /.
+Subscribers can be subscribed to more than one topic, we can use wildcards too:
+  +: ccnc/+/pos subsititute just one level (ccnc/x/pos and ccnc/y/pos are ok but ccnc/x/nominal/pos is not okay)
+  #: subsututes anything, any level in between: ccnc/#/pos is everything thats starts in ccnc and ends in pos
+Publisher can publish on many topic but one at the time (no wildcards), subscriber can subscribe to multiple topics with wildcards.
+The message published under a topic is a payload: a sequence of bytes up to 260 Mb per message. Bigger payload need to be split up or compressed.
+
+A message is assigned to a QoS level (Quality of service) and an optional retain flag. QoS levels are 3: 0-1-2. They state the reliability of the message, default is 0, message is delivered at most once. QoS 1 means the message is delivered at least once, QoS 2 means the message is delivered exactly once. If the physical level is complicated (copper wires) a message could take many different routes, with QoS 0 we have a minimum number of back and forth messages between sender and receiver: we may get the message at maximum once, once the message is received the subscriber stops the communication, any more message is lost. The sender and the broker don't have a reception acknowledge so the message can be lost without reception without notice. We can solve this problem with acknowledgement of receipt, this increases the amount of messages to be exchanged -> augmented overhead -> slower protocol: tradeoff between speed and safety. Sometimes a less safe approach is perfectly fine: see a thermometer that uploads every 10 seconds, if we miss one not a big deal, the room temperature doesn't change much in 20 seconds. Sometimes we really need an information: for example if something is open or not and it doesn't matter if we get the message more than once (QoS 1). If we really need an unique message otherwise we mess up things then QoS 2 is needed, it depends on application. The idea to loose a package is deeply related to the complexity of the network.  
+The retain flag is a feature of MQTT protocol, we can set it whenever we connect a publisher to the broker, and it tells the broker to deliver the message to any subscriber connected in the future, very useful for important acausal informations. If I set the retain flag every subscriber connected to the broker after the last message has been sent will receive anyway the last message, kind of "last know value". 
+LWT "Last will and testament": messages delivered as soon as the broker detects the client (publisher) has disconnected, the broker sends this messages to all subscribed subscibers. 
+
+Publisher and subscriber are just roles, a client can be both at the same time. For example the ccnc executable could act as both at the same time: can act as a publisher publishing constantly the set-point for the machine axis for the machine simulator, the executable needs to know the actual position of the axis for dealing with rapid motion, the controller sets the set point at the beginning and waits for the axis to reach the position, it needs a feedback to understand when the axis are in position. For slow motion we interpolate a sequence of setpoints, for rapid we just give the final one.
+
+There are many diffrent brokser services: the most known are Mosquitto, Paho, HiveMQ, Mosca, EMQ X, VerneMQ, they're almost all open source. They are also available as public services to anyone. Usually it's preferable to instantiate our own broker running locally on our machine. There are many diffrent libraries for implementing clients in virtually any knwon programming languages.
+
+Mosquitto is available both as broker and C library (libmosquitto). We can install the broker as a linux service but it's faster and easier to use a docker container. 
+Docker is a way to virtualize software which allows to setup very quickly services on many operating systems. 
+
+Example command:
+docker run -d -rm --name mosquitto -p1883:1883 -v"${PWD}/mosquitto.conf:/mosquitto/config/mosquitto.conf" eclipse-mosquitto
+
+We use a config file with a little bit of informations like, we could also provide passwords and encryption but it's not the aim of this course. Full documentation online. 
+
+//
+allow_anonymous true
+listener 1883
+protocol mqtt
+//
+
+Main header is "mosquitto.h". We have a set of functions that works similarly to what we've done: they initialize, destroy, reinitialize, client creation and destruction, library init version and cleanup, will (LWT) sett and clear, username and password (not needed here), for connecting and deconnecting, for publishing, subscribing and unsusbscribing, dealing with loops, and many others. Some functions are available as standard or version 5 related to an advanced version of the protocol, we'll stick to version 4 so we'll use the standard nomenclature of the functions and methods. 
+All functions name start with 'mosquitto_'
+
+Usual workflow:
+Start > library init > client init > client connect > set callbacks > loop (publishing messages & updating sockets) > free resources > stop
+
+The callbacks are functions automatically triggered on given events (successful connections, receiving messages...).
+
+Library initialization: mosquitto_lib_init(); FIRST COMMAND BEFORE EVERYTHING ELSE
+
+Client initialization: mqt = mosquitto_new(id, clean, user_data);
+  -id : can be a name, useful for debugging, only visible to broker, can be set to null, we won't use it. 
+  -clean : flag, if set (non zero), tells the broker to delete all messages and subscription fo disconnect 
+  -user_data : pointer to a struct to be shared with callbacks, everytime a callback is called takes this structure as argument, it's a way for having a common set of values accessible by the callbacks, in our case it will probably be a structure containing program, machine...
+
+Client connect: mosquitto_connect(mqt, broker_addr, broker_port, keepalive);
+  -mqt : client object initialized before
+  -broker_addr : self-explainatory
+  -broker_port : //
+  -keepalive : time interval for the broker to ping the client in order to let it know if the client is still connected or not
+
+Set callbacks: mosquitto_message_callback_set(mqt, on_message) (et simila)
+  -instruct to call on_message every time a message is received, the callback function must be of the type:
+    -void on_message(struct mosquitto *mqt, void *user_data, const struct mosquitto_message *msg): it must return void, it must take the mosquitto object as argument, a pointer to user data and a pointer to the message structure.
+
+Network operations are scheduled by subscribe and publish function, they're performed in alternative ways. When we call the publish and subscribe function nothing happens, we just queued the operations, everything happens once we call mosquitto_loop function, it manages network communication. 
+Another way is to start a parallel thread running independently from our code that iteratively calls mosquitto_loop, calling mosquitto_loop_start just after mosquitto_connect. 
+The second solution is easier and preferred when dealing with graphical user interfaces for example when the timing is not really stringet, we just have messages going back and forth. If we really have time execution requirements and we have a loop structure (and we have with the blocks), at each time step we have to call mosquitto_loop, so we're sure the messages exchange happens synchrounously with the program execution loop. 
+
+To schedule the publishing of a message we use: mosquitto_publish(mqt, mid, topic, len, payload, qos, retain):
+  -mid : message id, number associated to the message, can be left null and have it automatically assigned by the broker, unless we're debugging it's typically NULL. 
+  -topic : to which we want to publish the message
+  -len : number of bytes in the payload
+  -payload : pointer to a char, a stringet
+  -qos : already seen 
+  -retain : already seen
+
+When a messages is received the on_message callback is executed. It gets the message as a struct mosquitto_message which contains:
+  -mid, topic, payload, payload length, QoS level, retain flag. 
+  -It does not contain info on publisher -> the subscriber has no way to identify the publisher unless explicitely written in the payload or topic. 
+
+The payload is a sequence of bytes but by default it is not terminated by \0 like strings, if we want to pass a string we have to manually add the string terminator. 
+
+When everything is done:
+  -1 unsusbscribe all subscription
+  -2 Call mosquitto_loop or mosquitto_loop_stop
+  -3 Disconnect from broker
+  -4 Call mosquitto_destroy
+  -5 Call mosquitto_lib_cleanup
+
+With mosquitto-clients we get 2 cmd commands for testing purposes: mosquitto_pub and mosquitto_sub
+There's even a GUI alternative: mqtt-explorer 
+
+To test he used a mqtt broker installed in his office. The gui requires the broker address, standard port is 1883, there's a username and password option for non anonymous connections. If we want to connect outside of university network we need username and password.
+We have used the connection mqtt://repos.dii.unitn.it:1883/ named repos, under advanced options we select the topics we want to subscribe to. 
+
+The cmd commands specifies -h the host -t the topic and -m the payload 
+
+From the GUI software if the payload is in json format it automatically parse it and allow to plot the values. Very useful to use as a logger to see what happens to the set-point. 
+
+Since with json format it's easy to make a plot probably we'll use the json format to print and sending, publishing the setpoint to the machine.
+In our case we'll send the payload to matlab simulink who understand json format too. 
+
+We'll have one subscriber who's the simulatore, we might have another one (mqtt explorer for plotting), we might have another machine as another subscriber (a real one) connected to the digital twin: both receive at run time the same commands. We might use the model and the machine itself to inspect what's happening. 
+
+From the publisher pov having one or more subscriber doesn't change anything, the broker multiplexes the messages, standard brocker can easily manage thousands of clients at the same time. 
+
+In goodies we find the mosquitto.conf file, a bash file containing the docker command which is long
+
+================================
+
+We will make a basis for the digital twin and then a good model will be given to us with 3 models etcetera including the controller with driver and everything. We'll see how to implement MQTT in simulink. After that with bosetti again we'll implement everything together using a finite state machine for the final executable file.
