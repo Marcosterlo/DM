@@ -1,0 +1,1 @@
+We have to define the callback functions, we pass to mosquitto_connect_callback_set the pointer to a function, seeing the docs we see: " void (*on_connect)(struct mosquitto *, void *, int) " this means we want the pointer to a void returning function with arguments a struct mosquitto pointer, a pointer to general data (void *) and an integer

@@ -11,6 +11,7 @@
 
 #include "defines.h"
 #include "point.h" // useful to represent 3d coordinates
+#include <mosquitto.h>
 
 // opaque struct definition
 typedef struct machine machine_t;
@@ -39,5 +40,20 @@ point_t *machine_position(machine_t const *m);
 
 // Methods, public functions to deal with the class
 void machine_print_params(machine_t const *m);
+
+// MQTT-related
+// Callback definition
+typedef void (*machine_on_message)(struct mosquitto *mqt, void *userdata,
+                                   struct mosquitto_message const *msg);
+
+int machine_connect(machine_t *m, machine_on_message callback);
+// We add the rapid flag to tell wether we have to implement a rapid or
+// interpolation motion
+int machine_sync(machine_t *m, int rapid);
+// Listening = registering as a subscriber in MQTT Protocol
+int machine_listen_start(machine_t *m);
+int machine_listen_stop(machine_t *m);
+void machine_liste_update(machine_t *m);
+void machine_disconnect(machine_t *m);
 
 #endif // MACHINE_H

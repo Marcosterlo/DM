@@ -7,6 +7,16 @@
 #include "machine.h"
 #include "toml.h"
 #include <string.h>
+#include <mqtt_protocol.h>
+
+//   ____            _                 _   _                 
+//  |  _ \  ___  ___| | __ _ _ __ __ _| |_(_) ___  _ __  ___ 
+//  | | | |/ _ \/ __| |/ _` | '__/ _` | __| |/ _ \| '_ \/ __|
+//  | |_| |  __/ (__| | (_| | | | (_| | |_| | (_) | | | \__ \
+//  |____/ \___|\___|_|\__,_|_|  \__,_|\__|_|\___/|_| |_|___/
+                                                          
+
+#define BUFLEN 1024
 
 typedef struct machine {
   data_t A;  // max acceleration
@@ -14,7 +24,19 @@ typedef struct machine {
   data_t max_error, error;
   point_t *zero;
   point_t *setpoint, *position;
+
+  // MQTT-related fields
+  char broker_address[BUFLEN]; // Since it's a web address it's usually not long
+  int broker_port; 
+  char pub_topic[BUFLEN];
+  char sub_topic[BUFLEN];
+  char pub_buffer[BUFLEN];
+  struct mosquitto *mqt; // Stores the mosquitto object
+  struct mosquitto_message *msg; // Stores the last received message
 } machine_t;
+
+// Callbacks declaration
+static void on_connect(struct mosquitto *mqt, void *obj, int rc);
 
 //   _____                 _   _
 //  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___
@@ -22,12 +44,10 @@ typedef struct machine {
 //  |  _|| |_| | | | | (__| |_| | (_) | | | \__ \
 //  |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
 
-// Lifecycle
+// Lifecycle ===================================================================
 
 // We crate passing the name of a configuration file containing all machine
 // parameters
-
-#define BUFLEN 1024
 
 machine_t *machine_new(char const *cfg_path) {
   machine_t *m = NULL;
@@ -134,6 +154,22 @@ machine_t *machine_new(char const *cfg_path) {
     T_READ_D(d, m, ccnc, tq);
   }
 
+  // Block for mosquitto config import
+  {
+    toml_datum_t d;
+    toml_table_t *mqtt = toml_table_in(conf, "MQTT");
+    if (!mqtt) {
+      wprintf("Missing MQTT section\n");
+      goto fail;
+    }
+
+    // MACRO CREATION
+    T_READ_S(d, m, mqtt, broker_address);
+    T_READ_I(d, m, mqtt, broker_port);
+    T_READ_S(d, m, mqtt, pub_topic);
+    T_READ_S(d, m, mqtt, sub_topic);
+  }
+
   toml_free(conf);
   return m;
 
@@ -153,9 +189,16 @@ void machine_free(machine_t *m) {
   if (m->position)
     point_free(m->position);
   free(m);
+  // char broker_address[BUFLEN]; // Since it's a web address it's usually not long
+  // int broker_port; 
+  // char pub_topic[BUFLEN];
+  // char sub_topic[BUFLEN];
+  // char pub_buffer[BUFLEN];
+  // struct mosquitto *mqt; // Stores the mosquitto object
+  // struct mosquitto_message *msg; // Stores the last received message
 }
 
-// Accessors
+// Accessors ===================================================================
 
 // MACRO definition
 #define machine_getter(typ, par)                                               \
@@ -179,6 +222,65 @@ void machine_print_params(machine_t const *m) {
   printf(BBLK "C-CNC:A:         " CRESET "%f\n", m->A);
   printf(BBLK "C-CNC:tq:        " CRESET "%f\n", m->tq);
   printf(BBLK "C-CNC:max_error: " CRESET "%f\n", m->max_error);
+}
+
+// MQTT-related
+int machine_connect(machine_t *m, machine_on_message callback) {
+  assert(m);
+  // mosquitto_new requires: 1) id (for debugging purposes only, if NULL passed automatically set), 2) a boolean (1 or 0) clean_session, set to true to clean every precedent message on disconnect from the broker, for us this is a good idea to keep the program lightweight. 3) void *obj, a general user pointer to any callback that is specified
+  m->mqt = mosquitto_new(NULL, 1, m);
+  if (!m->mqt) {
+    // perror is used instead of eprintf, suggested way of dealing with errors by mosquitto and many other libraries, whenever they fail they set an error description into a global variable. Perror uses the same variables and attaches it to our description. It's prefereable to use it when using mosquitto. It prints in STDERR
+    perror("Could not create MQTT\n");
+    return EXIT_FAILURE;
+  }
+  // Callback set
+  mosquitto_connect_callback_set(m->mqt, on_connect);
+}
+
+int machine_sync(machine_t *m, int rapid) {
+  assert(m);
+
+}
+
+int machine_listen_start(machine_t *m) {
+  assert(m);
+
+}
+
+int machine_listen_stop(machine_t *m) {
+  assert(m);
+
+}
+
+void machine_liste_update(machine_t *m) {
+  assert(m);
+
+}
+
+void machine_disconnect(machine_t *m) {
+  assert(m);
+
+}
+
+// Static functions
+static void on_connect(struct mosquitto *mqt, void *obj, int rc) {
+  // We know obj is a machine struct type, we cast it
+  machine_t *m = (machine_t *)obj;
+  if (rc == CONNACK_ACCEPTED) { // Connection acknowledge accepted, 
+    wprintf("-> Connected to %s:%d\n", m->broker_address, m->broker_port);
+    // second argument is message id, third is subtopic string, fourth is quality of service
+    if (mosquitto_subscribe(mqt, NULL, m->sub_topic, 0) != MOSQ_ERR_SUCCESS) {
+      perror("Could not subscribe\n");
+      exit(EXIT_FAILURE);
+    }
+  } 
+  // Fail to connect
+  else {
+    eprintf("-X Connection error: %s\n", mosquitto_connack_string(rc));
+    // This function takes rc and return a human readable description of the error
+    exit(EXIT_FAILURE);
+  }
 }
 
 #ifdef MACHINE_MAIN
