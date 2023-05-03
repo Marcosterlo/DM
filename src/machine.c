@@ -6,15 +6,14 @@
 
 #include "machine.h"
 #include "toml.h"
-#include <string.h>
 #include <mqtt_protocol.h>
+#include <string.h>
 
-//   ____            _                 _   _                 
-//  |  _ \  ___  ___| | __ _ _ __ __ _| |_(_) ___  _ __  ___ 
+//   ____            _                 _   _
+//  |  _ \  ___  ___| | __ _ _ __ __ _| |_(_) ___  _ __  ___
 //  | | | |/ _ \/ __| |/ _` | '__/ _` | __| |/ _ \| '_ \/ __|
 //  | |_| |  __/ (__| | (_| | | | (_| | |_| | (_) | | | \__ \
 //  |____/ \___|\___|_|\__,_|_|  \__,_|\__|_|\___/|_| |_|___/
-                                                          
 
 #define BUFLEN 1024
 
@@ -27,16 +26,20 @@ typedef struct machine {
 
   // MQTT-related fields
   char broker_address[BUFLEN]; // Since it's a web address it's usually not long
-  int broker_port; 
+  int broker_port;
   char pub_topic[BUFLEN];
   char sub_topic[BUFLEN];
   char pub_buffer[BUFLEN];
-  struct mosquitto *mqt; // Stores the mosquitto object
+  struct mosquitto *mqt;         // Stores the mosquitto object
   struct mosquitto_message *msg; // Stores the last received message
+  int connecting; // flag to tell wether we're waiting connection or not, if set
+                  // to 1 it means we're waiting connection
 } machine_t;
 
 // Callbacks declaration
 static void on_connect(struct mosquitto *mqt, void *obj, int rc);
+static void on_message(struct mosquitto *mqt, void *obj,
+                       const struct mosquitto_message *msg);
 
 //   _____                 _   _
 //  |  ___|   _ _ __   ___| |_(_) ___  _ __  ___
@@ -171,14 +174,22 @@ machine_t *machine_new(char const *cfg_path) {
   }
 
   toml_free(conf);
+
+  // Library mosquitto cleanup and initialization
+  if (mosquitto_lib_init() != MOSQ_ERR_SUCCESS) {
+    eprintf("Could not initialize the mosquitto library\n");
+    goto fail;
+  }
+
+  // We set the flag to 1, it means we're waiting for connection
+  m->connecting = 1;
+
   return m;
 
 fail:
   machine_free(m);
   return NULL;
 }
-
-#undef BUFLEN
 
 void machine_free(machine_t *m) {
   assert(m);
@@ -188,14 +199,10 @@ void machine_free(machine_t *m) {
     point_free(m->setpoint);
   if (m->position)
     point_free(m->position);
+  if (m->mqt)
+    mosquitto_destroy(m->mqt);
+  mosquitto_lib_cleanup();
   free(m);
-  // char broker_address[BUFLEN]; // Since it's a web address it's usually not long
-  // int broker_port; 
-  // char pub_topic[BUFLEN];
-  // char sub_topic[BUFLEN];
-  // char pub_buffer[BUFLEN];
-  // struct mosquitto *mqt; // Stores the mosquitto object
-  // struct mosquitto_message *msg; // Stores the last received message
 }
 
 // Accessors ===================================================================
@@ -227,61 +234,150 @@ void machine_print_params(machine_t const *m) {
 // MQTT-related
 int machine_connect(machine_t *m, machine_on_message callback) {
   assert(m);
-  // mosquitto_new requires: 1) id (for debugging purposes only, if NULL passed automatically set), 2) a boolean (1 or 0) clean_session, set to true to clean every precedent message on disconnect from the broker, for us this is a good idea to keep the program lightweight. 3) void *obj, a general user pointer to any callback that is specified
+  // mosquitto_new requires: 1) id (for debugging purposes only, if NULL passed
+  // automatically set), 2) a boolean (1 or 0) clean_session, set to true to
+  // clean every precedent message on disconnect from the broker, for us this is
+  // a good idea to keep the program lightweight. 3) void *obj, a general user
+  // pointer to any callback that is specified
+  int count = 0;
   m->mqt = mosquitto_new(NULL, 1, m);
   if (!m->mqt) {
-    // perror is used instead of eprintf, suggested way of dealing with errors by mosquitto and many other libraries, whenever they fail they set an error description into a global variable. Perror uses the same variables and attaches it to our description. It's prefereable to use it when using mosquitto. It prints in STDERR
+    // perror is used instead of eprintf, suggested way of dealing with errors
+    // by mosquitto and many other libraries, whenever they fail they set an
+    // error description into a global variable. Perror uses the same variables
+    // and attaches it to our description. It's prefereable to use it when using
+    // mosquitto. It prints in STDERR
     perror("Could not create MQTT\n");
     return EXIT_FAILURE;
   }
   // Callback set
   mosquitto_connect_callback_set(m->mqt, on_connect);
+  mosquitto_message_callback_set(m->mqt, callback ? callback : on_message);
+  // Doing so if we pass a null callback the default callback for message will
+  // be on_message static function
+
+  // mosquitto_connect arguments:
+  // int mosquitto_connect(struct mosquitto *mosq, const char *host, int port,
+  // int keepalive)
+  if (mosquitto_connect(m->mqt, m->broker_address, m->broker_port, 10) !=
+      MOSQ_ERR_SUCCESS) {
+    perror("Invalid broker connection parameters\n");
+    return EXIT_FAILURE;
+  }
+  // Wait for the connection to be established (due to asynchronous mosquitto
+  // funciton that get queued and don't get executed immediately)
+  while (m->connecting) {
+    // While we wait for the connection to happen we call mosquitto_loop that
+    // must be called frequently, it's the actual function that does all the
+    // scheduled network operations, the second argument is the timeout: max
+    // number of milliseconds to wait for next operations, -1 means a thousand
+    // millisecond (1 second). After 1 second it returns a error. If we try the
+    // connection for more than 5 seconds we assume the broker is not available.
+    // Typically if the broker is present we will likely wait less than 1
+    // seconds and connecting becomes 0 almost instantaneously.
+    printf("loop: %d\n", mosquitto_loop(m->mqt, -1, 1));
+    if (++count >= 5) {
+      eprintf("Could not connect to broker\n");
+      return EXIT_FAILURE;
+    }
+  }
+  return EXIT_SUCCESS;
 }
 
 int machine_sync(machine_t *m, int rapid) {
-  assert(m);
-
+  assert(m && m->mqt);
+  // Fill up m->pub_buffer with the set point in JSON format
+  // {"x":100.2, "y":123, "z",0.0}
+  snprintf(m->pub_buffer, BUFLEN,
+           "{\"x\":%f, \"y\"%f, \"z\":%f, \"rapid:\":%s}", point_x(m->setpoint),
+           point_y(m->setpoint), point_z(m->setpoint),
+           rapid ? "true" : "false");
+  // send the buffer
+  // int mosquitto_publish(struct mosquitto *mosq, int *mid, const char *topic,
+  // int payloadlen, const void *payload, int qos, bool retain)
+  // We put retain = 0 to not have future subscriber to have this message
+  if (mosquitto_publish(m->mqt, NULL, m->pub_topic, strlen(m->pub_buffer),
+                        m->pub_buffer, 0, 0) != MOSQ_ERR_SUCCESS) {
+    perror("Could not send message\n");
+    return EXIT_FAILURE;
+  }
+  return EXIT_SUCCESS;
 }
 
 int machine_listen_start(machine_t *m) {
-  assert(m);
-
+  assert(m && m->mqt);
+  // int mosquitto_subscribe(struct mosquitto *mosq, int *mid, const char *sub,
+  // int qos)
+  if (mosquitto_subscribe(m->mqt, NULL, m->sub_topic, 0) != MOSQ_ERR_SUCCESS) {
+    perror("Could not subscribe\n");
+    return EXIT_FAILURE;
+  }
+  // We set the machine error to 10 times the maximum error, we have a
+  // difference to be corrected at the very beginning
+  m->error = m->max_error * 10.0;
+  wprintf("Subscribed to topic %s\n", m->sub_topic);
+  return EXIT_SUCCESS;
 }
 
 int machine_listen_stop(machine_t *m) {
-  assert(m);
-
+  assert(m && m->mqt);
+  if (mosquitto_unsubscribe(m->mqt, NULL, m->sub_topic) != MOSQ_ERR_SUCCESS) {
+    perror("Could not unsubscribe\n");
+    return EXIT_FAILURE;
+  }
+  wprintf("Unsubscribed from topic %s\n", m->sub_topic);
+  return EXIT_SUCCESS;
 }
 
-void machine_liste_update(machine_t *m) {
-  assert(m);
-
+// Calls mosquitto loop to do
+void machine_listen_update(machine_t *m) {
+  assert(m && m->mqt);
+  // 0 as second argument means to not wait anything to update the loop
+  if (mosquitto_loop(m->mqt, 0, 1) != MOSQ_ERR_SUCCESS) {
+    perror("mosquitto_loop error\n");
+  }
 }
 
 void machine_disconnect(machine_t *m) {
-  assert(m);
-
+  assert(m && m->mqt);
+  // Since we have a asynchronous network before disconnecting (which is
+  // immediate) we want to wait for any pending operation that needs to be still
+  // executed
+  while (mosquitto_want_write(m->mqt)) {
+    // The functions return true if there are pending operations
+    mosquitto_loop(m->mqt, 0, 1);
+    // Never a good idea to have a loop running at full speed for CPU usage
+    usleep(10000); // 10ms wait
+  }
+  mosquitto_disconnect(m->mqt);
 }
 
 // Static functions
 static void on_connect(struct mosquitto *mqt, void *obj, int rc) {
   // We know obj is a machine struct type, we cast it
   machine_t *m = (machine_t *)obj;
-  if (rc == CONNACK_ACCEPTED) { // Connection acknowledge accepted, 
+  if (rc == CONNACK_ACCEPTED) { // Connection acknowledge accepted,
     wprintf("-> Connected to %s:%d\n", m->broker_address, m->broker_port);
-    // second argument is message id, third is subtopic string, fourth is quality of service
+    // second argument is message id, third is subtopic string, fourth is
+    // quality of service
     if (mosquitto_subscribe(mqt, NULL, m->sub_topic, 0) != MOSQ_ERR_SUCCESS) {
       perror("Could not subscribe\n");
       exit(EXIT_FAILURE);
     }
-  } 
+  }
   // Fail to connect
   else {
     eprintf("-X Connection error: %s\n", mosquitto_connack_string(rc));
-    // This function takes rc and return a human readable description of the error
+    // This function takes rc and return a human readable description of the
+    // error
     exit(EXIT_FAILURE);
   }
+  // We reset the waiting for connection flag
+  m->connecting = 0;
 }
+
+static void on_message(struct mosquitto *mqt, void *obj,
+                       const struct mosquitto_message *msg) {}
 
 #ifdef MACHINE_MAIN
 

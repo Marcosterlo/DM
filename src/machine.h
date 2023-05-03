@@ -53,7 +53,7 @@ int machine_sync(machine_t *m, int rapid);
 // Listening = registering as a subscriber in MQTT Protocol
 int machine_listen_start(machine_t *m);
 int machine_listen_stop(machine_t *m);
-void machine_liste_update(machine_t *m);
+void machine_listen_update(machine_t *m);
 void machine_disconnect(machine_t *m);
 
 #endif // MACHINE_H
