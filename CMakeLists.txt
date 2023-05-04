@@ -88,12 +88,12 @@ add_executable(c-cnc ${SOURCE_DIR}/main/c-cnc.c)
 target_link_libraries(c-cnc c-cnc_static m)
 
 # Linking
-target_link_libraries(hello c-cnc_lib)
-target_link_libraries(c-cnc_lib m) # Our library to math library
+target_link_libraries(hello c-cnc_lib mosquitto)
+target_link_libraries(c-cnc_lib m mosquitto) # Our library to math library
 target_link_libraries(point m) # Point executable to math library
-target_link_libraries(block m) # Block executable to math library
-target_link_libraries(machine m) # Machine executable to math library
-target_link_libraries(program m) # Program executable to math library
+target_link_libraries(block m mosquitto) # Block executable to math library
+target_link_libraries(machine m mosquitto) # Machine executable to math library and mosquitto
+target_link_libraries(program m mosquitto) # Program executable to math library
 
 
 #   _____           _        _ _ 
