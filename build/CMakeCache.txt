@@ -266,7 +266,7 @@ SITE:STRING=marco-mint
 c-cnc_LIB_DEPENDS:STATIC=general;c-cnc_static;general;m;general;m;
 
 //Dependencies for the target
-c-cnc_lib_LIB_DEPENDS:STATIC=general;m;
+c-cnc_lib_LIB_DEPENDS:STATIC=general;m;general;mosquitto;
 
 
 ########################

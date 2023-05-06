@@ -61,4 +61,7 @@ CMakeFiles/machine.dir/src/program.c.o: \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /home/marco/Desktop/Working\ directory/DM/src/point.h \
   /home/marco/Desktop/Working\ directory/DM/src/machine.h \
+  /usr/include/mosquitto.h \
+  /usr/lib/llvm-14/lib/clang/14.0.0/include/stdbool.h \
+  /usr/lib/llvm-14/lib/clang/14.0.0/include/__stddef_max_align_t.h \
   /usr/include/string.h /usr/include/strings.h

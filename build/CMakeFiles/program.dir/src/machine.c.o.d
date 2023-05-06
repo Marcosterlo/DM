@@ -59,5 +59,16 @@ CMakeFiles/program.dir/src/machine.c.o: \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /home/marco/Desktop/Working\ directory/DM/src/point.h \
+  /usr/include/mosquitto.h \
+  /usr/lib/llvm-14/lib/clang/14.0.0/include/stdbool.h \
+  /usr/lib/llvm-14/lib/clang/14.0.0/include/__stddef_max_align_t.h \
   /home/marco/Desktop/Working\ directory/DM/src/toml.h \
-  /usr/include/string.h /usr/include/strings.h
+  /usr/include/mqtt_protocol.h /usr/include/string.h \
+  /usr/include/strings.h /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/linux/close_range.h

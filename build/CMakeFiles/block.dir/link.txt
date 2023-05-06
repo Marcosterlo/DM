@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/block.dir/src/block.c.o CMakeFiles/block.dir/src/machine.c.o CMakeFiles/block.dir/src/point.c.o CMakeFiles/block.dir/src/program.c.o CMakeFiles/block.dir/src/toml.c.o -o block  -lm 
+/usr/bin/cc -g CMakeFiles/block.dir/src/block.c.o CMakeFiles/block.dir/src/machine.c.o CMakeFiles/block.dir/src/point.c.o CMakeFiles/block.dir/src/program.c.o CMakeFiles/block.dir/src/toml.c.o -o block  -lm -lmosquitto 

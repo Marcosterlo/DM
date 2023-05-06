@@ -41,10 +41,13 @@ int main(int argc, char const *argv[]) {
   program_reset(p);
   printf("# N t tt lambda s v X Y Z\n");
   while ((curr_b = program_next(p))) {
+    fprintf(stderr, BRED"[%03zu]"CRESET" duration %f s ", block_n(curr_b), block_dt(curr_b));
+    fflush(stderr);
     // Rapid motion
     if (block_type(curr_b) == RAPID) {
       point_t *sp = machine_setpoint(m);
       point_t *target = block_target(curr_b);
+      fprintf(stderr, "\n");
       machine_listen_start(m);
       point_set_xyz(sp, point_x(target), point_y(target), point_z(target));
       while (machine_error(m) > machine_max_error(m)) {
@@ -63,8 +66,12 @@ int main(int argc, char const *argv[]) {
         continue;
       machine_sync(m, 0); // 0 because it's not a rapid motion
       printf("%lu %.3f %.3f %.6f %.3f %.3f %.3f %.3f %.3f\n", block_n(curr_b), t, tt, lambda, lambda * block_length(curr_b), v, point_x(pos), point_y(pos), point_z(pos));
+      fprintf(stderr, "[%5.1f%%]", lambda*100);
+      fflush(stderr);
       usleep(machine_tq(m) * 1E6);
+      fprintf(stderr, "\b\b\b\b\b\b\b\b");
     }
+    fprintf(stderr, "\n");
   }
   // --------------------------- //
 

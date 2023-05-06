@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/hello.dir/src/main/hello.c.o -o hello  -Wl,-rpath,"/home/marco/Desktop/Working directory/DM/build:" libc-cnc_lib.so -lm 
+/usr/bin/cc -g CMakeFiles/hello.dir/src/main/hello.c.o -o hello  -Wl,-rpath,"/home/marco/Desktop/Working directory/DM/build:" libc-cnc_lib.so -lmosquitto -lm -lmosquitto 

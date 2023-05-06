@@ -8,6 +8,7 @@
 #include "toml.h"
 #include <mqtt_protocol.h>
 #include <string.h>
+#include <unistd.h> // for usleep()
 
 //   ____            _                 _   _
 //  |  _ \  ___  ___| | __ _ _ __ __ _| |_(_) ___  _ __  ___
@@ -18,20 +19,20 @@
 #define BUFLEN 1024
 
 typedef struct machine {
-  data_t A;  // max acceleration
-  data_t tq; // quantization step
-  data_t max_error, error; // maximum error and current error
-  point_t *zero; // machine origin
+  data_t A;                     // max acceleration
+  data_t tq;                    // quantization step
+  data_t max_error, error;      // maximum error and current error
+  point_t *zero;                // machine origin
   point_t *setpoint, *position; // set point and current position
-  point_t *offest; // offset of the workpiece reference frame
+  point_t *offset;              // offset of the workpiece reference frame
 
   // MQTT-related fields
   char broker_address[BUFLEN]; // Since it's a web address it's usually not long
-  int broker_port; // port of mqtt broker
-  char pub_topic[BUFLEN]; // topich where to publish the set point
-  char sub_topic[BUFLEN]; // topich where current position is published
-  char pub_buffer[BUFLEN]; // buffer for storing the payload
-  struct mosquitto *mqt;         // Stores the mosquitto object
+  int broker_port;             // port of mqtt broker
+  char pub_topic[BUFLEN];      // topich where to publish the set point
+  char sub_topic[BUFLEN];      // topich where current position is published
+  char pub_buffer[BUFLEN];     // buffer for storing the payload
+  struct mosquitto *mqt;       // Stores the mosquitto object
   struct mosquitto_message *msg; // Stores the last received message
   int connecting; // flag to tell wether we're waiting connection or not, if set
                   // to 1 it means we're waiting connection
@@ -79,7 +80,7 @@ machine_t *machine_new(char const *cfg_path) {
   m->zero = point_new();
   m->setpoint = point_new();
   m->position = point_new();
-  m->offest = point_new();
+  m->offset = point_new();
   point_set_xyz(m->zero, 0, 0, 0);
   // if we don't do that the zero coordinates are undefined for how we
   // programmed the point class, we have to explicitely set to 0 in
@@ -137,7 +138,7 @@ machine_t *machine_new(char const *cfg_path) {
   if (!d.ok)                                                                   \
     wprintf("Missing %s:%s\n", toml_table_key(tab), #key);                     \
   else {                                                                       \
-    strncpy(machine->key, d.u.s, strlen(machine->key));                        \
+    strncpy(machine->key, d.u.s, BUFLEN);                                      \
     free(d.u.s);                                                               \
   }
   // We freed the string as indicated in the header file of toml library
@@ -164,11 +165,8 @@ machine_t *machine_new(char const *cfg_path) {
     if (!point) {
       wprintf("Missing C-CNC:offset, using defualt\n");
     } else {
-      point_set_xyz(m->offest, 
-        toml_double_at(point, 0).u.d,
-        toml_double_at(point, 1).u.d,
-        toml_double_at(point, 2).u.d
-      );
+      point_set_xyz(m->offset, toml_double_at(point, 0).u.d,
+                    toml_double_at(point, 1).u.d, toml_double_at(point, 2).u.d);
     }
 
     // Machine initial position
@@ -176,11 +174,8 @@ machine_t *machine_new(char const *cfg_path) {
     if (!point) {
       wprintf("Missing C-CNC:zero, using defualt\n");
     } else {
-      point_set_xyz(m->zero, 
-        toml_double_at(point, 0).u.d,
-        toml_double_at(point, 1).u.d,
-        toml_double_at(point, 2).u.d
-      );
+      point_set_xyz(m->zero, toml_double_at(point, 0).u.d,
+                    toml_double_at(point, 1).u.d, toml_double_at(point, 2).u.d);
     }
   }
 
@@ -189,7 +184,7 @@ machine_t *machine_new(char const *cfg_path) {
     toml_datum_t d;
     toml_table_t *mqtt = toml_table_in(conf, "MQTT");
     if (!mqtt) {
-      wprintf("Missing MQTT section\n");
+      eprintf("Missing MQTT section\n");
       goto fail;
     }
 
@@ -254,11 +249,13 @@ machine_getter(point_t *, position);
 void machine_print_params(machine_t const *m) {
   // C-CNC section
   fprintf(stderr, BGRN "Machine parameters\n" CRESET);
-  fprintf(stderr, BBLK "C-CNC:A:         " CRESET "%f\n", m->A);
-  fprintf(stderr, BBLK "C-CNC:tq:        " CRESET "%f\n", m->tq);
-  fprintf(stderr, BBLK "C-CNC:max_error: " CRESET "%f\n", m->max_error);
-  fprintf(stderr, BBLK "C-CNC:offset:    " CRESET "[%.3f, %.3f, %.3f]\n", point_x(m->offset), point_y(m->offest), point_z(m->offset));
-  fprintf(stderr, BBLK "C-CNC:zero:      " CRESET "[%.3f, %.3f, %.3f]\n", point_x(m->zero), point_y(m->zero), point_z(m->zero));
+  fprintf(stderr, BBLK "C-CNC:A:          " CRESET "%f\n", m->A);
+  fprintf(stderr, BBLK "C-CNC:tq:         " CRESET "%f\n", m->tq);
+  fprintf(stderr, BBLK "C-CNC:max_error:  " CRESET "%f\n", m->max_error);
+  fprintf(stderr, BBLK "C-CNC:zero:       " CRESET "[%.3f, %.3f, %.3f]\n",
+          point_x(m->zero), point_y(m->zero), point_z(m->zero));
+  fprintf(stderr, BBLK "C-CNC:offset:     " CRESET "[%.3f, %.3f, %.3f]\n",
+          point_x(m->offset), point_y(m->offset), point_z(m->offset));
   // MQTT section
   fprintf(stderr, BBLK "MQTT:broker_addr: " CRESET "%s\n", m->broker_address);
   fprintf(stderr, BBLK "MQTT:broker_port: " CRESET "%d\n", m->broker_port);
@@ -282,7 +279,7 @@ int machine_connect(machine_t *m, machine_on_message callback) {
     // error description into a global variable. Perror uses the same variables
     // and attaches it to our description. It's prefereable to use it when using
     // mosquitto. It prints in STDERR
-    perror("Could not create MQTT\n");
+    perror(BRED "Could not create MQTT\n" CRESET);
     return EXIT_FAILURE;
   }
   // Callback set
@@ -296,7 +293,7 @@ int machine_connect(machine_t *m, machine_on_message callback) {
   // int keepalive)
   if (mosquitto_connect(m->mqt, m->broker_address, m->broker_port, 10) !=
       MOSQ_ERR_SUCCESS) {
-    perror("Invalid broker connection parameters\n");
+    perror(BRED "Invalid broker connection parameters\n" CRESET);
     return EXIT_FAILURE;
   }
   // Wait for the connection to be established (due to asynchronous mosquitto
@@ -310,7 +307,7 @@ int machine_connect(machine_t *m, machine_on_message callback) {
     // connection for more than 5 seconds we assume the broker is not available.
     // Typically if the broker is present we will likely wait less than 1
     // seconds and connecting becomes 0 almost instantaneously.
-    printf("loop: %d\n", mosquitto_loop(m->mqt, -1, 1));
+    wprintf("loop: %d\n", mosquitto_loop(m->mqt, -1, 1));
     if (++count >= 5) {
       eprintf("Could not connect to broker\n");
       return EXIT_FAILURE;
@@ -325,26 +322,22 @@ int machine_sync(machine_t *m, int rapid) {
   // {"x":100.2, "y":123, "z",0.0}
   snprintf(m->pub_buffer, BUFLEN,
            "{\"x\":%f, \"y\"%f, \"z\":%f, \"rapid:\":%s}",
-           point_x(m->setpoint) + point_x(m->offest),
-           point_y(m->setpoint) + point_y(m->offest), 
-           point_z(m->setpoint) + point_z(m->offest),
-           rapid ? "true" : "false");
+           point_x(m->setpoint) + point_x(m->offset),
+           point_y(m->setpoint) + point_y(m->offset),
+           point_z(m->setpoint) + point_z(m->offset), rapid ? "true" : "false");
   // send the buffer
   // int mosquitto_publish(struct mosquitto *mosq, int *mid, const char *topic,
   // int payloadlen, const void *payload, int qos, bool retain)
   // We put retain = 0 to not have future subscriber to have this message
   if (mosquitto_publish(m->mqt, NULL, m->pub_topic, strlen(m->pub_buffer),
                         m->pub_buffer, 0, 0) != MOSQ_ERR_SUCCESS) {
-    perror("Could not send message\n");
+    perror(BRED "Could not send message\n" CRESET);
     return EXIT_FAILURE;
   }
-  return EXIT_SUCCESS;
-
-// Calls mosquitto loop to do
-// 0 as second argument means to not wait anything to update the loop
-  if (mosquitto_loop(m->mqt, 0, 1) != MOSQ_ERR_SUCCESS) {
-    perror("mosquitto_loop error\n");
+  if(mosquitto_loop(m->mqt, 0, 1) != MOSQ_ERR_SUCCESS) {
+    perror(BRED "mosquitto_loop error\n" CRESET);
   }
+  return EXIT_SUCCESS;
 }
 
 int machine_listen_start(machine_t *m) {
@@ -352,11 +345,13 @@ int machine_listen_start(machine_t *m) {
   // int mosquitto_subscribe(struct mosquitto *mosq, int *mid, const char *sub,
   // int qos)
   if (mosquitto_subscribe(m->mqt, NULL, m->sub_topic, 0) != MOSQ_ERR_SUCCESS) {
-    perror("Could not subscribe\n");
+    perror(BRED "Could not subscribe\n" CRESET);
     return EXIT_FAILURE;
   }
+  
   // We set the machine error to 10 times the maximum error, we have a
   // difference to be corrected at the very beginning
+
   m->error = m->max_error * 10.0;
   wprintf("Subscribed to topic %s\n", m->sub_topic);
   return EXIT_SUCCESS;
@@ -365,7 +360,7 @@ int machine_listen_start(machine_t *m) {
 int machine_listen_stop(machine_t *m) {
   assert(m && m->mqt);
   if (mosquitto_unsubscribe(m->mqt, NULL, m->sub_topic) != MOSQ_ERR_SUCCESS) {
-    perror("Could not unsubscribe\n");
+    perror(BRED "Could not unsubscribe\n" CRESET);
     return EXIT_FAILURE;
   }
   wprintf("Unsubscribed from topic %s\n", m->sub_topic);
@@ -384,6 +379,7 @@ void machine_disconnect(machine_t *m) {
     usleep(10000); // 10ms wait
   }
   mosquitto_disconnect(m->mqt);
+  m->connecting = 1;
 }
 
 // Static functions
@@ -419,8 +415,9 @@ static void on_message(struct mosquitto *mqt, void *obj,
   // c-cnc/status/error with strrchr becomes /error, a pointer to the last
   // occurrence of the last /, + 1 the pointer is to -> "error"
   char *subtopic = strrchr(msg->topic, '/') + 1;
-  fprintf(stderr, "<-message: %s:%s\n", msg->topic, (char *)msg->payload);
-  // We can cast the type of msg->payload, mosquitto leaves it as void in order to let us decide how to manage the payload
+  fprintf(stderr, "<- message: %s:%s\n", msg->topic, (char *)msg->payload);
+  // We can cast the type of msg->payload, mosquitto leaves it as void in order
+  // to let us decide how to manage the payload
 
   // make a copy of the message for storing it into m
   mosquitto_message_copy(m->msg, msg);
@@ -436,7 +433,7 @@ static void on_message(struct mosquitto *mqt, void *obj,
     // we get a message as "123.5,0.100,200", we use strtod, see documentation
     char *nxt = msg->payload;
     // doing so we get as a result 123.5 but nxt points now at 0.100
-    point_set_x(m->position, strtod(nxt, &nxt)); // "->,0.100,200"
+    point_set_x(m->position, strtod(nxt, &nxt));     // "->,0.100,200"
     point_set_y(m->position, strtod(nxt + 1, &nxt)); // "->,200"
     point_set_z(m->position, strtod(nxt + 1, &nxt)); // "->"
     // The + 1 in order to ignore the comma
@@ -446,7 +443,6 @@ static void on_message(struct mosquitto *mqt, void *obj,
     eprintf("Got unexpected message on %s\n", msg->topic);
   }
 }
-
 
 #ifdef MACHINE_MAIN
 
