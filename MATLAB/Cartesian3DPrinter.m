@@ -23,7 +23,7 @@ M = mqttclient('tcp://localhost'); % Broker connection
 sub = subscribe(M, 'c-cnc/setpoint', Callback=@get_setpoint); % Subscribe to set-point topic
 
 % Publish first set point
-write(M, 'c-cnc/setpoint', '{"x":0.000,"y":0.000,"z":-100.000,"rapid":false}'); % Set-point init
+% write(M, 'c-cnc/setpoint', '{"x":0.000,"y":0.000,"z":-100.000,"rapid":false}'); % Set-point init
 % MQTT JSON message description
 % 1. c-cnc is the root
 % 2. setpoint is the topic
