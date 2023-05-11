@@ -171,8 +171,8 @@ ccnc_state_t ccnc_do_idle(ccnc_state_data_t *data) {
 
   // PART EDITED BY MARCO
   // Steps:
-  // 1. Wait for keypress command according to state transition
-  fprintf(stderr, "Press spacebar to run, 'q' to quit\n");
+  // 1. Wait for keypress and command according state transition
+  fprintf(stderr, "Press "BGRN"spacebar"CRESET" to run, "BRED"'q'"CRESET" to quit\n");
   key = read_key();
   switch (key) {
   case ' ':
@@ -225,10 +225,11 @@ ccnc_state_t ccnc_do_stop(ccnc_state_data_t *data) {
   signal(SIGINT, SIG_DFL); // We reset the sigint if we came in stop using it
 
   // 1. Disconnecting
-  wprintf("Clean up...\n");
+  wprintf("Disconnect...\n");
   if (data->machine)
     machine_disconnect(data->machine);
 
+  wprintf("Clean up...\n");
   // 2. Free resources
   if (data->program)
     program_free(data->program);
