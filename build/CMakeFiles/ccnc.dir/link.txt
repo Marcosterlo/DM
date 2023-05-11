@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/ccnc.dir/src/main/ccnc.c.o -o ccnc  libc-cnc_static.a -lm -lmosquitto 

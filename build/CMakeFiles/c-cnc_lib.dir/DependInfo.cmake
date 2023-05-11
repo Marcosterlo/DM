@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/marco/Desktop/Working directory/DM/src/block.c" "CMakeFiles/c-cnc_lib.dir/src/block.c.o" "gcc" "CMakeFiles/c-cnc_lib.dir/src/block.c.o.d"
+  "/home/marco/Desktop/Working directory/DM/src/fsm.c" "CMakeFiles/c-cnc_lib.dir/src/fsm.c.o" "gcc" "CMakeFiles/c-cnc_lib.dir/src/fsm.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/machine.c" "CMakeFiles/c-cnc_lib.dir/src/machine.c.o" "gcc" "CMakeFiles/c-cnc_lib.dir/src/machine.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/point.c" "CMakeFiles/c-cnc_lib.dir/src/point.c.o" "gcc" "CMakeFiles/c-cnc_lib.dir/src/point.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/program.c" "CMakeFiles/c-cnc_lib.dir/src/program.c.o" "gcc" "CMakeFiles/c-cnc_lib.dir/src/program.c.o.d"

@@ -276,6 +276,19 @@ c-cnc/fast:
 .PHONY : c-cnc/fast
 
 #=============================================================================
+# Target rules for targets named ccnc
+
+# Build rule for target.
+ccnc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ccnc
+.PHONY : ccnc
+
+# fast build rule for target.
+ccnc/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ccnc.dir/build.make CMakeFiles/ccnc.dir/build
+.PHONY : ccnc/fast
+
+#=============================================================================
 # Target rules for targets named Experimental
 
 # Build rule for target.
@@ -675,6 +688,42 @@ src/block.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/block.c.s
 .PHONY : src/block.c.s
 
+src/fsm.o: src/fsm.c.o
+.PHONY : src/fsm.o
+
+# target to build an object file
+src/fsm.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_lib.dir/build.make CMakeFiles/c-cnc_lib.dir/src/fsm.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/fsm.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/fsm.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/fsm.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/fsm.c.o
+.PHONY : src/fsm.c.o
+
+src/fsm.i: src/fsm.c.i
+.PHONY : src/fsm.i
+
+# target to preprocess a source file
+src/fsm.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_lib.dir/build.make CMakeFiles/c-cnc_lib.dir/src/fsm.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/fsm.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/fsm.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/fsm.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/fsm.c.i
+.PHONY : src/fsm.c.i
+
+src/fsm.s: src/fsm.c.s
+.PHONY : src/fsm.s
+
+# target to generate assembly for a file
+src/fsm.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_lib.dir/build.make CMakeFiles/c-cnc_lib.dir/src/fsm.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/fsm.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/fsm.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/fsm.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/fsm.c.s
+.PHONY : src/fsm.c.s
+
 src/machine.o: src/machine.c.o
 .PHONY : src/machine.o
 
@@ -734,6 +783,30 @@ src/main/c-cnc.s: src/main/c-cnc.c.s
 src/main/c-cnc.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc.dir/build.make CMakeFiles/c-cnc.dir/src/main/c-cnc.c.s
 .PHONY : src/main/c-cnc.c.s
+
+src/main/ccnc.o: src/main/ccnc.c.o
+.PHONY : src/main/ccnc.o
+
+# target to build an object file
+src/main/ccnc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ccnc.dir/build.make CMakeFiles/ccnc.dir/src/main/ccnc.c.o
+.PHONY : src/main/ccnc.c.o
+
+src/main/ccnc.i: src/main/ccnc.c.i
+.PHONY : src/main/ccnc.i
+
+# target to preprocess a source file
+src/main/ccnc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ccnc.dir/build.make CMakeFiles/ccnc.dir/src/main/ccnc.c.i
+.PHONY : src/main/ccnc.c.i
+
+src/main/ccnc.s: src/main/ccnc.c.s
+.PHONY : src/main/ccnc.s
+
+# target to generate assembly for a file
+src/main/ccnc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ccnc.dir/build.make CMakeFiles/ccnc.dir/src/main/ccnc.c.s
+.PHONY : src/main/ccnc.c.s
 
 src/main/hello.o: src/main/hello.c.o
 .PHONY : src/main/hello.o
@@ -915,6 +988,7 @@ help:
 	@echo "... c-cnc"
 	@echo "... c-cnc_lib"
 	@echo "... c-cnc_static"
+	@echo "... ccnc"
 	@echo "... hello"
 	@echo "... machine"
 	@echo "... point"
@@ -922,12 +996,18 @@ help:
 	@echo "... src/block.o"
 	@echo "... src/block.i"
 	@echo "... src/block.s"
+	@echo "... src/fsm.o"
+	@echo "... src/fsm.i"
+	@echo "... src/fsm.s"
 	@echo "... src/machine.o"
 	@echo "... src/machine.i"
 	@echo "... src/machine.s"
 	@echo "... src/main/c-cnc.o"
 	@echo "... src/main/c-cnc.i"
 	@echo "... src/main/c-cnc.s"
+	@echo "... src/main/ccnc.o"
+	@echo "... src/main/ccnc.i"
+	@echo "... src/main/ccnc.s"
 	@echo "... src/main/hello.o"
 	@echo "... src/main/hello.i"
 	@echo "... src/main/hello.s"

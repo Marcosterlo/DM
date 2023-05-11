@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/marco/Desktop/Working directory/DM/src/block.c" "CMakeFiles/block.dir/src/block.c.o" "gcc" "CMakeFiles/block.dir/src/block.c.o.d"
+  "/home/marco/Desktop/Working directory/DM/src/fsm.c" "CMakeFiles/block.dir/src/fsm.c.o" "gcc" "CMakeFiles/block.dir/src/fsm.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/machine.c" "CMakeFiles/block.dir/src/machine.c.o" "gcc" "CMakeFiles/block.dir/src/machine.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/point.c" "CMakeFiles/block.dir/src/point.c.o" "gcc" "CMakeFiles/block.dir/src/point.c.o.d"
   "/home/marco/Desktop/Working directory/DM/src/program.c" "CMakeFiles/block.dir/src/program.c.o" "gcc" "CMakeFiles/block.dir/src/program.c.o.d"

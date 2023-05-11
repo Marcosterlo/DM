@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/machine.dir/src/block.c.o"
   "CMakeFiles/machine.dir/src/block.c.o.d"
+  "CMakeFiles/machine.dir/src/fsm.c.o"
+  "CMakeFiles/machine.dir/src/fsm.c.o.d"
   "CMakeFiles/machine.dir/src/machine.c.o"
   "CMakeFiles/machine.dir/src/machine.c.o.d"
   "CMakeFiles/machine.dir/src/point.c.o"
