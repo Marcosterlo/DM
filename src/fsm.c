@@ -18,7 +18,6 @@ Functions and types have been generated with prefix "ccnc_"
 #include "defines.h"
 #include "point.h"
 #include <stdio.h>
-#include <syslog.h>
 #include <termios.h>
 #include <unistd.h>
 
@@ -527,7 +526,7 @@ void ccnc_begin_rapid(ccnc_state_data_t *data) {
 
   // 4. Print INITIAL values for progress string (8 chars)
   fprintf(stderr, "Rapid block length: %f\n", block_length(b));
-  fprintf(stderr, "[    0.0%%]");
+  fprintf(stderr, "[  0.0%%]");
 
   // END PART EDITED BY MARCO
 }
@@ -540,7 +539,7 @@ void ccnc_begin_interp(ccnc_state_data_t *data) {
   // PART EDITED BY MARCO
 
   data->t_blk = 0;
-  fprintf(stderr, "[    0.0%%]");
+  fprintf(stderr, "[  0.0%%]");
 
   // END PART EDITED BY MARCO
 }
@@ -553,7 +552,7 @@ void ccnc_end_rapid(ccnc_state_data_t *data) {
   // PART EDITED BY MARCO
 
   machine_listen_stop(data->machine);
-  fprintf(stderr, "\b\b\b\b\b\b\b\b");
+  fprintf(stderr, "\b\b\b\b\b\b\b\b\b");
 
   // END PART EDITED BY MARCO
 }
@@ -563,7 +562,7 @@ void ccnc_end_rapid(ccnc_state_data_t *data) {
 void ccnc_end_interp(ccnc_state_data_t *data) {
   syslog(LOG_INFO, "[FSM] State transition ccnc_end_interp");
   /* Your Code Here */
-  fprintf(stderr, "\b\b\b\b\b\b\b\b");
+  fprintf(stderr, "\b\b\b\b\b\b\b\b\b");
 }
 
 

@@ -65,9 +65,7 @@ CMakeFiles/ccnc.dir/src/main/ccnc.c.o: \
   /usr/lib/llvm-14/lib/clang/14.0.0/include/__stddef_max_align_t.h \
   /home/marco/Desktop/Working\ directory/DM/src/main/../program.h \
   /home/marco/Desktop/Working\ directory/DM/src/main/../block.h \
-  /usr/include/string.h /usr/include/strings.h /usr/include/syslog.h \
-  /usr/include/x86_64-linux-gnu/sys/syslog.h \
-  /usr/include/x86_64-linux-gnu/bits/syslog-path.h /usr/include/unistd.h \
+  /usr/include/string.h /usr/include/strings.h /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/confname.h \

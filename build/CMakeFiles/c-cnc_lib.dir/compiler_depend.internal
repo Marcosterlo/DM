@@ -203,9 +203,6 @@ CMakeFiles/c-cnc_lib.dir/src/fsm.c.o
  /home/marco/Desktop/Working directory/DM/src/block.h
  /usr/include/string.h
  /usr/include/strings.h
- /usr/include/syslog.h
- /usr/include/x86_64-linux-gnu/sys/syslog.h
- /usr/include/x86_64-linux-gnu/bits/syslog-path.h
  /usr/include/termios.h
  /usr/include/x86_64-linux-gnu/bits/termios.h
  /usr/include/x86_64-linux-gnu/bits/termios-struct.h

@@ -1,6 +1,5 @@
 #include "../defines.h"
 #include "../fsm.h"
-#include <syslog.h>
 #include <unistd.h>
 
 int main(int argc, char const *argv[]) {
@@ -16,7 +15,7 @@ int main(int argc, char const *argv[]) {
   do {
     cur_state = ccnc_run_state(cur_state, &state_data);
     // Here we would need to implement the timer
-    usleep(500); // We put 5ms for the moment
+    usleep(5000); // We put 5ms for the moment
   } while (cur_state != CCNC_STATE_STOP);
   ccnc_run_state(cur_state, NULL);
   return 0;

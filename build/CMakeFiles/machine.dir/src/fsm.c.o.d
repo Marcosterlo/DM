@@ -65,10 +65,8 @@ CMakeFiles/machine.dir/src/fsm.c.o: \
   /usr/lib/llvm-14/lib/clang/14.0.0/include/__stddef_max_align_t.h \
   /home/marco/Desktop/Working\ directory/DM/src/program.h \
   /home/marco/Desktop/Working\ directory/DM/src/block.h \
-  /usr/include/string.h /usr/include/strings.h /usr/include/syslog.h \
-  /usr/include/x86_64-linux-gnu/sys/syslog.h \
-  /usr/include/x86_64-linux-gnu/bits/syslog-path.h \
-  /usr/include/termios.h /usr/include/x86_64-linux-gnu/bits/termios.h \
+  /usr/include/string.h /usr/include/strings.h /usr/include/termios.h \
+  /usr/include/x86_64-linux-gnu/bits/termios.h \
   /usr/include/x86_64-linux-gnu/bits/termios-struct.h \
   /usr/include/x86_64-linux-gnu/bits/termios-c_cc.h \
   /usr/include/x86_64-linux-gnu/bits/termios-c_iflag.h \

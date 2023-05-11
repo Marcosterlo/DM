@@ -75,9 +75,6 @@ CMakeFiles/ccnc.dir/src/main/ccnc.c.o
  /home/marco/Desktop/Working directory/DM/src/block.h
  /usr/include/string.h
  /usr/include/strings.h
- /usr/include/syslog.h
- /usr/include/x86_64-linux-gnu/sys/syslog.h
- /usr/include/x86_64-linux-gnu/bits/syslog-path.h
  /usr/include/unistd.h
  /usr/include/x86_64-linux-gnu/bits/posix_opt.h
  /usr/include/x86_64-linux-gnu/bits/environments.h

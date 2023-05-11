@@ -74,9 +74,6 @@ CMakeFiles/ccnc.dir/src/main/ccnc.c.o: ../src/main/ccnc.c \
   ../src/block.h \
   /usr/include/string.h \
   /usr/include/strings.h \
-  /usr/include/syslog.h \
-  /usr/include/x86_64-linux-gnu/sys/syslog.h \
-  /usr/include/x86_64-linux-gnu/bits/syslog-path.h \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
@@ -92,8 +89,6 @@ CMakeFiles/ccnc.dir/src/main/ccnc.c.o: ../src/main/ccnc.c \
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
 /usr/include/unistd.h:
-
-/usr/include/x86_64-linux-gnu/bits/syslog-path.h:
 
 /usr/include/strings.h:
 
@@ -138,8 +133,6 @@ CMakeFiles/ccnc.dir/src/main/ccnc.c.o: ../src/main/ccnc.c \
 /usr/lib/llvm-14/lib/clang/14.0.0/include/stdint.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
-
-/usr/include/x86_64-linux-gnu/sys/syslog.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
@@ -250,7 +243,5 @@ CMakeFiles/ccnc.dir/src/main/ccnc.c.o: ../src/main/ccnc.c \
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
 /usr/include/stdio.h:
-
-/usr/include/syslog.h:
 
 /usr/lib/llvm-14/lib/clang/14.0.0/include/stdarg.h:

@@ -201,9 +201,6 @@ CMakeFiles/c-cnc_static.dir/src/fsm.c.o: ../src/fsm.c \
   ../src/block.h \
   /usr/include/string.h \
   /usr/include/strings.h \
-  /usr/include/syslog.h \
-  /usr/include/x86_64-linux-gnu/sys/syslog.h \
-  /usr/include/x86_64-linux-gnu/bits/syslog-path.h \
   /usr/include/termios.h \
   /usr/include/x86_64-linux-gnu/bits/termios.h \
   /usr/include/x86_64-linux-gnu/bits/termios-struct.h \
@@ -584,8 +581,6 @@ CMakeFiles/c-cnc_static.dir/src/toml.c.o: ../src/toml.c \
 
 /usr/include/x86_64-linux-gnu/bits/termios.h:
 
-/usr/include/x86_64-linux-gnu/bits/syslog-path.h:
-
 /usr/lib/llvm-14/lib/clang/14.0.0/include/stdarg.h:
 
 /usr/include/stdio.h:
@@ -642,8 +637,6 @@ CMakeFiles/c-cnc_static.dir/src/toml.c.o: ../src/toml.c \
 
 /usr/include/asm-generic/param.h:
 
-/usr/include/syslog.h:
-
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
@@ -697,8 +690,6 @@ CMakeFiles/c-cnc_static.dir/src/toml.c.o: ../src/toml.c \
 /usr/include/linux/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
-
-/usr/include/x86_64-linux-gnu/sys/syslog.h:
 
 ../src/defines.h:
 
