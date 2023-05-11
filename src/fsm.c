@@ -551,8 +551,8 @@ void ccnc_end_rapid(ccnc_state_data_t *data) {
   /* Your Code Here */
   // PART EDITED BY MARCO
 
-  machine_listen_stop(data->machine);
   fprintf(stderr, "\b\b\b\b\b\b\b\b\b");
+  machine_listen_stop(data->machine);
 
   // END PART EDITED BY MARCO
 }

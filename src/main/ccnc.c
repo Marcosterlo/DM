@@ -17,6 +17,11 @@ int main(int argc, char const *argv[]) {
     // Here we would need to implement the timer
     usleep(5000); // We put 5ms for the moment
   } while (cur_state != CCNC_STATE_STOP);
-  ccnc_run_state(cur_state, NULL);
+  // The memory leak happened here, when the stop condition were met initially
+  // the line was: ccnc_run_state(cur_state, NULL);
+  // Now passing the state_data the function called in the stop state can
+  // successfully access to state_data and clean the machine and program
+  // instance that it contains
+  ccnc_run_state(cur_state, &state_data);
   return 0;
 }
