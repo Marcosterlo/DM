@@ -1,0 +1,4 @@
+No motion immediatly goes back to loading the block 
+Both rapid_motion and interp_motion are stable (refer also to themselves) to wait for the machine to reach the desired set point.
+
+In the .dot file generation adding the conidtions -k stop allows us to stop the program execution at any time by pressing CTRL-C

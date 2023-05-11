@@ -16,11 +16,20 @@ Functions and types have been generated with prefix "ccnc_"
 #ifndef FSM_H
 #define FSM_H
 #include <stdlib.h>
+#include "machine.h"
+#include "program.h"
 
 // State data object
 // By default set to void; override this typedef or load the proper
 // header if you need
-typedef void ccnc_state_data_t;
+typedef struct {
+  char *ini_file;
+  char *prog_file;
+  machine_t *machine;
+  program_t *program;
+  data_t t_tot; // total time
+  data_t t_blk; // block time
+} ccnc_state_data_t;
 
 // NOTHING SHALL BE CHANGED AFTER THIS LINE!
 
