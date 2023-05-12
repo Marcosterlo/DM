@@ -1,0 +1,49 @@
+  _____                   _            _ 
+ | ____|_  _____ _ __ ___(_)___  ___  / |
+ |  _| \ \/ / _ \ '__/ __| / __|/ _ \ | |
+ | |___ >  <  __/ | | (__| \__ \  __/ | |
+ |_____/_/\_\___|_|  \___|_|___/\___| |_|
+                                         
+Write a C program, in a single file, that loads a G-Code file as first argument on the command line and rewrites it (with a new name) by doing the following changes:
+
+  1. Line numbers are rearranged starting from N0 to Nxxx, with increment of 1
+  2. Lower case command letters are changed to upper case
+  3. Blank lines are removed
+  4. A single blank line at the at the end must be always present
+
+Optionally:
+
+  1. look at the printf documentation and find a way for having the line numbers padded left with a number of zeros such that the N command has always the same width. For example, if you have a total of 1234 lines, the first line starts with N0001 and the last one with N1233.
+  2. Support an optional second argument on the command line that specifies the increment between lines, so that if that argument is "10", then first line is N10, second N20, and so on.
+
+  _____                   _            ____  
+ | ____|_  _____ _ __ ___(_)___  ___  |___ \ 
+ |  _| \ \/ / _ \ '__/ __| / __|/ _ \   __) |
+ | |___ >  <  __/ | | (__| \__ \  __/  / __/ 
+ |_____/_/\_\___|_|  \___|_|___/\___| |_____|
+                                             
+Write a C program, in a single file, that reads a text file passed as command line argument and counts the number of lines, the number of characters, and the number and length of the shortest and longest line.
+
+  _____                   _            _____ 
+ | ____|_  _____ _ __ ___(_)___  ___  |___ / 
+ |  _| \ \/ / _ \ '__/ __| / __|/ _ \   |_ \ 
+ | |___ >  <  __/ | | (__| \__ \  __/  ___) |
+ |_____/_/\_\___|_|  \___|_|___/\___| |____/ 
+                                             
+Modify the c-cnc source files file such that the G-code command "FMAX" is supported, which is the equivalent of "F10000", if 10000 mm/min is the maximum available feed rate. The value of the maximum feed rate must be read from the INI file. Furthermore, any F command with a value larger than the maximum must be limited down to the maximum.
+
+  _____                   _            _  _   
+ | ____|_  _____ _ __ ___(_)___  ___  | || |  
+ |  _| \ \/ / _ \ '__/ __| / __|/ _ \ | || |_ 
+ | |___ >  <  __/ | | (__| \__ \  __/ |__   _|
+ |_____/_/\_\___|_|  \___|_|___/\___|    |_|  
+                                              
+Ask one of your mates to delete the content of one of the functions in the code we have written in class, then try to re-write it by yourself, using online help (man command) and, if necessary, lesson slides only.
+
+  _____                   _            ____  
+ | ____|_  _____ _ __ ___(_)___  ___  | ___| 
+ |  _| \ \/ / _ \ '__/ __| / __|/ _ \ |___ \ 
+ | |___ >  <  __/ | | (__| \__ \  __/  ___) |
+ |_____/_/\_\___|_|  \___|_|___/\___| |____/ 
+                                             
+Amend the fsm.c file so that the init state also calculates the total length and the total duration of the program. If you have done the Exercise 3 already, assume that the rapid movements are performed at constant speed equal to FMAX (from INI file); otherwise, assume a fixed maximum speed during rapid equal to 10000 mm/min.
