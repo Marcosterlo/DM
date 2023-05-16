@@ -8,6 +8,7 @@
 int main(int argc, char *argv[]) {
   FILE *old = NULL, *new = NULL;
   char *name = NULL, *tmp = NULL;
+  char last = 0;
   size_t n = 0;
   ssize_t nread = 0;
   int incr = 0, n_actual = 0;
@@ -43,19 +44,25 @@ int main(int argc, char *argv[]) {
     if (!strcmp(buffer, "\n")) {
       continue;
     }
-      while ((tmp = strsep(&buffer, " "))) {
-        tmp[0] = toupper(tmp[0]);
-        switch (tmp[0])
-        {
-        case 'N':
-          fprintf(new, "N%04d", n_actual);
-          n_actual += incr;
-          break;
-        default:
-          fprintf(new, " %s", tmp);
-          break;
-        }
+    if (buffer[strlen(buffer) - 1] != '\n') {
+      last = 1;
+    }
+    while ((tmp = strsep(&buffer, " "))) {
+      tmp[0] = toupper(tmp[0]);
+      switch (tmp[0])
+      {
+      case 'N':
+        fprintf(new, "N%04d", n_actual);
+        n_actual += incr;
+        break;
+      default:
+        fprintf(new, " %s", tmp);
+        break;
       }
+    }
+    if (last) {
+      fprintf(new, "\n");
+    }
   }
   fprintf(new, "\n");
 
