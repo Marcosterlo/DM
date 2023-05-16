@@ -1,3 +1,4 @@
 /home/marco/Desktop/Working directory/DM/exercises/build/CMakeFiles/ex1.dir
+/home/marco/Desktop/Working directory/DM/exercises/build/CMakeFiles/ex2.dir
 /home/marco/Desktop/Working directory/DM/exercises/build/CMakeFiles/edit_cache.dir
 /home/marco/Desktop/Working directory/DM/exercises/build/CMakeFiles/rebuild_cache.dir

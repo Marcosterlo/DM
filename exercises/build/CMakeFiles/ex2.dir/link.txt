@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/ex2.dir/src/exercise2.c.o -o ex2 

@@ -129,6 +129,19 @@ ex1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ex1.dir/build.make CMakeFiles/ex1.dir/build
 .PHONY : ex1/fast
 
+#=============================================================================
+# Target rules for targets named ex2
+
+# Build rule for target.
+ex2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ex2
+.PHONY : ex2
+
+# fast build rule for target.
+ex2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/build
+.PHONY : ex2/fast
+
 src/exercise1.o: src/exercise1.c.o
 .PHONY : src/exercise1.o
 
@@ -153,6 +166,30 @@ src/exercise1.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ex1.dir/build.make CMakeFiles/ex1.dir/src/exercise1.c.s
 .PHONY : src/exercise1.c.s
 
+src/exercise2.o: src/exercise2.c.o
+.PHONY : src/exercise2.o
+
+# target to build an object file
+src/exercise2.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/exercise2.c.o
+.PHONY : src/exercise2.c.o
+
+src/exercise2.i: src/exercise2.c.i
+.PHONY : src/exercise2.i
+
+# target to preprocess a source file
+src/exercise2.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/exercise2.c.i
+.PHONY : src/exercise2.c.i
+
+src/exercise2.s: src/exercise2.c.s
+.PHONY : src/exercise2.s
+
+# target to generate assembly for a file
+src/exercise2.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/exercise2.c.s
+.PHONY : src/exercise2.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ex1"
+	@echo "... ex2"
 	@echo "... src/exercise1.o"
 	@echo "... src/exercise1.i"
 	@echo "... src/exercise1.s"
+	@echo "... src/exercise2.o"
+	@echo "... src/exercise2.i"
+	@echo "... src/exercise2.s"
 .PHONY : help
 
 

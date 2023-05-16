@@ -38,3 +38,4 @@ endif()
 #    |_|\__,_|_|  \__, |\___|\__|___/
 #                 |___/              
 add_executable(ex1 ${SOURCES}/exercise1.c)
+add_executable(ex2 ${SOURCES}/exercise2.c)
