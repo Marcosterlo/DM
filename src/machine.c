@@ -22,6 +22,7 @@ typedef struct machine {
   data_t A;                     // max acceleration
   data_t tq;                    // quantization step
   data_t max_error, error;      // maximum error and current error
+  data_t max_feed;          // max feedrate in mm/min
   point_t *zero;                // machine origin
   point_t *setpoint, *position; // set point and current position
   point_t *offset;              // offset of the workpiece reference frame
@@ -159,6 +160,7 @@ machine_t *machine_new(char const *cfg_path) {
     T_READ_D(d, m, ccnc, A);
     T_READ_D(d, m, ccnc, max_error);
     T_READ_D(d, m, ccnc, tq);
+    T_READ_D(d, m, ccnc, max_feed);
 
     // Offset import (WP origin)
     point = toml_array_in(ccnc, "offset");
@@ -241,6 +243,7 @@ machine_getter(data_t, A);
 machine_getter(data_t, tq);
 machine_getter(data_t, max_error);
 machine_getter(data_t, error);
+machine_getter(data_t, max_feed);
 machine_getter(point_t *, zero);
 machine_getter(point_t *, setpoint);
 machine_getter(point_t *, position);
@@ -334,7 +337,7 @@ int machine_sync(machine_t *m, int rapid) {
     perror(BRED "Could not send message\n" CRESET);
     return EXIT_FAILURE;
   }
-  if(mosquitto_loop(m->mqt, 0, 1) != MOSQ_ERR_SUCCESS) {
+  if (mosquitto_loop(m->mqt, 0, 1) != MOSQ_ERR_SUCCESS) {
     perror(BRED "mosquitto_loop error\n" CRESET);
   }
   return EXIT_SUCCESS;
@@ -348,7 +351,7 @@ int machine_listen_start(machine_t *m) {
     perror(BRED "Could not subscribe\n" CRESET);
     return EXIT_FAILURE;
   }
-  
+
   // We set the machine error to 10 times the maximum error, we have a
   // difference to be corrected at the very beginning
 

@@ -34,6 +34,7 @@ data_t machine_A(machine_t const *m);
 data_t machine_tq(machine_t const *m);
 data_t machine_max_error(machine_t const *m);
 data_t machine_error(machine_t const *m);
+data_t machine_max_feed(machine_t const *m);
 point_t *machine_zero(machine_t const *m);
 point_t *machine_setpoint(machine_t const *m);
 point_t *machine_position(machine_t const *m);
