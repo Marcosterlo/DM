@@ -182,6 +182,36 @@ void program_reset(program_t *p) {
   p->current = NULL;
 }
 
+data_t program_time(program_t *p, machine_t *m) {
+  assert(p && m);
+  block_t *b = program_first(p);
+  data_t max_feed = machine_max_feed(m), total_time = 0;
+
+  while ((b = program_next(p))) {
+    if (block_type(b) == RAPID) {
+      total_time += block_length(b)/max_feed; 
+    }
+    else {
+      total_time += block_dt(b);
+    }
+  }
+
+  return total_time;
+}
+
+data_t program_tot_length(program_t *p, machine_t *m) {
+  assert(p && m);
+  block_t *b = program_first(p);
+  data_t total_length = 0;
+
+  while ((b = program_next(p))) {
+    total_length += block_length(b);
+  }
+
+  return total_length;
+
+}
+
 #ifdef PROGRAM_MAIN
 
 int main(int argc, char const *argv[]) {

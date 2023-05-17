@@ -146,6 +146,10 @@ ccnc_state_t ccnc_do_init(ccnc_state_data_t *data) {
   point_set_xyz(sp, point_x(zero), point_y(zero), point_z(zero));
   machine_sync(data->machine, 1); // This is a rapid motion
 
+  // 6. display total time and length of the program
+  fprintf(stderr, BGRN "Total length: %f\n" CRESET, program_tot_length(data->program, data->machine));
+  fprintf(stderr, BGRN "Total time: %f\n" CRESET, program_time(data->program, data->machine));
+
 next_state: // END PART EDITED BY MARCO
   switch (next_state) {
     case CCNC_STATE_IDLE:

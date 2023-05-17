@@ -41,6 +41,8 @@ size_t program_length(program_t const *p);
 block_t *program_current(program_t const *p);
 block_t *program_first(program_t const *p);
 block_t *program_last(program_t const *p);
+data_t program_time(program_t *p, machine_t *m);
+data_t program_tot_length(program_t *p, machine_t *m);
 
 // Processing
 int program_parse(program_t *p, machine_t *m); // integer to give info on errors
