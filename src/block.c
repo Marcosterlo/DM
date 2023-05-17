@@ -29,9 +29,9 @@ typedef struct {
 typedef struct block {
   char *line; // G-Code string
   block_type_t type;
-  size_t n;            // Block number
-  size_t tool;         // Tool number
-  data_t feedrate;     // feedrate in mm/min
+  size_t n;        // Block number
+  size_t tool;     // Tool number
+  data_t feedrate; // feedrate in mm/min
   // Remember feedrate in arcs could be lower due to accelaration limit and
   // centiripetal acceleration
   data_t arc_feedrate; // actual nominal feedrate along an arc motion
@@ -395,7 +395,7 @@ static int block_set_fields(block_t *b, char cmd, char *arg) {
   case 'F':
     feed = atof(arg);
     max_feed = machine_max_feed(b->machine);
-    if ((strcmp(arg, "MAX") == 0) || feed >= max_feed) {
+    if (!strcmp(arg, "MAX") || feed >= max_feed) {
       b->feedrate = max_feed;
     } else {
       b->feedrate = feed;
