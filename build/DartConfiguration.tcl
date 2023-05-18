@@ -11,7 +11,7 @@ BuildDirectory: /home/marco/Desktop/Working directory/DM/build
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: marco-mint
+Site: marco-mint-laptop
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Linux-c++

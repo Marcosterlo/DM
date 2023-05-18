@@ -16,7 +16,7 @@
 
 // Version string
 #define VERSION "1.1"
-#define BUILD_TYPE "Debug"
+#define BUILD_TYPE "Release"
 
 // COMMON TYPES
 typedef double data_t;

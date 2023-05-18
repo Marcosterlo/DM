@@ -6,5 +6,5 @@ C_DEFINES = -Dc_cnc_lib_EXPORTS
 
 C_INCLUDES = 
 
-C_FLAGS = -g -fPIC -fPIC -D_GNU_SOURCE -Wno-backslash-newline-escape -Wno-comment -Wall -DDEBUG -std=gnu11
+C_FLAGS = -O3 -DNDEBUG -fPIC -fPIC -D_GNU_SOURCE -Wno-backslash-newline-escape -Wno-comment -std=gnu11
 

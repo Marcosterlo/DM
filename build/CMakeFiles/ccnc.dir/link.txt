@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/ccnc.dir/src/main/ccnc.c.o -o ccnc  libc-cnc_static.a -lm -lmosquitto 
+/usr/bin/cc -O3 -DNDEBUG CMakeFiles/ccnc.dir/src/main/ccnc.c.o -o ccnc  -Wl,-rpath,::::::::::::::::::::::::::::: libc-cnc_static.a -lm -lmosquitto 

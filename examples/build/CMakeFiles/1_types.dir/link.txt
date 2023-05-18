@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/1_types.dir/src/1_types.c.o -o 1_types 

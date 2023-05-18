@@ -1,0 +1,54 @@
+1ST SOLUTION FOR TIMER IMPLEMENTATION
+REVIEW THREAD PART IN 8_timed.c
+
+2ND SOLUTION FOR TIMER IMPLEMENTATION 9_timed.c
+We use the signals of linux kernel, the sleep or usleep command waits for the time passed as an argument or till the process receives a message from the kernel. 
+We can instruct the kernel to deliver a signal to the process at regular time steps, this signal is called SIGALARM. We use the signal function already used in the finite state machine program to receive the signal from CTRL-C input. In 9-timed we are installing a signal handler with signal(SIGALARM, handler), then we set the timer to deliver a message every given time step, we uset the function setitimer(ENUM, time interval structure of tipe itv, and NULL), 
+
+int setitimer(int which, const struct itimerval *new_value, struct itimerval *old_value);
+
+To sum up we set the sleep to wait at most the passed value but in reality it should stop waiting on the receipt of the SIGALARM signal. We say at most because the OS does its best to guarantee the timing but higher priority process may occurr that will cause the signal to arrive late, if it arrives to late anyway we won't wait longer than the sleep argument passed. 
+
+
+3RD SOLUTION FOR TIMER IMPLEMENTATION 10_timed.c
+We use a cpu core to this designated aim -> higher CPU usage. The precision depends on the OS architecture, for example macOS should be more precise than linux. 
+
+We checked the 3 timer approach performances redirecting stderr to /dev/null with 2>
+
+In linux the signal approach is the best. In microcontroller with no priority of process system the timing is more precise
+
+In linux we can use sched_setschedule to set priorities of concurrent tasks, processes. In this way we can optimize the scheduler 
+
+  #ifdef __linux__
+  struct sched_param param = {.sched_priority = 80}; // set the priority
+  rc = sched_setscheduler(getpid(), SCHED_FIFO, &param);
+  if (rc) {
+    perror("Error (need sudo?): ");
+    exit(EXIT_FAILURE);
+  }
+  #endif
+
+The super user permission is needed to set the higher priority
+
+Change in CMakeLists.txt:
+
+# We add definitions for constant values like SYSLOG
+# We have to use the command with cmake -DSYSLOG=ON/OFF
+option(SYSLOG "Enable use of syslog facility" OFF)
+if (SYSLOG)
+  add_definitions(-DSYSLOG)
+endif()
+
+# We can use the command ccmake -B build to have a prompt to select and deselect variables
+
+In Release the compiler optimizes the code and switches off functions like assert, typically during development we develop in Debug mode, at the end we can switch to release. 
+
+Lastly we can install executables and libraries in the directory specified in CMakeLists.txt, usually in linux if we want an executable that the usr can use we can install in /usr/local
+
+Project
+
+TOOL RADIUS COMPENSATION
+G-code standar support a feature for offsetting tool trajectory
+G41 -> activate right compensation
+G42 -> activate left compensation
+G40 -> disable compensation

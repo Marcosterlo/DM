@@ -6,5 +6,5 @@ C_DEFINES = -DPOINT_MAIN
 
 C_INCLUDES = 
 
-C_FLAGS = -g -fPIC -D_GNU_SOURCE -Wno-backslash-newline-escape -Wno-comment -Wall -DDEBUG -std=gnu11
+C_FLAGS = -O3 -DNDEBUG -fPIC -D_GNU_SOURCE -Wno-backslash-newline-escape -Wno-comment -std=gnu11
 

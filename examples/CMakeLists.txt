@@ -49,3 +49,7 @@ add_executable(8_timed ${SOURCES}/8_timed.c ${SOURCES}/stats.c)
 add_executable(9_timed ${SOURCES}/9_timed.c ${SOURCES}/stats.c)
 add_executable(10_timed ${SOURCES}/10_timed.c ${SOURCES}/stats.c)
 add_executable(12_encoding ${SOURCES}/12_encoding.c)
+
+target_link_libraries(9_timed m)
+target_link_libraries(8_timed m)
+target_link_libraries(10_timed m)

@@ -1,0 +1,4 @@
+/home/marco/Desktop/Working directory/DM/products/bin/hello
+/home/marco/Desktop/Working directory/DM/products/bin/ccnc
+/home/marco/Desktop/Working directory/DM/products/bin/c-cnc
+/home/marco/Desktop/Working directory/DM/products/lib/static/libc-cnc_static.a

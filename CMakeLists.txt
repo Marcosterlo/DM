@@ -61,6 +61,14 @@ configure_file(
   ${SOURCE_DIR}/defines.h
 )
 
+# We add definitions for constant values like SYSLOG
+# We have to use the command with cmake -DSYSLOG=ON/OFF
+option(SYSLOG "Enable use of syslog facility" OFF)
+if (SYSLOG)
+  add_definitions(-DSYSLOG)
+endif()
+
+# We can use the command ccmake -B build to have a prompt to select and deselect variables
 
 #   _____                    _       
 #  |_   _|_ _ _ __ __ _  ___| |_ ___ 
@@ -107,6 +115,7 @@ target_link_libraries(program m mosquitto) # Program executable to math library
 # List of targets to install
 list(APPEND TARGETS_LIST
   hello
+  ccnc
   c-cnc c-cnc_static
 )
 # Destination directory

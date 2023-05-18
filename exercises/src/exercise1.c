@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
   char last = 0;
   size_t n = 0;
   ssize_t nread = 0;
-  int incr = 0, n_actual = 0;
+  int incr = 0, n_actual = 0, n_lines = 0;
   char *buffer = malloc(MAX_LENGTH);
 
   if (argc != 4) {
@@ -40,6 +40,23 @@ int main(int argc, char *argv[]) {
   else {
     printf("File aperti correttamente\n");
   }
+  
+  // Count number of lines
+  /*
+  while ((nread = getline(&buffer, &n, old)) != -1) {
+    if (!strcmp(buffer, "\n")) {
+      continue;
+    }
+    n_lines++;
+  }
+  */
+ 
+  while ((nread = getline(&buffer, &n, old)) != -1) {
+    if (!strcmp(buffer, "\n")) {
+      continue;
+    }
+    n_lines++;
+  }
 
   // Parsing
   while ((nread = getline(&buffer, &n, old)) != -1) {
@@ -54,7 +71,7 @@ int main(int argc, char *argv[]) {
       switch (tmp[0])
       {
       case 'N':
-        fprintf(new, "N%04d", n_actual);
+        fprintf(new, "N%0*d", 4, n_actual);
         n_actual += incr;
         break;
       default:

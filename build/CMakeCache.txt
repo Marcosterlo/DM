@@ -33,7 +33,7 @@ CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Build type default to Debug
-CMAKE_BUILD_TYPE:STRING=Debug
+CMAKE_BUILD_TYPE:STRING=Release
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -260,10 +260,10 @@ MEMORYCHECK_COMMAND:FILEPATH=MEMORYCHECK_COMMAND-NOTFOUND
 MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 
 //Name of the computer/site where compile is being run
-SITE:STRING=marco-mint
+SITE:STRING=marco-mint-laptop
 
-//Dependencies for the target
-c-cnc_LIB_DEPENDS:STATIC=general;c-cnc_static;general;m;general;m;
+//Enable use of syslog facility
+SYSLOG:BOOL=OFF
 
 //Dependencies for the target
 c-cnc_lib_LIB_DEPENDS:STATIC=general;m;general;mosquitto;
@@ -277,6 +277,8 @@ c-cnc_lib_LIB_DEPENDS:STATIC=general;m;general;mosquitto;
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
+//MODIFIED property for variable: CMAKE_BUILD_TYPE
+CMAKE_BUILD_TYPE-MODIFIED:INTERNAL=ON
 //This is the directory where this CMakeCache.txt was created
 CMAKE_CACHEFILE_DIR:INTERNAL=/home/marco/Desktop/Working directory/DM/build
 //Major version of cmake used to create the current loaded cache
@@ -440,4 +442,6 @@ MEMORYCHECK_COMMAND-ADVANCED:INTERNAL=1
 MEMORYCHECK_SUPPRESSIONS_FILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SITE
 SITE-ADVANCED:INTERNAL=1
+//MODIFIED property for variable: SYSLOG
+SYSLOG-MODIFIED:INTERNAL=ON
 

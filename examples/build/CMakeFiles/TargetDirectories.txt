@@ -1,0 +1,14 @@
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/0_hello.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/1_types.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/2_basics.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/3_file.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/4_include_guards.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/5_struct_union.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/6_inout_p.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/7_linkedlist.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/8_timed.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/9_timed.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/10_timed.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/12_encoding.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/edit_cache.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/rebuild_cache.dir
