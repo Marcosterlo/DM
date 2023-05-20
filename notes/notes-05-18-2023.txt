@@ -1,5 +1,6 @@
 1ST SOLUTION FOR TIMER IMPLEMENTATION
-REVIEW THREAD PART IN 8_timed.c
+The idea is that in the loop we branch a new thread who's only task is to wait (sleep) for an amount of time, normally the main loop would take less time than the thread waiting time, as a condition we add that the main can't loop unless the thread finish its task and merges back. In this way we are precisely timing the main loop with the branched thread timing.
+The idea to use a different thread it's because in this thread there will be no higher priority interrupts that would stop our wait. It's important to remember to join the thread back, otherwise we can't know when the thread will have done its operation
 
 2ND SOLUTION FOR TIMER IMPLEMENTATION 9_timed.c
 We use the signals of linux kernel, the sleep or usleep command waits for the time passed as an argument or till the process receives a message from the kernel. 
@@ -11,7 +12,7 @@ To sum up we set the sleep to wait at most the passed value but in reality it sh
 
 
 3RD SOLUTION FOR TIMER IMPLEMENTATION 10_timed.c
-We use a cpu core to this designated aim -> higher CPU usage. The precision depends on the OS architecture, for example macOS should be more precise than linux. 
+We use a cpu core to this designated aim -> higher CPU usage. This because we invoke a function that continuously checks the time at the maximum frequency allowable by the hardware. The precision depends on the OS architecture, for example macOS should be more precise than linux. 
 
 We checked the 3 timer approach performances redirecting stderr to /dev/null with 2>
 
