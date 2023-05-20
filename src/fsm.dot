@@ -10,6 +10,7 @@ digraph "C-CNC" {
   # List of states
   # Mark pure sink and pure source states with double border (purely cosmetic)
   init [peripheries=2]
+  go_to_zero
   idle
   load_block
   no_motion
@@ -22,6 +23,9 @@ digraph "C-CNC" {
   init -> idle
   init -> stop
   idle -> idle
+  idle -> go_to_zero [label="begin_zero"]
+  go_to_zero -> go_to_zero
+  go_to_zero -> idle [label="end_zero"]
   idle -> load_block [label="reset"]
   load_block -> no_motion
   no_motion -> load_block
