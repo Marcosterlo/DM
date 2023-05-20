@@ -4,7 +4,7 @@
  | |___ >  <  __/ | | (__| \__ \  __/ | |
  |_____/_/\_\___|_|  \___|_|___/\___| |_|
                                          
-Write a C program, in a single file, that loads a G-Code file as first argument on the command line and rewrites it (with a new name) by doing the following changes:
+Write a C program, in a single file, that loads a G-Code file as first argument on the command line and rewrites it (with a new name) by doing the following changes: (to a new  file or stdout)
 
   1. Line numbers are rearranged starting from N0 to Nxxx, with increment of 1
   2. Lower case command letters are changed to upper case
@@ -47,3 +47,15 @@ Ask one of your mates to delete the content of one of the functions in the code 
  |_____/_/\_\___|_|  \___|_|___/\___| |____/ 
                                              
 Amend the fsm.c file so that the init state also calculates the total length and the total duration of the program. If you have done the Exercise 3 already, assume that the rapid movements are performed at constant speed equal to FMAX (from INI file); otherwise, assume a fixed maximum speed during rapid equal to 10000 mm/min.
+
+  _____                   _             __   
+ | ____|_  _____ _ __ ___(_)___  ___   / /_  
+ |  _| \ \/ / _ \ '__/ __| / __|/ _ \ | '_ \ 
+ | |___ >  <  __/ | | (__| \__ \  __/ | (_) |
+ |_____/_/\_\___|_|  \___|_|___/\___|  \___/ 
+ Copy from Moodle
+                                             
+
+
+Ex1 changes
+blank line is a line composed of only spaces too, redirect to stdout or file, padding must be dynamic respect to the total number of lines. Move Nxx to the start of the line if it is not.

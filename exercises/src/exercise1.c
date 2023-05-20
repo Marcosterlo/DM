@@ -50,13 +50,6 @@ int main(int argc, char *argv[]) {
     n_lines++;
   }
   */
- 
-  while ((nread = getline(&buffer, &n, old)) != -1) {
-    if (!strcmp(buffer, "\n")) {
-      continue;
-    }
-    n_lines++;
-  }
 
   // Parsing
   while ((nread = getline(&buffer, &n, old)) != -1) {
@@ -83,7 +76,6 @@ int main(int argc, char *argv[]) {
       fprintf(new, "\n");
     }
   }
-  fprintf(new, "\n");
 
 fail:
   free(buffer);

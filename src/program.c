@@ -209,7 +209,6 @@ data_t program_tot_length(program_t *p, machine_t *m) {
   }
 
   return total_length;
-
 }
 
 #ifdef PROGRAM_MAIN
