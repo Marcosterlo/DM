@@ -31,8 +31,12 @@ int main(int argc, char const *argv[]) {
     eprintf("Error initializing the machine\n");
     exit(EXIT_FAILURE);
   }
+  
+  // Simulation rt_pacing
+  data_t rt_pacing = machine_rt_pacing(state_data.machine);
 
   // Delta t imported by configuration file
+//  useconds_t dt = machine_tq(state_data.machine) * 1E6 * rt_pacing;
   useconds_t dt = machine_tq(state_data.machine) * 1E6;
   // to convert second into microseconds
   // Delta t max

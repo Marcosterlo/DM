@@ -1,0 +1,14 @@
+When using a PID controller we have a output command only to non zero error, this means we will always have a certain degree of delay in the actuation. 
+2nd feedback loop is used to minimize this delay
+
+Dynamic libraries need to be in the same folder as executable or in system folder of the OS.
+
+Practical example on using dynamic libraries and static ones. Up to this moment we only used static ones: all files under src go to the static library.
+
+  ____  _______     _____ _______        __  ____  _____ ____  
+ |  _ \| ____\ \   / /_ _| ____\ \      / / |  _ \| ____/ ___| 
+ | |_) |  _|  \ \ / / | ||  _|  \ \ /\ / /  | |_) |  _|| |     
+ |  _ <| |___  \ V /  | || |___  \ V  V /   |  _ <| |__| |___  
+ |_| \_\_____|  \_/  |___|_____|  \_/\_/    |_| \_\_____\____| 
+
+Differences is even in the size of the executables, with dynamic approach part of the cose stays in the dynamic library. With dynamic approach we can't run the executable where we want, we need to have executable and dynamic library in the same folder. 

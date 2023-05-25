@@ -300,7 +300,6 @@ ccnc_state_t ccnc_do_go_to_zero(ccnc_state_data_t *data) {
 
   /* Your Code Here */
   // PART EDITED BY MARCO
-  data_t tq = machine_tq(data->machine);
 
   // Steps
   // 1. Sync machine
@@ -590,13 +589,11 @@ void ccnc_begin_zero(ccnc_state_data_t *data) {
   point_t *target = machine_zero(data->machine);
 
   // Steps
-  // 1. Reset only the block timer
-  data->t_blk = 0;
 
-  // 2. Start listening to MQTT status updates
+  // 1. Start listening to MQTT status updates
   machine_listen_start(data->machine);
 
-  // 3. Set final position and set point
+  // 2. Set final position and set point
   point_set_xyz(sp, point_x(target), point_y(target), point_z(target));
   machine_sync(data->machine, 1);
 

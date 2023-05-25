@@ -37,6 +37,9 @@ typedef struct machine {
   struct mosquitto_message *msg; // Stores the last received message
   int connecting; // flag to tell wether we're waiting connection or not, if set
                   // to 1 it means we're waiting connection
+
+  // Simulation fields
+  data_t rt_pacing;
 } machine_t;
 
 // Callbacks declaration
@@ -161,6 +164,7 @@ machine_t *machine_new(char const *cfg_path) {
     T_READ_D(d, m, ccnc, max_error);
     T_READ_D(d, m, ccnc, tq);
     T_READ_D(d, m, ccnc, max_feed);
+    T_READ_D(d, m, ccnc, rt_pacing);
 
     // Offset import (WP origin)
     point = toml_array_in(ccnc, "offset");
@@ -244,6 +248,7 @@ machine_getter(data_t, tq);
 machine_getter(data_t, max_error);
 machine_getter(data_t, error);
 machine_getter(data_t, max_feed);
+machine_getter(data_t, rt_pacing);
 machine_getter(point_t *, zero);
 machine_getter(point_t *, setpoint);
 machine_getter(point_t *, position);
@@ -255,6 +260,7 @@ void machine_print_params(machine_t const *m) {
   fprintf(stderr, BBLK "C-CNC:A:          " CRESET "%f\n", m->A);
   fprintf(stderr, BBLK "C-CNC:tq:         " CRESET "%f\n", m->tq);
   fprintf(stderr, BBLK "C-CNC:max_error:  " CRESET "%f\n", m->max_error);
+  fprintf(stderr, BBLK "C-CNC:rt_pacing:  " CRESET "%f\n", m->rt_pacing);
   fprintf(stderr, BBLK "C-CNC:zero:       " CRESET "[%.3f, %.3f, %.3f]\n",
           point_x(m->zero), point_y(m->zero), point_z(m->zero));
   fprintf(stderr, BBLK "C-CNC:offset:     " CRESET "[%.3f, %.3f, %.3f]\n",
