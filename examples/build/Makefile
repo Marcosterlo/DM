@@ -272,6 +272,32 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/12_encoding.dir/build.make CMakeFiles/12_encoding.dir/build
 .PHONY : 12_encoding/fast
 
+#=============================================================================
+# Target rules for targets named 13_queue
+
+# Build rule for target.
+13_queue: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 13_queue
+.PHONY : 13_queue
+
+# fast build rule for target.
+13_queue/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/13_queue.dir/build.make CMakeFiles/13_queue.dir/build
+.PHONY : 13_queue/fast
+
+#=============================================================================
+# Target rules for targets named 14_pid
+
+# Build rule for target.
+14_pid: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 14_pid
+.PHONY : 14_pid
+
+# fast build rule for target.
+14_pid/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/14_pid.dir/build.make CMakeFiles/14_pid.dir/build
+.PHONY : 14_pid/fast
+
 src/0_hello.o: src/0_hello.c.o
 .PHONY : src/0_hello.o
 
@@ -343,6 +369,54 @@ src/12_encoding.s: src/12_encoding.c.s
 src/12_encoding.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/12_encoding.dir/build.make CMakeFiles/12_encoding.dir/src/12_encoding.c.s
 .PHONY : src/12_encoding.c.s
+
+src/13_queue.o: src/13_queue.c.o
+.PHONY : src/13_queue.o
+
+# target to build an object file
+src/13_queue.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/13_queue.dir/build.make CMakeFiles/13_queue.dir/src/13_queue.c.o
+.PHONY : src/13_queue.c.o
+
+src/13_queue.i: src/13_queue.c.i
+.PHONY : src/13_queue.i
+
+# target to preprocess a source file
+src/13_queue.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/13_queue.dir/build.make CMakeFiles/13_queue.dir/src/13_queue.c.i
+.PHONY : src/13_queue.c.i
+
+src/13_queue.s: src/13_queue.c.s
+.PHONY : src/13_queue.s
+
+# target to generate assembly for a file
+src/13_queue.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/13_queue.dir/build.make CMakeFiles/13_queue.dir/src/13_queue.c.s
+.PHONY : src/13_queue.c.s
+
+src/14_pid.o: src/14_pid.c.o
+.PHONY : src/14_pid.o
+
+# target to build an object file
+src/14_pid.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/14_pid.dir/build.make CMakeFiles/14_pid.dir/src/14_pid.c.o
+.PHONY : src/14_pid.c.o
+
+src/14_pid.i: src/14_pid.c.i
+.PHONY : src/14_pid.i
+
+# target to preprocess a source file
+src/14_pid.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/14_pid.dir/build.make CMakeFiles/14_pid.dir/src/14_pid.c.i
+.PHONY : src/14_pid.c.i
+
+src/14_pid.s: src/14_pid.c.s
+.PHONY : src/14_pid.s
+
+# target to generate assembly for a file
+src/14_pid.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/14_pid.dir/build.make CMakeFiles/14_pid.dir/src/14_pid.c.s
+.PHONY : src/14_pid.c.s
 
 src/1_types.o: src/1_types.c.o
 .PHONY : src/1_types.o
@@ -584,6 +658,54 @@ src/inout.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/6_inout_p.dir/build.make CMakeFiles/6_inout_p.dir/src/inout.c.s
 .PHONY : src/inout.c.s
 
+src/pid_controller.o: src/pid_controller.c.o
+.PHONY : src/pid_controller.o
+
+# target to build an object file
+src/pid_controller.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/14_pid.dir/build.make CMakeFiles/14_pid.dir/src/pid_controller.c.o
+.PHONY : src/pid_controller.c.o
+
+src/pid_controller.i: src/pid_controller.c.i
+.PHONY : src/pid_controller.i
+
+# target to preprocess a source file
+src/pid_controller.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/14_pid.dir/build.make CMakeFiles/14_pid.dir/src/pid_controller.c.i
+.PHONY : src/pid_controller.c.i
+
+src/pid_controller.s: src/pid_controller.c.s
+.PHONY : src/pid_controller.s
+
+# target to generate assembly for a file
+src/pid_controller.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/14_pid.dir/build.make CMakeFiles/14_pid.dir/src/pid_controller.c.s
+.PHONY : src/pid_controller.c.s
+
+src/queue.o: src/queue.c.o
+.PHONY : src/queue.o
+
+# target to build an object file
+src/queue.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/13_queue.dir/build.make CMakeFiles/13_queue.dir/src/queue.c.o
+.PHONY : src/queue.c.o
+
+src/queue.i: src/queue.c.i
+.PHONY : src/queue.i
+
+# target to preprocess a source file
+src/queue.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/13_queue.dir/build.make CMakeFiles/13_queue.dir/src/queue.c.i
+.PHONY : src/queue.c.i
+
+src/queue.s: src/queue.c.s
+.PHONY : src/queue.s
+
+# target to generate assembly for a file
+src/queue.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/13_queue.dir/build.make CMakeFiles/13_queue.dir/src/queue.c.s
+.PHONY : src/queue.c.s
+
 src/stats.o: src/stats.c.o
 .PHONY : src/stats.o
 
@@ -625,6 +747,8 @@ help:
 	@echo "... 0_hello"
 	@echo "... 10_timed"
 	@echo "... 12_encoding"
+	@echo "... 13_queue"
+	@echo "... 14_pid"
 	@echo "... 1_types"
 	@echo "... 2_basics"
 	@echo "... 3_file"
@@ -643,6 +767,12 @@ help:
 	@echo "... src/12_encoding.o"
 	@echo "... src/12_encoding.i"
 	@echo "... src/12_encoding.s"
+	@echo "... src/13_queue.o"
+	@echo "... src/13_queue.i"
+	@echo "... src/13_queue.s"
+	@echo "... src/14_pid.o"
+	@echo "... src/14_pid.i"
+	@echo "... src/14_pid.s"
 	@echo "... src/1_types.o"
 	@echo "... src/1_types.i"
 	@echo "... src/1_types.s"
@@ -673,6 +803,12 @@ help:
 	@echo "... src/inout.o"
 	@echo "... src/inout.i"
 	@echo "... src/inout.s"
+	@echo "... src/pid_controller.o"
+	@echo "... src/pid_controller.i"
+	@echo "... src/pid_controller.s"
+	@echo "... src/queue.o"
+	@echo "... src/queue.i"
+	@echo "... src/queue.s"
 	@echo "... src/stats.o"
 	@echo "... src/stats.i"
 	@echo "... src/stats.s"

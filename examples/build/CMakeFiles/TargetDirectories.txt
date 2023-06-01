@@ -10,5 +10,7 @@
 /home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/9_timed.dir
 /home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/10_timed.dir
 /home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/12_encoding.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/13_queue.dir
+/home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/14_pid.dir
 /home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/edit_cache.dir
 /home/marco/Desktop/Working directory/DM/examples/build/CMakeFiles/rebuild_cache.dir

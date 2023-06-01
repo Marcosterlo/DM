@@ -49,6 +49,8 @@ add_executable(8_timed ${SOURCES}/8_timed.c ${SOURCES}/stats.c)
 add_executable(9_timed ${SOURCES}/9_timed.c ${SOURCES}/stats.c)
 add_executable(10_timed ${SOURCES}/10_timed.c ${SOURCES}/stats.c)
 add_executable(12_encoding ${SOURCES}/12_encoding.c)
+add_executable(13_queue ${SOURCES}/13_queue.c ${SOURCES}/queue.c)
+add_executable(14_pid ${SOURCES}/14_pid.c ${SOURCES}/pid_controller.c)
 
 target_link_libraries(9_timed m)
 target_link_libraries(8_timed m)

@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/13_queue.dir/src/13_queue.c.o CMakeFiles/13_queue.dir/src/queue.c.o -o 13_queue 

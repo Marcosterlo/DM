@@ -1,14 +1,21 @@
-When using a PID controller we have a output command only to non zero error, this means we will always have a certain degree of delay in the actuation. 
-2nd feedback loop is used to minimize this delay
+Differences between nominal and actual trajectory: examples:
+Having a simple step response from 0 to a set-point. It's similar to what happens when we perform a single axis rapid motion, the output that we get should have no overshoot at start and no offset after stabilization. Vertical axis that move against gravity have to work against a constant force, typically they need to have an integral component in order to take into account gravity. If we are looking at what happens in xy in a rapid motion, moninally we're going from one point to another with a straight line, according to the gcode standard there is no guarantee that the trajectory follows the minimum path, nowadays controllers usually do the interpolation also in rapid motion but this is not guaranteed a priori. The only difference is that in rapid motion the feed rate is set to max, following gcode standard there is no guarantee the path will be straight, we just put the final axis position and let them move at maximum, since the axis may have different masses and friction the resulting trajectory could be non straight, the only way to guarantee a straight line taking into consideration these aspect is by adding a control feedback, hence interpolation that is not included in Gcode standard.
+If the simulation ran as expected we would have seen this behaviour in simulink
 
-Dynamic libraries need to be in the same folder as executable or in system folder of the OS.
+In linear or arc motion supposing that we have a starting position and a final position, actually we are limiting the acceleration and we round the profile, it is even smoother if we limit the jerk too, second derivative. If we see the real trajectory we always perceive some delay respect to the ideal one, the delay is due to the PID controller nature, in order to have a non zero output we need a non zero difference from actual position and set-point, we have to "wait" for the machine to differ from set-point in order to have a moving input and so the delay shows. We have a sequence of set-point distanced of delta t (quantization time). This delay can be minimized if we use rather than a normal PID we use a feedback velocity tachogenerator system directly attached to the axis, doing so the response is much quicker reducing at its minimum the time delay, we add the velocity contribution to the PID input so that the output is not zero waiting for position to be different from set-point. 
+When we have seen the theory about controllers we saw that we have very complex block diagrams with 3 feedback loops: position loop, velocity loop (from tachogenerator attached to axis motor), the third one is a inner electrical loop inside the motor itself. The second loop is needed to minimize this intrinsic delay. 
 
-Practical example on using dynamic libraries and static ones. Up to this moment we only used static ones: all files under src go to the static library.
+We can use the bone structure of this project as a draft to do our c/c++ projects
 
-  ____  _______     _____ _______        __  ____  _____ ____  
- |  _ \| ____\ \   / /_ _| ____\ \      / / |  _ \| ____/ ___| 
- | |_) |  _|  \ \ / / | ||  _|  \ \ /\ / /  | |_) |  _|| |     
- |  _ <| |___  \ V /  | || |___  \ V  V /   |  _ <| |__| |___  
- |_| \_\_____|  \_/  |___|_____|  \_/\_/    |_| \_\_____\____| 
+The CMakeList.txt we use is designed to compile everything we put under src into a static and dynamic library. Everything that we put into main is not going into the library. We should make exectutables into main, then make a specific target for them in CMakeLists and then link the target with the libraries, either the dynamic or static one.
+In order for the linking to work the dynamic library NEEDS TO BE IN THE SAME FOLDER AS THE EXECUTABLE OR IN A SYSTEM FOLDER /usr/lib or /usr/local/lib, in a different folder it won't work. 
 
-Differences is even in the size of the executables, with dynamic approach part of the cose stays in the dynamic library. With dynamic approach we can't run the executable where we want, we need to have executable and dynamic library in the same folder. 
+Practical example on how to use dynamic vs static libraries. Till now we used static libraries, in target_link_libraries(... c-cnc_static). All the files that are under src go into static libraries and when we compile the executable we compile everything with the static libraries, the result is identycal to compile a single target putting in the target all the source files. The advantage is that in this way we have 2 step linking: we have both the libraries and the executable. We can move the executable whenever we want and it will run because it has all the dependencies already embedded in the executable file. The other part of the code is in the dynamic library. In mac a dynamic library object has the file extension .dylib, in linux .so (shared object). 
+If we move the exectuable from the dynamic libraries from the same folder then the executable won't work anymore. 
+
+In CMakeList we added some line to search the dynamic library in the current path or /usr/local/lib, so having added this line we could run an executable compiled with dynamic library even if it is not in the same directory because it would have searched in /usr/local/lib. If we comment this part building and running again the executable won't work unless the .so file is in the same directory
+
+LIST OF USEFUL FUNCTIONS
+Inspecting problem when we can't find a library: ldd "name of executable" -> it return the list of libraries needed for the executable and the correspective paths. If we show not found in the path of the library it tells us the library is not found by the executable, we can act following this information.
+
+nm (stands for names) -> gives all the functions available in a given executable or library. We get memory address, type of function (defining T, use (used by lib but not defined by lib) U), We have variable number of underscores before the name of the function, typically the function we define have a memory location associated, the functions we just use do not have a correspettive memory location

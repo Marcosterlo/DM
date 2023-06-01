@@ -1,0 +1,9 @@
+   ___                             
+  / _ \ _   _  ___ _   _  ___  ___ 
+ | | | | | | |/ _ \ | | |/ _ \/ __|
+ | |_| | |_| |  __/ |_| |  __/\__ \
+  \__\_\\__,_|\___|\__,_|\___||___/
+                                   
+A way in order to store and order data (messages or other informations). Queues are shared by processes, for example we can have a process that creates data and pushed and another that downloads and pops from queue. 
+Today we'll develop a FIFO QUEUE. 
+Exist already a lot of queue implementations online
