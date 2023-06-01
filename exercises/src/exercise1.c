@@ -76,15 +76,17 @@ int main(int argc, char *argv[]) {
   n_lines = n_lines * incr;
   // Se il numero di righe è minore di 10 si passa n_digits rimane inizializzata
   // a 1
-  if (n_lines >= 10) {
-    // altrimenti si divide per 10, finché non otteniamo un numero minore di 10
-    // vuol dire che il numero è composto da un altro digit
-    while ((n_lines /= 10) >= 10) {
-      n_digits++;
-    }
-    // Ultima aggiunta per fare appattare tutto
-    n_digits++;
-  }
+  // if (n_lines >= 10) {
+  //   // altrimenti si divide per 10, finché non otteniamo un numero minore di 10
+  //   // vuol dire che il numero è composto da un altro digit
+  //   while ((n_lines /= 10) >= 10) {
+  //     n_digits++;
+  //   }
+  //   // Ultima aggiunta per fare appattare tutto
+  //   n_digits++;
+  // }
+  n_digits = (int)ceil(log10(n_lines));
+  // Way better like this
 
   // Parsing
   while ((nread = getline(&buffer, &n, old)) != -1) {
