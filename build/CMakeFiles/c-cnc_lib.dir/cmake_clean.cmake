@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/c-cnc_lib.dir/src/axis.c.o"
+  "CMakeFiles/c-cnc_lib.dir/src/axis.c.o.d"
   "CMakeFiles/c-cnc_lib.dir/src/block.c.o"
   "CMakeFiles/c-cnc_lib.dir/src/block.c.o.d"
   "CMakeFiles/c-cnc_lib.dir/src/fsm.c.o"

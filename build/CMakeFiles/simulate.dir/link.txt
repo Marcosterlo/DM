@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG CMakeFiles/simulate.dir/src/main/simulate.c.o -o simulate  -Wl,-rpath,"/home/marco/Desktop/Working directory/DM/build" libc-cnc_lib.so -lm -lmosquitto 

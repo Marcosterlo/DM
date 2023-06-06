@@ -97,6 +97,14 @@ target_link_libraries(c-cnc c-cnc_static m mosquitto)
 add_executable(ccnc ${SOURCE_DIR}/main/ccnc.c)
 target_link_libraries(ccnc c-cnc_static m mosquitto)
 
+# Tuning axes PID
+add_executable(tuning ${LIB_SOURCES})
+target_compile_definitions(tuning PUBLIC AXIS_MAIN)
+target_link_libraries(tuning c-cnc_static m mosquitto)
+
+add_executable(simulate ${SOURCE_DIR}/main/simulate.c)
+target_link_libraries(simulate c-cnc_lib m mosquitto)
+
 # Linking
 target_link_libraries(hello c-cnc_lib mosquitto)
 target_link_libraries(c-cnc_lib m mosquitto) # Our library to math library

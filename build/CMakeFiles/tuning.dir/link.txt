@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG CMakeFiles/tuning.dir/src/axis.c.o CMakeFiles/tuning.dir/src/block.c.o CMakeFiles/tuning.dir/src/fsm.c.o CMakeFiles/tuning.dir/src/machine.c.o CMakeFiles/tuning.dir/src/point.c.o CMakeFiles/tuning.dir/src/program.c.o CMakeFiles/tuning.dir/src/toml.c.o -o tuning  libc-cnc_static.a -lm -lmosquitto 

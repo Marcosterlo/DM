@@ -69,10 +69,24 @@ include CMakeFiles/machine.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/machine.dir/flags.make
 
+CMakeFiles/machine.dir/src/axis.c.o: CMakeFiles/machine.dir/flags.make
+CMakeFiles/machine.dir/src/axis.c.o: ../src/axis.c
+CMakeFiles/machine.dir/src/axis.c.o: CMakeFiles/machine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/machine.dir/src/axis.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/machine.dir/src/axis.c.o -MF CMakeFiles/machine.dir/src/axis.c.o.d -o CMakeFiles/machine.dir/src/axis.c.o -c "/home/marco/Desktop/Working directory/DM/src/axis.c"
+
+CMakeFiles/machine.dir/src/axis.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/machine.dir/src/axis.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/marco/Desktop/Working directory/DM/src/axis.c" > CMakeFiles/machine.dir/src/axis.c.i
+
+CMakeFiles/machine.dir/src/axis.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/machine.dir/src/axis.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/marco/Desktop/Working directory/DM/src/axis.c" -o CMakeFiles/machine.dir/src/axis.c.s
+
 CMakeFiles/machine.dir/src/block.c.o: CMakeFiles/machine.dir/flags.make
 CMakeFiles/machine.dir/src/block.c.o: ../src/block.c
 CMakeFiles/machine.dir/src/block.c.o: CMakeFiles/machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/machine.dir/src/block.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/machine.dir/src/block.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/machine.dir/src/block.c.o -MF CMakeFiles/machine.dir/src/block.c.o.d -o CMakeFiles/machine.dir/src/block.c.o -c "/home/marco/Desktop/Working directory/DM/src/block.c"
 
 CMakeFiles/machine.dir/src/block.c.i: cmake_force
@@ -86,7 +100,7 @@ CMakeFiles/machine.dir/src/block.c.s: cmake_force
 CMakeFiles/machine.dir/src/fsm.c.o: CMakeFiles/machine.dir/flags.make
 CMakeFiles/machine.dir/src/fsm.c.o: ../src/fsm.c
 CMakeFiles/machine.dir/src/fsm.c.o: CMakeFiles/machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/machine.dir/src/fsm.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/machine.dir/src/fsm.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/machine.dir/src/fsm.c.o -MF CMakeFiles/machine.dir/src/fsm.c.o.d -o CMakeFiles/machine.dir/src/fsm.c.o -c "/home/marco/Desktop/Working directory/DM/src/fsm.c"
 
 CMakeFiles/machine.dir/src/fsm.c.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/machine.dir/src/fsm.c.s: cmake_force
 CMakeFiles/machine.dir/src/machine.c.o: CMakeFiles/machine.dir/flags.make
 CMakeFiles/machine.dir/src/machine.c.o: ../src/machine.c
 CMakeFiles/machine.dir/src/machine.c.o: CMakeFiles/machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/machine.dir/src/machine.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/machine.dir/src/machine.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/machine.dir/src/machine.c.o -MF CMakeFiles/machine.dir/src/machine.c.o.d -o CMakeFiles/machine.dir/src/machine.c.o -c "/home/marco/Desktop/Working directory/DM/src/machine.c"
 
 CMakeFiles/machine.dir/src/machine.c.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/machine.dir/src/machine.c.s: cmake_force
 CMakeFiles/machine.dir/src/point.c.o: CMakeFiles/machine.dir/flags.make
 CMakeFiles/machine.dir/src/point.c.o: ../src/point.c
 CMakeFiles/machine.dir/src/point.c.o: CMakeFiles/machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/machine.dir/src/point.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/machine.dir/src/point.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/machine.dir/src/point.c.o -MF CMakeFiles/machine.dir/src/point.c.o.d -o CMakeFiles/machine.dir/src/point.c.o -c "/home/marco/Desktop/Working directory/DM/src/point.c"
 
 CMakeFiles/machine.dir/src/point.c.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/machine.dir/src/point.c.s: cmake_force
 CMakeFiles/machine.dir/src/program.c.o: CMakeFiles/machine.dir/flags.make
 CMakeFiles/machine.dir/src/program.c.o: ../src/program.c
 CMakeFiles/machine.dir/src/program.c.o: CMakeFiles/machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/machine.dir/src/program.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/machine.dir/src/program.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/machine.dir/src/program.c.o -MF CMakeFiles/machine.dir/src/program.c.o.d -o CMakeFiles/machine.dir/src/program.c.o -c "/home/marco/Desktop/Working directory/DM/src/program.c"
 
 CMakeFiles/machine.dir/src/program.c.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/machine.dir/src/program.c.s: cmake_force
 CMakeFiles/machine.dir/src/toml.c.o: CMakeFiles/machine.dir/flags.make
 CMakeFiles/machine.dir/src/toml.c.o: ../src/toml.c
 CMakeFiles/machine.dir/src/toml.c.o: CMakeFiles/machine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/machine.dir/src/toml.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/machine.dir/src/toml.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/machine.dir/src/toml.c.o -MF CMakeFiles/machine.dir/src/toml.c.o.d -o CMakeFiles/machine.dir/src/toml.c.o -c "/home/marco/Desktop/Working directory/DM/src/toml.c"
 
 CMakeFiles/machine.dir/src/toml.c.i: cmake_force
@@ -155,6 +169,7 @@ CMakeFiles/machine.dir/src/toml.c.s: cmake_force
 
 # Object files for target machine
 machine_OBJECTS = \
+"CMakeFiles/machine.dir/src/axis.c.o" \
 "CMakeFiles/machine.dir/src/block.c.o" \
 "CMakeFiles/machine.dir/src/fsm.c.o" \
 "CMakeFiles/machine.dir/src/machine.c.o" \
@@ -165,6 +180,7 @@ machine_OBJECTS = \
 # External object files for target machine
 machine_EXTERNAL_OBJECTS =
 
+machine: CMakeFiles/machine.dir/src/axis.c.o
 machine: CMakeFiles/machine.dir/src/block.c.o
 machine: CMakeFiles/machine.dir/src/fsm.c.o
 machine: CMakeFiles/machine.dir/src/machine.c.o
@@ -173,7 +189,7 @@ machine: CMakeFiles/machine.dir/src/program.c.o
 machine: CMakeFiles/machine.dir/src/toml.c.o
 machine: CMakeFiles/machine.dir/build.make
 machine: CMakeFiles/machine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable machine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/marco/Desktop/Working directory/DM/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable machine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/machine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

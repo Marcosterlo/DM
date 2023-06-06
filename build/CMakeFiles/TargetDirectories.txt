@@ -7,6 +7,8 @@
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/program.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/c-cnc.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/ccnc.dir
+/home/marco/Desktop/Working directory/DM/build/CMakeFiles/tuning.dir
+/home/marco/Desktop/Working directory/DM/build/CMakeFiles/simulate.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Experimental.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Nightly.dir
 /home/marco/Desktop/Working directory/DM/build/CMakeFiles/Continuous.dir

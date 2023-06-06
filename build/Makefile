@@ -289,6 +289,32 @@ ccnc/fast:
 .PHONY : ccnc/fast
 
 #=============================================================================
+# Target rules for targets named tuning
+
+# Build rule for target.
+tuning: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tuning
+.PHONY : tuning
+
+# fast build rule for target.
+tuning/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/build
+.PHONY : tuning/fast
+
+#=============================================================================
+# Target rules for targets named simulate
+
+# Build rule for target.
+simulate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulate
+.PHONY : simulate
+
+# fast build rule for target.
+simulate/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulate.dir/build.make CMakeFiles/simulate.dir/build
+.PHONY : simulate/fast
+
+#=============================================================================
 # Target rules for targets named Experimental
 
 # Build rule for target.
@@ -652,6 +678,45 @@ ContinuousSubmit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ContinuousSubmit.dir/build.make CMakeFiles/ContinuousSubmit.dir/build
 .PHONY : ContinuousSubmit/fast
 
+src/axis.o: src/axis.c.o
+.PHONY : src/axis.o
+
+# target to build an object file
+src/axis.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_lib.dir/build.make CMakeFiles/c-cnc_lib.dir/src/axis.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/axis.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/axis.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/axis.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/axis.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/axis.c.o
+.PHONY : src/axis.c.o
+
+src/axis.i: src/axis.c.i
+.PHONY : src/axis.i
+
+# target to preprocess a source file
+src/axis.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_lib.dir/build.make CMakeFiles/c-cnc_lib.dir/src/axis.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/axis.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/axis.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/axis.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/axis.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/axis.c.i
+.PHONY : src/axis.c.i
+
+src/axis.s: src/axis.c.s
+.PHONY : src/axis.s
+
+# target to generate assembly for a file
+src/axis.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_lib.dir/build.make CMakeFiles/c-cnc_lib.dir/src/axis.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/c-cnc_static.dir/build.make CMakeFiles/c-cnc_static.dir/src/axis.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/axis.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/axis.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/axis.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/axis.c.s
+.PHONY : src/axis.c.s
+
 src/block.o: src/block.c.o
 .PHONY : src/block.o
 
@@ -662,6 +727,7 @@ src/block.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/block.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/block.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/block.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/block.c.o
 .PHONY : src/block.c.o
 
 src/block.i: src/block.c.i
@@ -674,6 +740,7 @@ src/block.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/block.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/block.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/block.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/block.c.i
 .PHONY : src/block.c.i
 
 src/block.s: src/block.c.s
@@ -686,6 +753,7 @@ src/block.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/block.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/block.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/block.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/block.c.s
 .PHONY : src/block.c.s
 
 src/fsm.o: src/fsm.c.o
@@ -698,6 +766,7 @@ src/fsm.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/fsm.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/fsm.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/fsm.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/fsm.c.o
 .PHONY : src/fsm.c.o
 
 src/fsm.i: src/fsm.c.i
@@ -710,6 +779,7 @@ src/fsm.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/fsm.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/fsm.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/fsm.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/fsm.c.i
 .PHONY : src/fsm.c.i
 
 src/fsm.s: src/fsm.c.s
@@ -722,6 +792,7 @@ src/fsm.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/fsm.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/fsm.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/fsm.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/fsm.c.s
 .PHONY : src/fsm.c.s
 
 src/machine.o: src/machine.c.o
@@ -734,6 +805,7 @@ src/machine.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/machine.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/machine.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/machine.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/machine.c.o
 .PHONY : src/machine.c.o
 
 src/machine.i: src/machine.c.i
@@ -746,6 +818,7 @@ src/machine.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/machine.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/machine.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/machine.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/machine.c.i
 .PHONY : src/machine.c.i
 
 src/machine.s: src/machine.c.s
@@ -758,6 +831,7 @@ src/machine.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/machine.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/machine.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/machine.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/machine.c.s
 .PHONY : src/machine.c.s
 
 src/main/c-cnc.o: src/main/c-cnc.c.o
@@ -832,6 +906,30 @@ src/main/hello.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hello.dir/build.make CMakeFiles/hello.dir/src/main/hello.c.s
 .PHONY : src/main/hello.c.s
 
+src/main/simulate.o: src/main/simulate.c.o
+.PHONY : src/main/simulate.o
+
+# target to build an object file
+src/main/simulate.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulate.dir/build.make CMakeFiles/simulate.dir/src/main/simulate.c.o
+.PHONY : src/main/simulate.c.o
+
+src/main/simulate.i: src/main/simulate.c.i
+.PHONY : src/main/simulate.i
+
+# target to preprocess a source file
+src/main/simulate.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulate.dir/build.make CMakeFiles/simulate.dir/src/main/simulate.c.i
+.PHONY : src/main/simulate.c.i
+
+src/main/simulate.s: src/main/simulate.c.s
+.PHONY : src/main/simulate.s
+
+# target to generate assembly for a file
+src/main/simulate.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulate.dir/build.make CMakeFiles/simulate.dir/src/main/simulate.c.s
+.PHONY : src/main/simulate.c.s
+
 src/point.o: src/point.c.o
 .PHONY : src/point.o
 
@@ -843,6 +941,7 @@ src/point.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/point.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/point.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/point.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/point.c.o
 .PHONY : src/point.c.o
 
 src/point.i: src/point.c.i
@@ -856,6 +955,7 @@ src/point.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/point.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/point.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/point.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/point.c.i
 .PHONY : src/point.c.i
 
 src/point.s: src/point.c.s
@@ -869,6 +969,7 @@ src/point.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/point.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/point.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/point.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/point.c.s
 .PHONY : src/point.c.s
 
 src/program.o: src/program.c.o
@@ -881,6 +982,7 @@ src/program.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/program.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/program.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/program.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/program.c.o
 .PHONY : src/program.c.o
 
 src/program.i: src/program.c.i
@@ -893,6 +995,7 @@ src/program.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/program.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/program.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/program.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/program.c.i
 .PHONY : src/program.c.i
 
 src/program.s: src/program.c.s
@@ -905,6 +1008,7 @@ src/program.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/program.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/program.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/program.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/program.c.s
 .PHONY : src/program.c.s
 
 src/toml.o: src/toml.c.o
@@ -917,6 +1021,7 @@ src/toml.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/toml.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/toml.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/toml.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/toml.c.o
 .PHONY : src/toml.c.o
 
 src/toml.i: src/toml.c.i
@@ -929,6 +1034,7 @@ src/toml.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/toml.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/toml.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/toml.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/toml.c.i
 .PHONY : src/toml.c.i
 
 src/toml.s: src/toml.c.s
@@ -941,6 +1047,7 @@ src/toml.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/block.dir/build.make CMakeFiles/block.dir/src/toml.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/machine.dir/build.make CMakeFiles/machine.dir/src/toml.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/program.dir/build.make CMakeFiles/program.dir/src/toml.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tuning.dir/build.make CMakeFiles/tuning.dir/src/toml.c.s
 .PHONY : src/toml.c.s
 
 # Help Target
@@ -993,6 +1100,11 @@ help:
 	@echo "... machine"
 	@echo "... point"
 	@echo "... program"
+	@echo "... simulate"
+	@echo "... tuning"
+	@echo "... src/axis.o"
+	@echo "... src/axis.i"
+	@echo "... src/axis.s"
 	@echo "... src/block.o"
 	@echo "... src/block.i"
 	@echo "... src/block.s"
@@ -1011,6 +1123,9 @@ help:
 	@echo "... src/main/hello.o"
 	@echo "... src/main/hello.i"
 	@echo "... src/main/hello.s"
+	@echo "... src/main/simulate.o"
+	@echo "... src/main/simulate.i"
+	@echo "... src/main/simulate.s"
 	@echo "... src/point.o"
 	@echo "... src/point.i"
 	@echo "... src/point.s"
